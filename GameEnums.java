@@ -1,15 +1,20 @@
 public class GameEnums {
     public enum Supertype {
+
         BASIC, SNOW, LEGENDARY, WORLD, ELITE, ONGOING
+
     }
     public enum Type {
+
         CREATURE, ENCHANTMENT, INSTANT, SORCERY, LAND,
         PLANESWALKER, ARTIFACT, TRIBAL
+
     }
     public enum EnchantmentSubType {
 
         // Enchantments
         AURA, CURSE, SHRINE
+
     }
     public enum ArtifactSubType {
 
@@ -120,6 +125,8 @@ public class GameEnums {
         
     }
     public enum Zone {
+
         COMMAND, BATTLEFIELD, EXILE_FUP, EXILE_FDN, GRAVEYARD, LIBRARY, HAND
+        
     }
 }

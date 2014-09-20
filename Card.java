@@ -1,7 +1,10 @@
 public abstract class Card {
-    GameEnums.SuperType m_super;
-    GameEnums.Type m_type;
-    // SubType to be declared in subclass
+    GameEnums.SuperType[] m_super;
+    GameEnums.Type[] m_type;
+
+    String name;
+    String description;
+    String flavor;
 
     abstract void play (GameCore game);
     abstract void discard (GameCore game);
