@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Deck {
-    public int numberOfCards;
+    public int numCards;
     private ArrayList<Card> cards = new ArrayList<Card>();
     //private ArrayList<Card> discardedCards = new ArrayList<Card>();
     private Random rand;
