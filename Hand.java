@@ -8,7 +8,7 @@ public class Hand {
         cards.add(c);
     }
     
-    //verificar na discard phase
+    //verificar na cleanup phase
     public int size (){
         return cards.size();
     }
