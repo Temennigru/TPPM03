@@ -6,6 +6,9 @@ public abstract class Card extends GameObject {
     String description;
     String flavor;
 
+    Player owner;
+    Player controler;
+
     public abstract void play (GameCore game);
     public abstract void discard (GameCore game);
     public abstract void place (GameCore game, GameEnums.Zone zone);
