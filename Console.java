@@ -1,33 +1,30 @@
+import java.util.Scanner
 
 public class Console{
+    
+     //gameCore ???
+    
+    Scanner userInput = new Scanner (System.in);
+    String userCommand;
+    System.out.print ("Enter your next command: ");
+    userCommand = userInput.next;
+    
+    //implementar como if (userCommand.equals("playcard"))...
 
     addCommand (String commandName, Command command){
-    
     }
     
-    //gameCore
-    //help
-    //
+    //Comandos a serem implementados:
+    //Play a Card
+    //Play a Land
+    //Activate a Card
+    //Tap a Card
+    //Read a Card
+    //Skip Turn Phase
+    //Help
     
-    //interface:
-    
-    //numero de cartas (do adversario principalmente)
-    //mana pool
-    //suas cartas
-    //cemiterio
-    //mesa
-    
-    //acoes:
-    
-    //virar uma carta
-    //      -> gera efeito (adiciona mana ao mana pool ou ativa uma abilidade)
-    //jogar uma carta da sua mao
-    //      -> selecionar de onde vai vir a mana (virar cartas de terreno ou ativar da mana pool)
-    //      -> fast effects
-    //skip para a proxima fase do turno
-    //      ->
-    //descricao de uma carta
-    //      -> le a descricao da carta, power/toughness, custo de mana
-    
+    //Implementar também comandos específicos de resposta, geralmente respondidos com um inteiro. Exemplo:
+    //Which card from your hand? 1-forest 2-elf 3-lifedrain 4-blacklotus 5-fireball
+    //5
 
 }
