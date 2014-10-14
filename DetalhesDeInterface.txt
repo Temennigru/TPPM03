@@ -13,22 +13,3 @@ Manapool: 0 White 0 blacK 0 Red 0 Blue 0 Green 0 Uncolor
 Deck ?
 Graveyard ?
 Table ?
-
-
-
-
->>Commands<<
-
-General
-- Play a Card
-- Play a Land (once per turn)
-- Activate a Card
-
-Após mensagens do tipo "Which ability from this card would you like to activate?"
-- 1... 2...
-
-Combat (?)
-- Assign attackers
-- Assign blockers
-
-(fast effects?)
