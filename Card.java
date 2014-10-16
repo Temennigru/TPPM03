@@ -6,9 +6,10 @@ public abstract class Card extends GameObject {
     String description;
     String flavor;
 
-    Player owner;
-    Player controler;
+    public Player owner;
+    public Player controler;
 
+    public void cast (GameCore game) {} // Does nothing by default. Only cards with "when you cast" use this.
     public abstract void play (GameCore game);
     public abstract void discard (GameCore game);
     public abstract void place (GameCore game, GameEnums.Zone zone);

@@ -1,4 +1,4 @@
-public abstract class Enchantment extends Card {
+public abstract class Enchantment extends Permanent {
     GameEnums.EnchantmentType[] sub;
     boolean token;
     String manaCost;
