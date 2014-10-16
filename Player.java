@@ -1,7 +1,7 @@
 public class Player {
     int life;
     GameCore game;
-    Vector<Card> deck;
+    MTGDeck deck;
     Vector<Card> hand;
     Vector<Card> graveyard;
     Console commandInterface;

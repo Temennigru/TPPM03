@@ -2,13 +2,12 @@ public class StranglerootGheist extends Creature {
     boolean hasCounter;
 
     public StranglerootGheist () {
-        this.sub = { SPIRIT };
+        this.m_sub = { GameEnums.CreatureSubType.SPIRIT };
         this.power = 2;
         this.toughness = 1;
-        this.token = false;
         this.sick = false;
         this.manaCost = "GG";
-        this.hasToken = false;
+        this.hasCounter = false;
         this.name = "Strangleroot Gheist"
         this.description = "Haste" + System.lineSeparator() + "Undying (when this creature dies," +
         " if it had no +1/+1 counters on it, return it to the battlefield under it's owner's control" +
@@ -19,16 +18,15 @@ public class StranglerootGheist extends Creature {
     public play (GameCore game) {
         this.power = 2;
         this.toughness = 1;
-        this.token = false;
         this.sick = false; // Haste
         this.hasToken = false;
 
-        // Register in battlefield here \/
+        // TODO: Register in battlefield here \/
     }
 
     public void discard (GameCore game) {
         // TODO: Make an exception if card is not in hand.
-        this.place (game, GRAVEYARD);
+        this.place (game, GameEnums.Zone.GRAVEYARD);
     }
 
     public void place (GameCore game, GameEnums.Zone zone) {
@@ -44,12 +42,12 @@ public class StranglerootGheist extends Creature {
             this.power++;
             this.toughness++;
             this.hasCounter = true;
-            this.place (game, BATTLEFIELD);
+            this.place (game, GameEnums.Zone.BATTLEFIELD);
         }
     }
 
     public String toString() {
-        return this.name + this.manaCost + System.lineSeparator() +
+        return this.name + " - " + this.manaCost + System.lineSeparator() +
         "Creature - Spirit" + System.lineSeparator() +
         this.description + System.lineSeparator() +
         this.flavor + System.lineSeparator() +

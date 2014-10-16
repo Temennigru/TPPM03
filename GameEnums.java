@@ -129,4 +129,7 @@ public class GameEnums {
         COMMAND, BATTLEFIELD, EXILE_FUP, EXILE_FDN, GRAVEYARD, LIBRARY, HAND
         
     }
+    public enum AbilityType {
+        ACTIVE, TRIGGERED, PASSIVE
+    }
 }

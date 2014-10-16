@@ -1,6 +1,6 @@
-public abstract class Creature extends Card {
-    GameEnums.CreatureSubType[] sub;
-    GameEnums.Type[] type = { CREATURE };
+public abstract class Creature extends Permanent {
+    GameEnums.CreatureSubType[] m_sub;
+    GameEnums.Type[] m_type = { GameEnums.Type.CREATURE };
     int power;
     int toughness;
     boolean token = false;

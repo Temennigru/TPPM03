@@ -1,5 +1,6 @@
 public abstract class Permanent extends Card {
     final boolean tapped;
+    boolean token = false;
 
     public final void tap() {
         tapped = true;
