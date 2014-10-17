@@ -9,7 +9,7 @@ public class Gravecrawler extends Creature {
 	        this.power = 2;
 	        this.toughness = 1;
 	        this.sick = true;
-	        this.manaCost = "B";
+	        this.manaCost = "K";
 	        this.name = "Gravecrawler"
 	        this.description = "Gravecrawler can't block." + System.lineSeparator() + "You may cast Gravecrawler from your graveyard as long as you control a Zombie.";
 	        this.flavor = "Innistrad's ghoulcallers are talented enough, but let me show you what someone with real power can create. _Liliana Vess";
