@@ -4,7 +4,7 @@ public class Gravecrawler extends Creature {
 
 	boolean canblock = false;
 
-	 public GravecrawlerStranglerootGheist () {
+	 public Gravecrawler () {
         this.m_sub = { GameEnums.CreatureSubType.ZOMBIE }; 
         this.power = 2;
         this.toughness = 1;
