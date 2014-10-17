@@ -1,5 +1,8 @@
+package Core;
+
 import java.util.ArrayList;
 import java.util.Random;
+import Cards.Abstract.*;
 
 public abstract class Deck {
     public int numCards;

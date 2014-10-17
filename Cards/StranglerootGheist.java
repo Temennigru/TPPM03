@@ -3,6 +3,7 @@
 package Cards.Concrete;
 
 import Core.*;
+import Cards.*;
 
 public class StranglerootGheist extends Creature {
     boolean hasCounter;

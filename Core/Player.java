@@ -1,6 +1,7 @@
 package Core;
 
 import java.util.Vector;
+import Cards.Abstract.*;
 
 public abstract class Player {
     int life;
