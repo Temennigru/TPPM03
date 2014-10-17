@@ -1,21 +1,25 @@
+package Cards.Concrete;
+
+import Core.*;
+
 public class StranglerootGheist extends Creature {
     boolean hasCounter;
 
     public StranglerootGheist () {
-        this.m_sub = { GameEnums.CreatureSubType.SPIRIT };
+        this.m_sub = new GameEnums.CreatureSubType[1]; m_sub[0] = GameEnums.CreatureSubType.SPIRIT;
         this.power = 2;
         this.toughness = 1;
         this.sick = false;
         this.manaCost = "GG";
         this.hasCounter = false;
-        this.name = "Strangleroot Gheist"
+        this.name = "Strangleroot Gheist";
         this.description = "Haste" + System.lineSeparator() + "Undying (when this creature dies," +
         " if it had no +1/+1 counters on it, return it to the battlefield under it's owner's control" +
         "with a +1/+1 counter on it.";
         this.flavor = "Geists of the hanged often haunt the tree on which they died.";
     }
 
-    public play () {
+    public void play () {
         this.power = 2;
         this.toughness = 1;
         this.sick = false; // Haste

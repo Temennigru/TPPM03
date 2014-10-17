@@ -1,4 +1,6 @@
-public class Ability extends GameObject {
+package Core;
+
+public abstract class Ability extends GameObject {
 
     GameEnums.AbilityType m_abilityType;
     public abstract boolean stackable();

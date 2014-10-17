@@ -1,3 +1,5 @@
+package Core;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -27,7 +29,7 @@ public abstract class Deck {
             int x = rand.nextInt(cards.size());
             int y = rand.nextInt(cards.size());
             Card temp = cards.get(x);
-            cards.set(x,cards.get(y);
+            cards.set(x,cards.get(y));
             cards.set(y,temp);
         }
     }
@@ -38,7 +40,7 @@ public abstract class Deck {
     }
     
     public Card draw(){
-        if (cards.size == 0) {
+        if (cards.size() == 0) {
             return null;
         }
         return cards.remove(0);

@@ -1,4 +1,8 @@
+package Core;
+
 import java.util.Scanner;
+import java.io.*;
+import java.lang.*;
 
 public class Console{
     
@@ -6,7 +10,7 @@ public class Console{
     
     Scanner userInput = new Scanner (System.in);
     String userCommand;
-    System.out.print ("Enter your next command: ");
+    System.out.println("Enter your next command: ");
     userCommand = userInput.next;
     
     //implementar como if (userCommand.equals("playcard"))...

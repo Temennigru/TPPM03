@@ -1,3 +1,5 @@
+package Core;
+
 public class GameStack {
     List<GameObject> stack;
 

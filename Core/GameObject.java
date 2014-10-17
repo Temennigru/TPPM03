@@ -1,3 +1,7 @@
+package Core;
+
+import java.util.*;
+
 public abstract class GameObject {
     GameObject m_source = this;
     public Player m_owner;

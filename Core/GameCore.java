@@ -3,7 +3,8 @@
  * with it, it will mess you up.
  */
 
-import GameEnums.*;
+package Core;
+
 import java.lang.*;
 
 public class GameCore {

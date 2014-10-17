@@ -1,5 +1,9 @@
+package Cards;
+
+import Core.*;
+
 public abstract class Permanent extends Card {
-    final boolean tapped;
+    boolean tapped;
     boolean token = false;
 
     public final void tap() {

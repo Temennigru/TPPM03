@@ -1,3 +1,9 @@
+package Cards;
+
+import Core.*;
+
+import java.util.Vector;
+
 public abstract class Card extends GameObject {
     Vector<Ability> abilities;
 

@@ -1,5 +1,7 @@
+package Core;
+
 public class GameEnums {
-    public enum Supertype {
+    public enum SuperType {
 
         BASIC, SNOW, LEGENDARY, WORLD, ELITE, ONGOING
 
