@@ -5,5 +5,5 @@ public class Command {
 
     public abstract String getDescription();
 
-    public abstract void Exec (GameCore game, String[] args);
+    public abstract void Exec (String[] args);
 }

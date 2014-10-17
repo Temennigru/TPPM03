@@ -15,7 +15,7 @@ public class StranglerootGheist extends Creature {
         this.flavor = "Geists of the hanged often haunt the tree on which they died.";
     }
 
-    public play (GameCore game) {
+    public play () {
         this.power = 2;
         this.toughness = 1;
         this.sick = false; // Haste
@@ -24,20 +24,20 @@ public class StranglerootGheist extends Creature {
         // TODO: Register in battlefield here \/
     }
 
-    public void discard (GameCore game) {
+    public void discard () {
         // TODO: Make an exception if card is not in hand.
         this.place (game, GameEnums.Zone.GRAVEYARD);
     }
 
-    public void place (GameCore game, GameEnums.Zone zone) {
+    public void place (GameEnums.Zone zone) {
         this.place (game, zone, 0);
     }
 
-    public void place (GameCore game, GameEnums.Zone zone, int position) {
+    public void place (GameEnums.Zone zone, int position) {
         // TODO: Register in zone here \/
     }
 
-    public void kill (GameCore game) {
+    public void kill () {
         if (!this.hasCounter) {
             this.power++;
             this.toughness++;

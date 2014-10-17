@@ -7,5 +7,5 @@ public abstract class Creature extends Permanent {
     boolean sick = true;
     String manaCost;
 
-    public abstract void kill (GameCore game);
+    public abstract void kill ();
 }

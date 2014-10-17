@@ -1,6 +1,6 @@
 public class Turn {
 
-    public Turn (Player player, GameCore game);
+    public Turn (Player player);
     public void untap();
     public void upkeep();
     public void main1();

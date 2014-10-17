@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Deck {
+public abstract class Deck {
     public int numCards;
     private ArrayList<Card> cards = new ArrayList<Card>();
     //private ArrayList<Card> discardedCards = new ArrayList<Card>();
@@ -37,9 +37,9 @@ public class Deck {
         return cards.size() == 0;
     }
     
-    public Card draw() throws EmptyDeckException{
+    public Card draw(){
         if (cards.size == 0) {
-            throw new EmptyDeckException();
+            return null;
         }
         return cards.remove(0);
     }  

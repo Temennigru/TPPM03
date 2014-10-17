@@ -4,24 +4,28 @@ public class GameEnums {
         BASIC, SNOW, LEGENDARY, WORLD, ELITE, ONGOING
 
     }
+
     public enum Type {
 
         CREATURE, ENCHANTMENT, INSTANT, SORCERY, LAND,
         PLANESWALKER, ARTIFACT, TRIBAL
 
     }
+
     public enum EnchantmentSubType {
 
         // Enchantments
         AURA, CURSE, SHRINE
 
     }
+
     public enum ArtifactSubType {
 
         // Artifacts
         CONTRAPTION, EQUIPMENT, FORTIFICATION
 
     }
+
     public enum LandSubType {
 
         // Lands
@@ -29,6 +33,7 @@ public class GameEnums {
         PLAINS, ISLAND, SWAMP, MOUNTAIN, FOREST
 
     }
+
     public enum PlaneSubType {
 
         // Planes (not used)
@@ -40,12 +45,14 @@ public class GameEnums {
         SHADOWMOOR, SHANDALAR, ULGROTHA, VALLA, VRYN, WILDFIRE, ZENDIKAR
 
     }
+
     public enum PlanesWalkerSubType {
 
         // Planeswalker
         AJANI, BOLAS, CHANDRA, DOMRI, ELSPETH, GARRUK, GIDEON, JACE,
-        KARN, KOTH, LILIANA, NISSA, SARKHAN, SORIN, TAMIYO, TEZZERET
+        KARN, KOTH, LILIANA, NISSA, SARKHAN, SORIN, TAMIYO, TEZZERET,
         TIBALT, VENSER, VRASKA
+
 
     }
     public enum SpellSubType {
@@ -101,7 +108,7 @@ public class GameEnums {
 
         RABBIT, RAT, REBEL, REFLECTION, RHINO, RIGGER, ROGUE,
 
-        SABLE, SALAMANDER, SAMURAI. SAND, SAPROLING, SATYR, SCARECROW, SCORPION,
+        SABLE, SALAMANDER, SAMURAI, SAND, SAPROLING, SATYR, SCARECROW, SCORPION,
         SCOUT, SERF, SERPENT, SHADE, SHAMAN, SHAPESHIFTER, SHEEP, SIREN, SKELETON,
         SLITH, SLIVER, SLUG, SNAKE, SOLDIER, SOLTARI, SPAWN, SPECTER, SPELLSHAPER,
         SPHINX, SPIDER, SPIKE, SPIRIT, SPLINTER, SPONGE, SQUID, SQUIRREL, STARFISH,
