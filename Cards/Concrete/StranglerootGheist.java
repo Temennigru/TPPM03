@@ -1,3 +1,5 @@
+//reference: http://magiccards.info/dka/en/127.html
+
 package Cards.Concrete;
 
 import Core.*;

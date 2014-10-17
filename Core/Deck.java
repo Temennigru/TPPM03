@@ -1,5 +1,3 @@
-package Core;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -39,6 +37,12 @@ public abstract class Deck {
         return cards.size() == 0;
     }
     
+    //iteracao no deck, para acessar um elemento especifico, cards.get(3) acessaria esse elemento
+    //public void accessDeck (Deck deck){
+	//for (int i=0, n=cards.size(); i < n; i++)
+    //     cards.get(i);
+    //}
+
     public Card draw(){
         if (cards.size() == 0) {
             return null;
