@@ -1,3 +1,5 @@
+//reference: http://magiccards.info/dka/en/127.html
+
 public class StranglerootGheist extends Creature {
     boolean hasCounter;
 
