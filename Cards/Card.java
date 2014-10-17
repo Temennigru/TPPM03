@@ -5,6 +5,8 @@ import Core.*;
 import java.util.Vector;
 
 public abstract class Card extends GameObject {
+    public int m_id;
+
     Vector<Ability> abilities;
 
     GameEnums.SuperType[] m_super = {};
