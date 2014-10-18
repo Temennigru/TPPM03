@@ -11,14 +11,14 @@ public abstract class Deck {
     private Random rand;
     
     //Construtor
-    public Deck(){
+    public abstract Deck(){
         rand = new Random();
         createDeck();
         shuffle();
     }
     
     //enche o deck com cartas
-    private void createDeck(){
+    private abstract void createDeck(){
         //for (int i = 0; i < numCards ; i++){
             //cards.add (new Card());
         //}
@@ -29,7 +29,7 @@ public abstract class Deck {
     }
 
     //embaralha o deck
-    public void shuffle(){
+    public final void shuffle(){
         for (int i=0 ; i < cards.size(); i++){
             int x = rand.nextInt(cards.size());
             int y = rand.nextInt(cards.size());
@@ -40,7 +40,7 @@ public abstract class Deck {
     }
     
     //retorna true se o deck nao tem mais cartas
-    public boolean isEmpty() {
+    public final boolean isEmpty() {
         return cards.size() == 0;
     }
     
