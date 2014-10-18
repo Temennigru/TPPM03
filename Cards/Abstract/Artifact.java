@@ -1,4 +1,4 @@
-package Cards;
+package Cards.Abstract;
 
 import Core.*;
 

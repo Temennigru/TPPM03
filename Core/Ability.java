@@ -2,8 +2,12 @@ package Core;
 
 public abstract class Ability extends GameObject {
 
-    GameEnums.AbilityType m_abilityType;
-    public abstract boolean stackable();
+	public Ability (GameObject father){}
+
+	protected Ability() {}
+
+    private GameEnums.AbilityType m_abilityType;
+
     public abstract String[] activateCost();
 
     public abstract void activate ();

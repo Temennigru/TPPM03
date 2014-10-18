@@ -1,20 +1,18 @@
-package Cards;
+package Cards.Abstract;
 
 import Core.*;
 
 import java.util.Vector;
 
 public abstract class Card extends GameObject {
-    public int m_id;
+    public Vector<Ability> abilities;
 
-    Vector<Ability> abilities;
+    public GameEnums.SuperType[] m_super = {};
+    public GameEnums.Type[] m_type;
 
-    GameEnums.SuperType[] m_super = {};
-    GameEnums.Type[] m_type;
-
-    String name;
-    String description;
-    String flavor;
+    protected String name;
+    protected String description;
+    protected String flavor;
 
     public void cast () {} // Does nothing by default. Only cards with "when you cast" use this.
     public abstract void play ();

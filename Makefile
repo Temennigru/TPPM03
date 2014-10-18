@@ -7,7 +7,8 @@ JC = javac
 
 PACKAGES := \
     Core \
-    Card \
+    Cards \
+    Cards/Abstract \
 
 CLASSES := main.java
 

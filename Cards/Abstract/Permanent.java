@@ -1,10 +1,14 @@
-package Cards;
+package Cards.Abstract;
 
 import Core.*;
 
 public abstract class Permanent extends Card {
-    boolean tapped;
-    boolean token = false;
+    protected boolean tapped = false;
+    protected boolean token = false;
+
+
+    private final void destroy() {}
+    private final void sac() {}
 
     public final void tap() {
         tapped = true;

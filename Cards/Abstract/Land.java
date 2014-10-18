@@ -1,8 +1,9 @@
-package Cards;
+package Cards.Abstract;
 
 import Core.*;
 
-public abstract class Creature extends Permanent {
-    GameEnums.LandSubType[] m_sub;
-    GameEnums.Type[] m_type = { LAND };
+public abstract class Land extends Permanent {
+    public boolean stackable() { return false; }
+    public GameEnums.LandSubType[] m_sub;
+    public GameEnums.Type[] m_type = { GameEnums.Type.LAND };
 }
