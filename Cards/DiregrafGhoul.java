@@ -9,7 +9,7 @@ public class DiregrafGhoul extends Creature {
         this.power = 2;
         this.toughness = 2;
         this.sick = true;
-        this.manaCost = "K";
+        this.manaCost = "B";
         this.name = "Diregraf Ghoul"
         this.description = "Diregraf Ghoul enters the battlefield tapped.";
         this.flavor = "At least this one still has arms and legs. Well, most of its legs. _Enslow, ghoulcaller of Nephalia";

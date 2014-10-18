@@ -1,6 +1,6 @@
 //reference: http://magiccards.info/cns/en/113.html
 
-//UUK
+//BCC
 
 //sorcery
 

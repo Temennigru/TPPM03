@@ -21,4 +21,14 @@ public abstract class Permanent extends Card {
     public final boolean isTapped() {
         return tapped;
     }
+
+    public final String toString() {
+        String tmp = this.name;
+        if (this.isTapped()) { tmp += " T"; }
+        tmp += " - " this.manaCost + String.format("%n") +
+        this.types + String.format("%n") +
+        this.description + String.format("%n") +
+        this.flavor + String.format("%n");
+        return tmp;
+    }
 }

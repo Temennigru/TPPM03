@@ -33,4 +33,9 @@ public abstract class Creature extends Permanent {
     protected int regen = 0;
 
     public abstract void kill();
+    
+    public void attack (Player player) {
+        GameCore game = getGame();
+        game.declareAttacker(this, player);
+    }
 }

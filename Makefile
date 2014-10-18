@@ -9,15 +9,18 @@ PACKAGES := \
     Core \
     Cards \
     Cards/Abstract \
+    
+CLASSES := $(call getJava,$(PACKAGES))
 
-CLASSES := main.java
+.PHONY: default clean makeClasses
 
-.PHONY: default clean $(PACKAGES)
-
-$(PACKAGES):
+#$(PACKAGES):
 	$(eval CLASSES := $(CLASSES) $@/*.java)
 
-default: $(PACKAGES) classes
+makeClasses:
+	$(eval CLASSES := $(call getJava,$(PACKAGES)))
+
+default: makeClasses classes
 
 classes: $(CLASSES:.java=.class)
 

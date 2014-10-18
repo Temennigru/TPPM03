@@ -20,6 +20,7 @@ public class StranglerootGheist extends Creature {
         this.manaCost = "GG";
         this.hasCounter = false;
         this.name = "Strangleroot Gheist";
+        this.types = "Creature - Spirit"
         this.description = "Haste" + String.format("%n") + "Undying (when this creature dies," +
         " if it had no +1/+1 counters on it, return it to the battlefield under it's owner's control" +
         "with a +1/+1 counter on it.";
@@ -52,20 +53,17 @@ public class StranglerootGheist extends Creature {
     }
 
     public void kill () {
+        // TODO: Make an exception if card is not in battlefield.
         if (!this.hasCounter) {
             this.play ();
             this.power++;
             this.toughness++;
             this.hasCounter = true;
+        } else {
+            this.power--;
+            this.toughness--;
+            this.hasCounter = false;
+            this.place(GameEnums.Zone.GRAVEYARD);
         }
-    }
-
-    public String toString() {
-        return this.name + " - " + this.manaCost + String.format("%n") +
-        "Creature - Spirit" + String.format("%n") +
-        this.description + String.format("%n") +
-        this.flavor + String.format("%n") +
-        Integer.toString(this.power) + "/" + Integer.toString(this.toughness) + String.format("%n");
-
     }
 }

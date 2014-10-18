@@ -13,11 +13,22 @@ public abstract class Card extends GameObject {
     protected String name;
     protected String description;
     protected String flavor;
+    protected String types;
+    protected String manaCost;
 
-    public void cast () {} // Does nothing by default. Only cards with "when you cast" use this.
+    public void cast () {
+        // TODO: use stack
+        this.play();
+    }
     public abstract void play ();
     public abstract void discard ();
     public abstract void place (GameEnums.Zone zone);
     public abstract void place (GameEnums.Zone zone, int position);
-    public abstract String toString();
+    public String toString() {
+        return this.name + " - " + this.manaCost + String.format("%n") +
+        this.types + String.format("%n") +
+        this.description + String.format("%n") +
+        this.flavor + String.format("%n");
+    }
+    public void activateAt(int ability) {}
 }

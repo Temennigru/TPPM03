@@ -5,7 +5,7 @@ import java.util.Vector;
 
 public class RealPlayer extends Player {
     private int life;
-    //private Deck deck;
+    //protected Deck library;
     protected Vector<Card> hand;
     protected Vector<Card> graveyard;
     public int[] manaPool;
@@ -52,7 +52,9 @@ public class RealPlayer extends Player {
             		break;
             	default:
             		if (Character.isDigit(mana.charAt(i))) {
-            			this.manaPool[5]++;
+            			int j = i;
+            			while (Character.isDigit(mana.charAt(i))) { i++; }
+            			this.manaPool[5] += Integer.parseInt(mana.substring(j, i));
             		} else {
             			assert false;
             		}

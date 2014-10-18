@@ -6,7 +6,7 @@ import Cards.Abstract.*;
 
 public abstract class Deck {
     public int numCards;
-    private ArrayList<Card> cards = new ArrayList<Card>();
+    protected ArrayList<Card> cards = new ArrayList<Card>();
     //private ArrayList<Card> discardedCards = new ArrayList<Card>();
     private Random rand;
     
@@ -24,6 +24,10 @@ public abstract class Deck {
         //}
     }
     
+    public Iterator<Card> iterator() {
+        return cards.iterator();
+    }
+
     //embaralha o deck
     public void shuffle(){
         for (int i=0 ; i < cards.size(); i++){

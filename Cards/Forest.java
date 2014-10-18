@@ -41,6 +41,7 @@ public class Forest extends Land {
 
         this.abilities = new Vector<Ability>();
         this.name = "Forest";
+        this.types = "Basic Land - Forest";
         this.description = "(T: Add G to your mana pool)";
         this.flavor = "";
 
@@ -71,7 +72,7 @@ public class Forest extends Land {
         String tmp = this.name;
         if (this.isTapped()) { tmp += " T"; }
         tmp += String.format("%n") +
-        "Basic Land - Forest" + String.format("%n") +
+        this.types + String.format("%n") +
         this.description + String.format("%n") +
         this.flavor + String.format("%n");
         return tmp;

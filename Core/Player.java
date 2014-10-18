@@ -5,7 +5,7 @@ import Cards.Abstract.*;
 
 public abstract class Player {
     private int life;
-    private Deck deck;
+    protected Deck library;
     protected Vector<Card> hand;
     protected Vector<Card> graveyard;
     private int[] manaPool;
@@ -20,5 +20,7 @@ public abstract class Player {
     public abstract void shuffle(GameEnums.Zone zone);
     public abstract void takeTurn();
     public abstract void addMana(String mana);
-    
+    public void addToHand      (Card card) {}
+    public void addToDeck      (Card card) {}
+    public void addToGraveyard (Card card) {}
 }
