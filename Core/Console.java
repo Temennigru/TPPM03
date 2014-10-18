@@ -1,34 +1,68 @@
-package Core;
-
 import java.util.Scanner;
-import java.io.*;
-import java.lang.*;
 
-public class Console{
-    
-     //gameCore ???
-    
-    Scanner userInput = new Scanner (System.in);
-    String userCommand;
-    System.out.println("Enter your next command: ");
-    userCommand = userInput.next;
-    
-    //implementar como if (userCommand.equals("playcard"))...
+public class Console {
+	
+	public static void PlayCommand(){
+		System.out.println("What would you like to play? Card or Land?");
+		String userCommand2 ;
+		Scanner userInput = new Scanner (System.in);
+		userCommand2 = userInput.next();
+		CardOrLandCommand(userCommand2);
+	}
+	
+	public static void Compare (String userCommand){
+		if (userCommand.equals("play")){
+			PlayCommand();
+		}
+		else if (userCommand.equals("read")){
+			System.out.println("reading a card");
+		}
+		else if (userCommand.equals("tap")){
+			System.out.println("taping a card");
+		}
+		else if (userCommand.equals("skip")){
+			System.out.println("skipping this phase");
+		}
+		else if (userCommand.equals("help")){
+			System.out.println("main commands are:");
+			System.out.println("play, read, tap, skip, help, activate, quit");
+		}
+		else if (userCommand.equals("activate")){
+			System.out.println("activating a card");
+		}
+		else if (userCommand.equals("quit")){
+		System.exit(0);;
+		}
+		else {
+			System.out.println("type help for help");
+		}
+		
+	}
+	
+	public static void CardOrLandCommand (String userCommand2){
+		if (userCommand2.equals("card"))
+		{
+			System.out.println("playing a card");
+		}
+		else if (userCommand2.equals("land"))
+		{
+			System.out.println("playing a land yo!");
+		}
+		else 
+		{
+			System.out.println("waaat");
+		}
+	}
+	
 
-    addCommand (String commandName, Command command){
-    }
-    
-    //Comandos a serem implementados:
-    //Play a Card
-    //Play a Land
-    //Activate a Card
-    //Tap a Card
-    //Read a Card
-    //Skip Turn Phase
-    //Help
-    
-    //Implementar também comandos específicos de resposta, geralmente respondidos com um inteiro. Exemplo:
-    //Which card from your hand? 1-forest 2-elf 3-lifedrain 4-blacklotus 5-fireball
-    //5
+//	public static void main(String[] args) {
+//		while(true){
+//		System.out.println("Enter your next command: ");
+//		String userCommand ;
+//		Scanner userInput = new Scanner (System.in);
+//		userCommand = userInput.next();
+//		Console.Compare(userCommand);
+//		}
+//	}
 
 }
