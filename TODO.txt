@@ -1,2 +1,11 @@
 TODO:
 1- remove protected members and reimplement in subclasses
+
+classe token
+console
+AI do computador
+deck do jogador
+deck da AI
+implementar as cartas
+documentacao
+diagramas uml
