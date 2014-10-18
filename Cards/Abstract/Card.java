@@ -7,6 +7,7 @@ import java.util.Vector;
 public abstract class Card extends GameObject {
     public Vector<Ability> abilities;
 
+    public GameEnums.Zone location;
     public GameEnums.SuperType[] m_super = {};
     public GameEnums.Type[] m_type;
 

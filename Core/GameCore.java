@@ -79,9 +79,6 @@ public class GameCore {
 
     private void removeFromZone (Card card, GameEnums.Zone zone) {
 
-        // Bad implementation, I know, but it's surprisingly easier to
-        // maintain than making methods.
-
         Iterator<Card> itr;
 
         switch (zone) {
@@ -116,6 +113,22 @@ public class GameCore {
 
     public void registerOnZone (Card card, GameEnums.Zone zone) {
 
+        // Safety first
+        if (card.location == null            || ( 
+                card.location != COMMAND     &&
+                card.location != BATTLEFIELD &&
+                card.location != EXILE_FUP   &&
+                card.location != EXILE_FDN   &&
+                card.location != GRAVEYARD   &&
+                card.location != GRAVEYARD   &&
+                card.location != LIBRARY     &&
+                card.location != HAND        && ) ) {
+
+            this.removeFromGameZones(card);
+        }
+
+        else { this.removeFromZone(card, card.location); }
+
         switch (zone) {
             case COMMAND:
                 m_commandZone.addElement(card);
@@ -139,5 +152,7 @@ public class GameCore {
                 card.m_owner.addToHand(card);
                 break;
         }
+
+        card.location = zone;
     }
 }
