@@ -10,8 +10,6 @@ import java.lang.System;
 
 public class GravebornMuse extends Creature {
 
-    boolean istapped = true;
-
 	public GravebornMuse () {
         this.m_sub = { GameEnums.CreatureSubType.ZOMBIE, GameEnums.CreatureSubType.SPIRIT }; 
         this.power = 3;
