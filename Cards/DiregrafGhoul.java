@@ -1,8 +1,15 @@
 //reference: http://magiccards.info/isd/en/97.html
 
+
+package Cards;
+
+import Core.*;
+import Cards.Abstract.*;
+import java.lang.System;
+
 public class DiregrafGhoul extends Creature {
 
-	boolean istapped = true; // Onde as cartas são viradas?
+	boolean istapped = true;
 
 	public DiregrafGhoul () {
         this.m_sub = { GameEnums.CreatureSubType.ZOMBIE }; 
