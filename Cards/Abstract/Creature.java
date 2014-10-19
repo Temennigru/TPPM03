@@ -10,6 +10,8 @@ public abstract class Creature extends Permanent {
     protected boolean token = false;
     protected boolean sick = true;
 
+    private int damage = 0;
+
     // Evergreen abilities
     protected boolean deathtouch = false;
     protected boolean defender = false;
@@ -36,6 +38,14 @@ public abstract class Creature extends Permanent {
         game.declareAttacker(this, player);
         if (!this.vigilance) { this.tap(); }
     }
+
+    public final int toughness () { return this.toughness; }
+    public final int power () { return this.power; }
+    public final int damage () { return this.damage; }
+
+    public final void toughness (int value) { this.toughness = value; }
+    public final void power (int value) { this.power = value; }
+    public final void damage (int value) { this.damage = value; }
 
     public String toString() {
         String tmp = this.name;
