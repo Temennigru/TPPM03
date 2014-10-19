@@ -12,6 +12,8 @@ public abstract class Player {
     private int[] manaPool;
     //Console commandInterface;
 
+    protected boolean dead = false;
+
     // Damage dealing is the game's responsibility. The player can only lose life.
 
     protected Player() {}
@@ -90,4 +92,8 @@ public abstract class Player {
         if (card.m_owner != this) { throw new GameExceptions.WrongOwnerException(card, card.m_owner, this); }
         this.graveyard.add(card);
     }
+
+    public final void lose () { this.dead = true; }
+
+    public final boolean lost() { return this.dead; } // No cheating =)
 }
