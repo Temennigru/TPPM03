@@ -22,7 +22,8 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class GameCore {
-    Player[] m_player;
+    private Player[] m_player;
+    private boolean[] m_canLose; // TODO: implement this
 
     private Vector<Card> m_battlefield;
     private Vector<Card> m_exileFupZone;
@@ -59,6 +60,11 @@ public class GameCore {
         m_player = new Player[2];
         m_player[0] = player1;
         m_player[1] = player2;
+
+        // TODO: Implement cannot lose
+        canLose = new Player[2];
+        canLose[0] = true;
+        canLose[1] = true;
 
         /*Random rand;
         
@@ -154,7 +160,17 @@ public class GameCore {
     public void stateCheck() {
         Iterator<Card> itr = this.m_battlefield.iterator();
         while (itr.hasNext()) {
-
+            Card el = itr.next();
+            if (Arrays.asList(el).contains(GameEnums.Type.CREATURE)) {
+                if (el.toughness() <= 0) { el.kill(); } // Killed by state-based action and not destroyed
+                else if (el.toughness() <= el.damage()) { el.destroy(); }
+            }
+        }
+        for (int i = 0; i < 2; i++) {
+            // TODO: Implement poison
+            if (this.player[i].life <= 0 && canLose[i]) {
+                this.player[i].lose();
+            }
         }
     }
 
