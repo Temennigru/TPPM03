@@ -33,7 +33,7 @@ public class CitanulWoodreaders extends Creature {
         this.place (game, GameEnums.Zone.GRAVEYARD);
     }
     
-    public void place (GameEnums.Zone zone, int position) throws GameExceptions.GameException {
+    public void place (GameEnums.Zone zone, int position) {
         this.place (game, zone, 0);
     }
 
