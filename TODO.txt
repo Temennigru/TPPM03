@@ -1,2 +1,7 @@
 TODO:
 1- remove protected members and reimplement in subclasses
+2- IA
+3- Console
+4- Image display
+5- Turn operations
+6- Implement state checks

@@ -3,6 +3,7 @@ package Core;
 import java.util.ArrayList;
 import java.util.Random;
 import Cards.Abstract.*;
+import java.util.Iterator;
 
 public abstract class Deck {
     public int numCards;
@@ -11,18 +12,11 @@ public abstract class Deck {
     private Random rand;
     
     //Construtor
-    public abstract Deck(){
-        rand = new Random();
-        createDeck();
-        shuffle();
-    }
+    private Deck(){}
+    public Deck (Player player){}
     
     //enche o deck com cartas
-    private abstract void createDeck(){
-        //for (int i = 0; i < numCards ; i++){
-            //cards.add (new Card());
-        //}
-    }
+    protected abstract void createDeck();
     
     public Iterator<Card> iterator() {
         return cards.iterator();
@@ -44,13 +38,11 @@ public abstract class Deck {
         return cards.size() == 0;
     }
     
-    //iteracao no deck, para acessar um elemento especifico, cards.get(3) acessaria esse elemento
-    //public void accessDeck (Deck deck){
-	//for (int i=0, n=cards.size(); i < n; i++)
-    //     cards.get(i);
-    //}
+    public final void add (Card card) {
+        this.cards.add(card);
+    }
 
-    public Card draw(){
+    public final Card draw(){
         if (cards.size() == 0) {
             return null;
         }

@@ -5,17 +5,14 @@ import java.util.Vector;
 
 public class RealPlayer extends Player {
     private int life;
-    //protected Deck library;
-    protected Vector<Card> hand;
-    protected Vector<Card> graveyard;
     public int[] manaPool;
-    private String name;
     //Console commandInterface;
 
     // Damage dealing is the game's responsibility. The player can only lose life.
 
-    public RealPlayer (Deck deck) {
+    public RealPlayer(String name, Deck deck) {
     	this.life = 20;
+    	this.name = name;
     	//this.deck = deck;
     	this.hand = new Vector<Card>();
     	this.graveyard = new Vector<Card>();

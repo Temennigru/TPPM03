@@ -9,9 +9,6 @@ public abstract class Creature extends Permanent {
     protected int toughness;
     protected boolean token = false;
     protected boolean sick = true;
-    protected String manaCost;
-
-
 
     // Evergreen abilities
     protected boolean deathtouch = false;
@@ -32,10 +29,23 @@ public abstract class Creature extends Permanent {
     protected boolean vigilance = false;
     protected int regen = 0;
 
-    public abstract void kill();
-    
-    public void attack (Player player) {
-        GameCore game = getGame();
-        game.declareAttacker(this, player);
+    public abstract void kill() throws GameExceptions.GameException;
+
+    public void attack (Player player) throws GameExceptions.GameException {
+        GameCore game = GameCore.getGame();
+        //game.declareAttacker(this, player);
+        this.tap();
+    }
+
+    public String toString() {
+        String tmp = this.name;
+        tmp += " - " + this.manaCost;
+        if (this.isTapped()) { tmp += " T"; }
+        tmp += String.format("%n") +
+        this.types + String.format("%n") +
+        this.description + String.format("%n") +
+        this.flavor + String.format("%n") +
+        Integer.toString(this.power) + "/" + Integer.toString(this.toughness) + String.format("%n");
+        return tmp;
     }
 }

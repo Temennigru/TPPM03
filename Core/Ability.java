@@ -8,8 +8,8 @@ public abstract class Ability extends GameObject {
 
     private GameEnums.AbilityType m_abilityType;
 
-    public abstract String[] activateCost();
+    public abstract String[] activateCost() throws GameExceptions.GameException;
 
-    public abstract void activate ();
+    public abstract boolean activate () throws GameExceptions.GameException;
 
 }

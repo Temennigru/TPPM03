@@ -8,13 +8,14 @@ import java.util.Vector;
 
 public class Forest extends Land {
 
+
+    public GameEnums.SuperType[] m_super = { GameEnums.SuperType.BASIC };
+    public GameEnums.LandSubType[] m_sub = { GameEnums.LandSubType.FOREST };
+
     private static class TapForMana extends Ability {
 
         private GameObject m_fatherObject;
         private GameObject m_source;
-
-        public GameEnums.SuperType[] m_super = { GameEnums.SuperType.BASIC };
-        public GameEnums.LandSubType[] m_sub = { GameEnums.LandSubType.FOREST };
 
         private GameEnums.AbilityType m_abilityType;
 
@@ -26,55 +27,37 @@ public class Forest extends Land {
             this.m_fatherObject = father;
         }
 
-        public void activate () {
-            this.activate (this);
+        public boolean activate () throws GameExceptions.GameException {
+            return this.activate (this);
         }
 
-        public void activate (GameObject source) {
+        public boolean activate (GameObject source) throws GameExceptions.GameException {
+            if (((Permanent)this.m_fatherObject).location != GameEnums.Zone.BATTLEFIELD) { throw new GameExceptions.WrongZoneException(((Permanent)this.m_fatherObject), ((Permanent)this.m_fatherObject).location, GameEnums.Zone.BATTLEFIELD); }
+            if (((Permanent)this.m_fatherObject).isTapped()) return false;
             this.m_fatherObject.m_controler.addMana("G");
             ((Permanent)this.m_fatherObject).tap();
+            return true;
         }
 
     }
 
     public Forest () {
-
+        this.reset();
         this.abilities = new Vector<Ability>();
         this.name = "Forest";
         this.types = "Basic Land - Forest";
         this.description = "(T: Add G to your mana pool)";
-        this.flavor = "";
 
         this.abilities.addElement(new TapForMana(this));
     }
 
-    public void play () {
+    private void reset() {
+        this.untap();
+    }
+
+    public void play () throws GameExceptions.GameException {
         this.token = false;
         GameCore game = GameCore.getGame();
         game.registerOnZone(this, GameEnums.Zone.BATTLEFIELD);
-    }
-
-    public void discard () {
-        // TODO: Make an exception if card is not in hand.
-        this.place (GameEnums.Zone.GRAVEYARD);
-    }
-
-    public void place (GameEnums.Zone zone) {
-        this.place (zone, 0);
-    }
-
-    public void place (GameEnums.Zone zone, int position) {
-        GameCore game = GameCore.getGame();
-        game.registerOnZone(this, zone);
-    }
-
-    public String toString() {
-        String tmp = this.name;
-        if (this.isTapped()) { tmp += " T"; }
-        tmp += String.format("%n") +
-        this.types + String.format("%n") +
-        this.description + String.format("%n") +
-        this.flavor + String.format("%n");
-        return tmp;
     }
 }

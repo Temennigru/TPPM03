@@ -18,6 +18,7 @@ import Cards.Abstract.*;
 import java.lang.*;
 import java.util.Vector;
 import java.util.Random;
+import java.util.Iterator;
 
 public class GameCore {
     Player[] m_player;
@@ -73,7 +74,7 @@ public class GameCore {
         this.removeFromZone (card, GameEnums.Zone.EXILE_FUP);
         this.removeFromZone (card, GameEnums.Zone.EXILE_FDN);
         this.removeFromZone (card, GameEnums.Zone.GRAVEYARD);
-        this.removeFromZone (card, GameEnums.Zone.LIBRARY);
+        //this.removeFromZone (card, GameEnums.Zone.LIBRARY);
         this.removeFromZone (card, GameEnums.Zone.HAND);
     }
 
@@ -103,26 +104,28 @@ public class GameCore {
             case HAND:
                 itr = card.m_owner.hand.iterator();
                 break;
+            default:
+                itr = null;
+                break;
         }
 
         while(itr.hasNext()) {
-            if (card == itr.next()) { itr.remove() }
-            System.out.print(element + " ");
+            if (card == itr.next()) { itr.remove(); }
         }
     }
 
-    public void registerOnZone (Card card, GameEnums.Zone zone) {
+    public void registerOnZone (Card card, GameEnums.Zone zone) throws GameExceptions.GameException {
 
         // Safety first
         if (card.location == null            || ( 
-                card.location != COMMAND     &&
-                card.location != BATTLEFIELD &&
-                card.location != EXILE_FUP   &&
-                card.location != EXILE_FDN   &&
-                card.location != GRAVEYARD   &&
-                card.location != GRAVEYARD   &&
-                card.location != LIBRARY     &&
-                card.location != HAND        && ) ) {
+                card.location != GameEnums.Zone.COMMAND     &&
+                card.location != GameEnums.Zone.BATTLEFIELD &&
+                card.location != GameEnums.Zone.EXILE_FUP   &&
+                card.location != GameEnums.Zone.EXILE_FDN   &&
+                card.location != GameEnums.Zone.GRAVEYARD   &&
+                card.location != GameEnums.Zone.GRAVEYARD   &&
+                card.location != GameEnums.Zone.LIBRARY     &&
+                card.location != GameEnums.Zone.HAND        ) ) {
 
             this.removeFromGameZones(card);
         }

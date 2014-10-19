@@ -10,7 +10,7 @@ public abstract class Permanent extends Card {
     private final void destroy() {}
     private final void sac() {}
 
-    public final void tap() {
+    public final void tap() throws GameExceptions.GameException {
         tapped = true;
     }
 
@@ -22,10 +22,17 @@ public abstract class Permanent extends Card {
         return tapped;
     }
 
-    public final String toString() {
+    public void place (GameEnums.Zone zone, int position) throws GameExceptions.GameException {
+        this.untap();
+        GameCore game = GameCore.getGame();
+        game.registerOnZone(this, zone);
+    }
+
+    public String toString() {
         String tmp = this.name;
+        tmp += " - " + this.manaCost;
         if (this.isTapped()) { tmp += " T"; }
-        tmp += " - " this.manaCost + String.format("%n") +
+        tmp += String.format("%n") +
         this.types + String.format("%n") +
         this.description + String.format("%n") +
         this.flavor + String.format("%n");
