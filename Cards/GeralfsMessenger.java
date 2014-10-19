@@ -1,4 +1,4 @@
-//reference: http://magiccards.info/avr/en/89.html
+//reference: http://magiccards.info/dka/en/63.html
 
 //TODO: enter play lose 2 life
 //TODO: undying
