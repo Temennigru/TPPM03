@@ -1,4 +1,4 @@
-//reference: http://magiccards.info/avr/en/89.html
+//reference: http://magiccards.info/10e/en/145.html
 
 //TODO: at the beginning of your upkeep...
 
