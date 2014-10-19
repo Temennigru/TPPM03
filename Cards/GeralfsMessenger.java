@@ -1,7 +1,6 @@
 //reference: http://magiccards.info/dka/en/63.html
 
 //TODO: enter play lose 2 life
-//TODO: undying
 
 package Cards;
 
@@ -26,27 +25,42 @@ public class GeralfsMessenger extends Creature {
         this.flavor = "Without a mind, it doesn`t fear death. Without a soul, it doesn`t mind killing.";
 	}
 
-	public play (GameCore game) {
+    private void reset() {
         this.power = 3;
         this.toughness = 2;
-        this.sick = true;
+        this.hasCounter = false;
+        this.untap();
+    }
+
+	public play (GameCore game) {
+        this.reset();
+
+        this.place (GameEnums.Zone.BATTLEFIELD);
 	}
 	
-	public play (GameCore game, GameEnums.Zone zone){
-		this.power = 3;
-        this.toughness = 2;
-        this.sick = true;
-	}
-	
+    public void place (GameEnums.Zone zone, int position) throws GameExceptions.GameException {
+        this.reset();
+        this.location = zone;
+        GameCore game = GameCore.getGame();
+        game.registerOnZone(this, zone);
+    }
 	public void discard (GameCore game) {
        	this.place (game, GameEnums.Zone.GRAVEYARD);
     }
 
-    public void place (GameCore game, GameEnums.Zone zone) {
-		this.place (game, zone, 0);
-	}
-
-    public void kill (GameCore game) {
+    public void kill () throws GameExceptions.GameException {
+        // TODO: Make an exception if card is not in battlefield.
+        if (!this.hasCounter) {
+            this.play ();
+            this.power++;
+            this.toughness++;
+            this.hasCounter = true;
+        } else {
+            this.power--;
+            this.toughness--;
+            this.hasCounter = false;
+            this.place(GameEnums.Zone.GRAVEYARD);
+        }
     }
 
     public String toString() {
