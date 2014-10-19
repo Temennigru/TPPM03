@@ -22,7 +22,6 @@ public class Barishi extends Creature {
     }
 
     private void reset() {
-        this.haste = true;
         this.power = 4;
         this.toughness = 3;
         this.sick = true;
