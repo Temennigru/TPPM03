@@ -15,7 +15,7 @@ public class KozilekButcherOfTruth extends Creature {
         this.name = "Kozilek, Butcher of Truth"
         this.description = "When you cast Kozilek, Butcher of Truth, draw four cards"
         + System.lineSeparator() + "Annihilator 4 (Whenever this creature attacks, defending player sacrifices four permanents.)"
-        + System.lineSeparator() + "When Kozilek is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library."
+        + System.lineSeparator() + "When Kozilek is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library.";
         this.flavor = " ";
     }
 
