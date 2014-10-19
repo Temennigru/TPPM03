@@ -9,10 +9,11 @@ import java.lang.System;
 public class StranglerootGeist extends Creature {
     boolean hasCounter;
 
-    public GameEnums.CreatureSubType[] m_sub = { GameEnums.CreatureSubType.SPIRIT };
 
     public StranglerootGheist () {
         this.reset();
+        this.m_sub = new GameEnums.CreatureSubType[1];
+        this.m_sub[0] = GameEnums.CreatureSubType.SPIRIT;
         this.manaCost = "GG";
         this.name = "Strangleroot Geist";
         this.types = "Creature - Spirit";

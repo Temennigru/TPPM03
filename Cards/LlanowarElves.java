@@ -7,7 +7,6 @@ import java.util.Vector;
 
 public class LlanowarElves extends Creature {
 
-    public GameEnums.CreatureSubType[] m_sub = { GameEnums.CreatureSubType.ELF, GameEnums.CreatureSubType.DRUID };
 
     private static class TapForMana extends Ability {
 
@@ -46,6 +45,10 @@ public class LlanowarElves extends Creature {
 
 	public LlanowarElves () {
         this.reset();
+        this.m_sub = new GameEnums.CreatureSubType[2];
+        this.m_sub[0] = GameEnums.CreatureSubType.ELF;
+        this.m_sub[0] = GameEnums.CreatureSubType.DRUID;
+
         this.abilities = new Vector<Ability>();
         this.manaCost = "G";
         this.name = "Llanowar Elves";
