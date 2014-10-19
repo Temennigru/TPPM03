@@ -34,10 +34,7 @@ public class CitanulWoodreaders extends Creature {
     }
     
     public void place (GameEnums.Zone zone, int position) throws GameExceptions.GameException {
-        this.reset();
-        this.location = zone;
-        GameCore game = GameCore.getGame();
-        game.registerOnZone(this, zone);
+        this.place (game, zone, 0);
     }
 
     public void kill (GameCore game) {
