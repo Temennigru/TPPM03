@@ -19,6 +19,7 @@ import java.lang.*;
 import java.util.Vector;
 import java.util.Random;
 import java.util.Iterator;
+import java.util.Map;
 
 public class GameCore {
     Player[] m_player;
@@ -27,6 +28,9 @@ public class GameCore {
     private Vector<Card> m_exileFupZone;
     private Vector<Card> m_exileFdnZone;
     private Vector<Card> m_commandZone;
+    private Map<Card, Player> attackers;
+    private Map<Card, Card> blockers;
+
 
     Player m_currentPlayer;
 
@@ -117,20 +121,8 @@ public class GameCore {
     public void registerOnZone (Card card, GameEnums.Zone zone) throws GameExceptions.GameException {
 
         // Safety first
-        if (card.location == null            || ( 
-                card.location != GameEnums.Zone.COMMAND     &&
-                card.location != GameEnums.Zone.BATTLEFIELD &&
-                card.location != GameEnums.Zone.EXILE_FUP   &&
-                card.location != GameEnums.Zone.EXILE_FDN   &&
-                card.location != GameEnums.Zone.GRAVEYARD   &&
-                card.location != GameEnums.Zone.GRAVEYARD   &&
-                card.location != GameEnums.Zone.LIBRARY     &&
-                card.location != GameEnums.Zone.HAND        ) ) {
 
-            this.removeFromGameZones(card);
-        }
-
-        else { this.removeFromZone(card, card.location); }
+        this.removeFromGameZones(card);
 
         switch (zone) {
             case COMMAND:
@@ -157,5 +149,62 @@ public class GameCore {
         }
 
         card.location = zone;
+    }
+
+    public void stateCheck() {
+        Iterator<Card> itr = this.m_battlefield.iterator();
+        while (itr.hasNext()) {
+
+        }
+    }
+
+    public Iterator<Card> iterator (GameEnums.Zone zone) {
+        switch (zone) {
+            case COMMAND:
+                itr = m_commandZone.iterator();
+                break;
+            case BATTLEFIELD:
+                itr = m_battlefield.iterator();
+                break;
+            case EXILE_FUP:
+                itr = m_exileFupZone.iterator();
+                break;
+            case EXILE_FDN:
+                itr = m_exileFdnZone.iterator();
+                break;
+            default:
+                itr = null;
+                break;
+        }
+    }
+
+    public Iterator<Card> iterator (Player player, GameEnums.Zone zone) {
+        switch (zone) {
+            case COMMAND:
+                itr = m_commandZone.iterator();
+                break;
+            case BATTLEFIELD:
+                itr = m_battlefield.iterator();
+                break;
+            case EXILE_FUP:
+                itr = m_exileFupZone.iterator();
+                break;
+            case EXILE_FDN:
+                itr = m_exileFdnZone.iterator();
+                break;
+            case GRAVEYARD:
+                itr = player.graveyard.iterator();
+                break;
+            case LIBRARY:
+                itr = player.library.iterator();
+                break;
+            case HAND:
+                itr = player.hand.iterator();
+                break;
+            default:
+                itr = null;
+                break;
+            }
+        }
     }
 }

@@ -29,35 +29,4 @@ public class RealPlayer extends Player {
 
     public void takeTurn() {}
 
-    public void addMana(String mana) { 
-      	for (int i = 0; i < mana.length(); i++) {
-        	switch (mana.charAt(i)) {
-            	case 'R':
-            		this.manaPool[0]++;
-            		break;
-            	case 'G':
-            		this.manaPool[1]++;
-            		break;
-            	case 'B':
-            		this.manaPool[2]++;
-            		break;
-            	case 'U':
-            		this.manaPool[3]++;
-            		break;
-            	case 'W':
-            		this.manaPool[4]++;
-            		break;
-            	default:
-            		if (Character.isDigit(mana.charAt(i))) {
-            			int j = i;
-            			while (Character.isDigit(mana.charAt(i))) { i++; }
-            			this.manaPool[5] += Integer.parseInt(mana.substring(j, i));
-            		} else {
-            			assert false;
-            		}
-            		break;
-        	}
-    	}
-    }
-
 }

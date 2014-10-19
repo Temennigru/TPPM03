@@ -1,7 +1,16 @@
 TODO:
-1- remove protected members and reimplement in subclasses
+1- Remove protected members and reimplement in subclasses
 2- IA
 3- Console
 4- Image display
-5- Turn operations
-6- Implement state checks
+5- Implement state checks
+6- Set owner and controler on deck
+
+
+TP3:
+1- Global effects
+2- Add stack
+3- Legendary rules
+
+MAYBE:
+1- Implement planeswalkers

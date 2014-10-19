@@ -33,8 +33,8 @@ public abstract class Creature extends Permanent {
 
     public void attack (Player player) throws GameExceptions.GameException {
         GameCore game = GameCore.getGame();
-        //game.declareAttacker(this, player);
-        this.tap();
+        game.declareAttacker(this, player);
+        if (!this.vigilance) { this.tap(); }
     }
 
     public String toString() {

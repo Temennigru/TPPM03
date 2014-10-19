@@ -9,19 +9,19 @@ public class main {
 
 		Core.GameCore game = Core.GameCore.getGame(me, null);
 
-		Cards.Abstract.Card s = new StranglerootGheist();
+		Cards.Abstract.Card s = new StranglerootGeist();
 		s.m_owner = me;
 		s.m_controler = me;
 
 		s.play();
 		System.out.println(s.toString());
 
-		System.out.println("Killing gheist\n");
+		System.out.println("Killing geist\n");
 		((Cards.Abstract.Creature)s).kill();
 		System.out.println(s.location.toString());
 		System.out.println(s.toString());
 
-		System.out.println("Killing gheist\n");
+		System.out.println("Killing geist\n");
 		((Cards.Abstract.Creature)s).kill();
 		System.out.println(s.location.toString());
 		System.out.println(s.toString());
@@ -61,11 +61,10 @@ public class main {
 
 		System.out.println("Green mana: " + Integer.toString(me.manaPool[1]));
 
-		((Cards.Abstract.Creature)e).kill();
-
 		System.out.println(e.location.toString());
 
 		e.activateAt(0);
 
+		System.out.println("Green mana: " + Integer.toString(me.manaPool[1]));
 	}
 }

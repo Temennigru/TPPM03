@@ -17,8 +17,9 @@ public abstract class Card extends GameObject {
     protected String types = "";
     protected String manaCost = "";
 
-    public void cast () throws GameExceptions.GameException {
+    public boolean cast () throws GameExceptions.GameException {
         // TODO: use stack
+        if (this.location != GameEnums.Zone.HAND) { throw new GameExceptions.WrongZoneException(this, this.location, GameEnums.Zone.HAND); }
         this.play();
     }
 

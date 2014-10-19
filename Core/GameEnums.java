@@ -133,12 +133,18 @@ public class GameEnums {
         HEAD, HERO, REVELLER
         
     }
+
     public enum Zone {
 
         COMMAND, BATTLEFIELD, EXILE_FUP, EXILE_FDN, GRAVEYARD, LIBRARY, HAND
         
     }
+
     public enum AbilityType {
         ACTIVE, TRIGGERED, PASSIVE
+    }
+
+    public enum ManaPoolDirection {
+        ADD, SUB
     }
 }

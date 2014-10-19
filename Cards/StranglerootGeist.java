@@ -6,7 +6,7 @@ import Core.*;
 import Cards.Abstract.*;
 import java.lang.System;
 
-public class StranglerootGheist extends Creature {
+public class StranglerootGeist extends Creature {
     boolean hasCounter;
 
     public GameEnums.CreatureSubType[] m_sub = { GameEnums.CreatureSubType.SPIRIT };
@@ -14,7 +14,7 @@ public class StranglerootGheist extends Creature {
     public StranglerootGheist () {
         this.reset();
         this.manaCost = "GG";
-        this.name = "Strangleroot Gheist";
+        this.name = "Strangleroot Geist";
         this.types = "Creature - Spirit";
         this.description = "Haste" + String.format("%n") + "Undying (when this creature dies," +
         " if it had no +1/+1 counters on it, return it to the battlefield under it's owner's control" +
