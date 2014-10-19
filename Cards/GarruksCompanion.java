@@ -3,7 +3,7 @@
 
 public class GarruksCompanion extends Creature {
 
-	 public GarruksCompanion () {
+	public GarruksCompanion () {
         this.m_sub = { GameEnums.CreatureSubType.BEAST };
         this.power = 3;
         this.toughness = 2;
