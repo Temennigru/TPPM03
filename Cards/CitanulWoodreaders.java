@@ -10,10 +10,11 @@ import java.lang.System;
 
 public class CitanulWoodreaders extends Creature {
 
-    public GameEnums.CreatureSubType[] m_sub = { GameEnums.CreatureSubType.HUMAN, GameEnums.CreatureSubType.DRUID };
-
     public CitanulWoodreaders () {
-        this.reset();
+        this.m_sub = { GameEnums.CreatureSubType.HUMAN, GameEnums.CreatureSubType.DRUID };
+        this.power = 1;
+        this.toughness = 4;
+        this.sick = true;
         this.manaCost = "2G";
         this.name = "Citanul Woodreaders";
         this.types = "Creature - Human Druid";
@@ -22,19 +23,16 @@ public class CitanulWoodreaders extends Creature {
         this.flavor = "They seek out living trees to glean age-old secrets from sap and wood.";
     }
 
-    private void reset() {
+    public play (GameCore game) {
         this.power = 1;
         this.toughness = 4;
-        this.hasCounter = false;
-        this.untap();
+        this.sick = true;
     }
-
-    public void play () throws GameExceptions.GameException {
-        this.reset();
-
-        this.place (GameEnums.Zone.BATTLEFIELD);
+    
+    public void discard (GameCore game) {
+        this.place (game, GameEnums.Zone.GRAVEYARD);
     }
-
+    
     public void place (GameEnums.Zone zone, int position) throws GameExceptions.GameException {
         this.reset();
         this.location = zone;
@@ -42,6 +40,14 @@ public class CitanulWoodreaders extends Creature {
         game.registerOnZone(this, zone);
     }
 
-    public void kill () throws GameExceptions.GameException {
+    public void kill (GameCore game) {
+    }
+
+    public String toString() {
+        return this.name + " - " + this.manaCost + System.lineSeparator() +
+        "Creature - Beast" + System.lineSeparator() +
+        this.description + System.lineSeparator() +
+        this.flavor + System.lineSeparator() +
+        this.power.toString() + "/" + this.toughness.toString() + System.lineSeparator();
     }
 }
