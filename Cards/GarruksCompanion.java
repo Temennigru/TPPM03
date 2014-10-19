@@ -1,5 +1,12 @@
 //reference: http://magiccards.info/m12/en/175.html
+
 //TODO: implementar o trample
+
+package Cards;
+
+import Core.*;
+import Cards.Abstract.*;
+import java.lang.System;
 
 public class GarruksCompanion extends Creature {
 
@@ -15,7 +22,7 @@ public class GarruksCompanion extends Creature {
         this.flavor = "They seek out living trees to glean age-old secrets from sap and wood.";
     }
 
-	 public play (GameCore game) {
+	public play (GameCore game) {
         this.power = 3;
         this.toughness = 2;
         this.sick = true;
