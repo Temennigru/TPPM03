@@ -1,4 +1,5 @@
 //reference: http://magiccards.info/m12/en/175.html
+//TODO: implementar o trample
 
 public class GarruksCompanion extends Creature {
 
@@ -9,8 +10,9 @@ public class GarruksCompanion extends Creature {
         this.sick = true;
         this.manaCost = "GG";
         this.name = "Garruk's Companion"
-        this.description = "Trample"; //TODO: implementar o trample
-        this.flavor = " ";
+        this.description = "Trample"
+        + "(If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)";
+        this.flavor = "They seek out living trees to glean age-old secrets from sap and wood.";
     }
 
 	 public play (GameCore game) {
