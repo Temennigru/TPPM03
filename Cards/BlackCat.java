@@ -16,7 +16,7 @@ public class BlackCat extends Creature {
         this.toughness = 1;
         this.sick = true;
         this.manaCost = "1B";
-        this.name = "BlackCat"
+        this.name = "Black Cat"
         this.description = "When Black Cat dies, target opponent discards a card at random.";
         this.flavor = "Its last life is spent tormenting your deams.";
 	}
