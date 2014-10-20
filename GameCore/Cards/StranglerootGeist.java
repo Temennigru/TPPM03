@@ -34,7 +34,6 @@ public class StranglerootGeist extends Creature {
 
     public void play () throws GameExceptions.GameException {
         this.reset();
-
         this.place (GameEnums.Zone.BATTLEFIELD);
     }
 

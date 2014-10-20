@@ -13,10 +13,11 @@ public class GeralfsMessenger extends Creature {
     boolean istapped = true;
 
 	public GeralfsMessenger () {
-        this.m_sub = { GameEnums.CreatureSubType.ZOMBIE}; 
-        this.power = 3;
-        this.toughness = 2;
-        this.sick = true;
+        this.reset();
+        this.m_type = new GameEnums.Type[1];
+        this.m_type[0] = GameEnums.Type.CREATURE;
+        this.m_sub = new GameEnums.CreatureSubType[1];
+        this.m_sub[0] = GameEnums.CreatureSubType.ZOMBIE;
         this.manaCost = "BBB";
         this.name = "Geralf's Messenger"
         this.description = "Geralf's Messenger enters the battlefield tapped."
@@ -32,20 +33,16 @@ public class GeralfsMessenger extends Creature {
         this.untap();
     }
 
-	public play (GameCore game) {
+    public void play () throws GameExceptions.GameException {
         this.reset();
-
         this.place (GameEnums.Zone.BATTLEFIELD);
-	}
-	
+    }
+
     public void place (GameEnums.Zone zone, int position) throws GameExceptions.GameException {
         this.reset();
         this.location = zone;
         GameCore game = GameCore.getGame();
         game.registerOnZone(this, zone);
-    }
-	public void discard (GameCore game) {
-       	this.place (game, GameEnums.Zone.GRAVEYARD);
     }
 
     public void kill () throws GameExceptions.GameException {
@@ -62,12 +59,4 @@ public class GeralfsMessenger extends Creature {
             this.place(GameEnums.Zone.GRAVEYARD);
         }
     }
-
-    public String toString() {
-        return this.name + " - " + this.manaCost + System.lineSeparator() +
-        "Creature - Zombie" + System.lineSeparator() +
-        this.description + System.lineSeparator() +
-        this.flavor + System.lineSeparator() +
-        this.power.toString() + "/" + this.toughness.toString() + System.lineSeparator();
-	}
 }

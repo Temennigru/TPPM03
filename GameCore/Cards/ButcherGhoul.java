@@ -11,9 +11,10 @@ public class ButcherGhoul extends Creature {
 
 	public ButcherGhoul () {
         this.reset();
+        this.m_type = new GameEnums.Type[1];
+        this.m_type[0] = GameEnums.Type.CREATURE;
         this.m_sub = new GameEnums.CreatureSubType[1];
         this.m_sub[0] = GameEnums.CreatureSubType.ZOMBIE;
-        this.sick = true;
         this.manaCost = "1B";
         this.name = "Butcher Ghoul"
         this.description = "Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner`s control with a +1/+1 counter on it. )";

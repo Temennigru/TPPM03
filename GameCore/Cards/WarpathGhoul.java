@@ -11,6 +11,8 @@ public class WarpathGhoul extends Creature {
 
     public WarpathGhoul () {
         this.reset();
+        this.m_type = new GameEnums.Type[1];
+        this.m_type[0] = GameEnums.Type.CREATURE;
         this.m_sub = new GameEnums.CreatureSubType[1];
         this.m_sub[0] = GameEnums.CreatureSubType.ZOMBIE;
         this.manaCost = "2B";
@@ -23,7 +25,6 @@ public class WarpathGhoul extends Creature {
     private void reset() {
         this.power = 3;
         this.toughness = 2;
-        this.sick = true;
     }
 
     public void play () throws GameExceptions.GameException {

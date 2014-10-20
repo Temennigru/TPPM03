@@ -12,9 +12,10 @@ public class TokenZombie extends Creature {
 
 	public TokenZombie () {
         this.reset();
+        this.m_type = new GameEnums.Type[1];
+        this.m_type[0] = GameEnums.Type.CREATURE;
         this.m_sub = new GameEnums.CreatureSubType[1];
         this.m_sub[0] = GameEnums.CreatureSubType.ZOMBIE;
-        this.sick = true;
         this.manaCost = "";
         this.name = "Zombie"
         this.description = " ";
@@ -24,8 +25,6 @@ public class TokenZombie extends Creature {
     private void reset() {
         this.power = 2;
         this.toughness = 2;
-        this.hasCounter = false;
-        this.untap();
     }
 
     public void play () throws GameExceptions.GameException {
