@@ -1,6 +1,7 @@
 //reference: http://magiccards.info/rtr/en/140.html
 package GameCore.Cards;
 
+//TODO: token 5/5 wurm with trample http://magiccards.info/extra/token/return-to-ravnica/wurm.html
 //TODO: trample
 //TODO: when dies, put three 5/5
 //TODO: when put into graveyard, shuffle it into library

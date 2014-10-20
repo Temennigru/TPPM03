@@ -1,0 +1,31 @@
+PlayerDeck
+
+3x Black Cat
+4x Butcher Ghoul
+4x Geralf's Messenger
+4x Gravecrawler
+3x Warpath Ghoul
+1x Army of the Damned
+3x Assassinate
+2x Damnation
+2x Endless Ranks of the Dead
+16x Swamp
+
+Creature (18)
+Sorcery (6)
+Enchantment (2)
+Land (16)
+
+AIDeck
+4x Barishi
+4x Garruk's Companion
+2x Indrik Stomphowler
+1x Kozilek, Butcher of Truth
+4x Leatherback Baloth
+4x Llanowar Elves
+4x Strangleroot Geist
+1x Terra Stomper
+16x Forest
+
+Creature (24)
+Land (16)

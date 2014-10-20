@@ -1,3 +1,6 @@
+/*
+a more complex GUI will be used in future versions
+
 package GameCore.Ui.Gui;
 
 import javax.swing.*;
@@ -9,3 +12,4 @@ public class GraphTeste {
 	//	JFrame frame = new GraphTable ("Magic TP2 Table");
 	//}
 }	
+*/
