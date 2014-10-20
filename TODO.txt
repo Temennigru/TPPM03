@@ -5,7 +5,10 @@ TODO:
 4- Image display
 √5- Implement state checks
 6- Set owner and controler on deck
-
+7- implement armyofthedamned, assassinate, damnation, endlessranksofthedead cards
+8- implement details on cards: barishi (remove from game, shuffle), blackcat (opp discards when killed),
+- terrastomper (trample, cantbecountered), garruks (trample), indrikstomp (when enters, destroy target),
+- kozilek (when cast draw 4 cards, annihilator, when put on graveyard shuffle)
 
 TP3:
 1- Global effects
