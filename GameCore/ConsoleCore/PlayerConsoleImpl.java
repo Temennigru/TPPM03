@@ -4,6 +4,7 @@ import GameCore.*;
 import GameCore.GameObjectCore.Card;
 import GameCore.Ui.Tui.TextUserInterface;
 import GameCore.Cards.*;
+import GameCore.GameObjectCore.*;
 
 
 import java.io.IOException;
@@ -68,7 +69,8 @@ public class PlayerConsoleImpl implements Console {
 			} else if (new String("end").startsWith(com)) {
 				return null;
 			} else {
-				tui.setOutput("Try again. (type \"help\" for help)");
+				tui.setOutput("Try again. (type \"help\" for help)", false);
+				tui.newLine();
 			}
 			// Other zones are pointless for the time being.
 		}
@@ -136,14 +138,17 @@ public class PlayerConsoleImpl implements Console {
 
 		s.play();
 
-		while (true) {
+		while (s != null) {
 			s = me.prompt();
 			if (s == null) {
 				System.out.println("No card chosen");
 			} else {
 				System.out.println("Chosen card: " + s.name);
-				if (s.name().equals("Strangleroot Geist")) {
+				if (s.name.equals("Strangleroot Geist")) {
 					((Creature)s).kill();
+				} else {
+					((Permanent)s).tap();
+				}
 			}
 		}
 	}
