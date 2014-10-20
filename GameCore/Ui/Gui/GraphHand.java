@@ -1,3 +1,6 @@
+/*
+a more complex GUI will be used in future versions
+
 package GameCore.Ui.Gui;
 
 import java.awt.Color;
@@ -45,3 +48,4 @@ public class GraphHand extends JPanel {
 		
 	}
 }
+*/
