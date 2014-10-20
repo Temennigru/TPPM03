@@ -1,3 +1,6 @@
+/*
+a more complex GUI will be used in future versions
+
 package GameCore.Gui;
 
 import java.awt.BorderLayout;
@@ -18,3 +21,4 @@ public class GraphTable extends JFrame{
 	
 	}
 }
+*/
