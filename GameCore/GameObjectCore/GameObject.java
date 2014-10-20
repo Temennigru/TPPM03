@@ -1,4 +1,4 @@
-package Core;
+package GameCore.GameObjectCore;
 
 import java.util.*;
 

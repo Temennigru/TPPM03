@@ -1,4 +1,4 @@
-package Cards.Abstract;
+package GameCore.GameObjectCore;
 
 import Core.*;
 

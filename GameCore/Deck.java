@@ -1,4 +1,4 @@
-package GameCore.Gui;
+package GameCore;
 
 import java.util.ArrayList;
 import java.util.Random;

@@ -1,4 +1,4 @@
-package GameCore.Gui;
+package GameCore.Ui.Gui;
 
 import javax.swing.*;
 
