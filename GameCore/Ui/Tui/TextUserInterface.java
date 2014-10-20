@@ -2,6 +2,7 @@ package GameCore.Ui.Tui;
 
 import java.lang.System;
 import java.lang.Runtime;
+import java.lang.Thread;
 import java.io.*;
 import java.util.Scanner;
 import java.io.ByteArrayOutputStream;
@@ -10,27 +11,51 @@ import java.io.InputStream;
 public class TextUserInterface {
 
 	private static TextUserInterface m_tui = null;
+	private static boolean m_restore = false;
+    private static TuiUtil.CleanupHook m_failsafe = null;
 	private PrintStream m_out;
 	private PrintStream m_log;
-	private String m_output;
+	private String m_buffer;
 
 	// Singleton Methods
-	private TextUserInterface(){} // Don't use this
+	private TextUserInterface(){}
+
+	private TextUserInterface(PrintStream log) throws IOException {
+		m_out = System.out;
+		this.m_log = log;
+		System.setOut(this.m_log);
+		this.m_buffer = "";
+		this.clearScreen();
+	}
 
 	private TextUserInterface(String logfile) throws IOException {
 		m_out = System.out;
 		this.setLogFile(logfile);
 		System.setOut(this.m_log);
-		this.m_output = "";
+		this.m_buffer = "";
 		this.clearScreen();
 	}
 
+	protected static void restoreTerminalAccess() {
+		if (m_tui == null || m_restore) { return; }
+
+		m_restore = true;
+		System.setOut(m_tui.m_out);
+	}
+
 	public static TextUserInterface getTui() throws IOException {
-		if (m_tui == null) { m_tui = new TextUserInterface("Doug.log"); }
-		return m_tui;
+		return getTui("Doug.log");
 	}
 
 	public static TextUserInterface getTui(String logfile) throws IOException {
+
+        // Failsafe against ctrl+c during CBreak mode
+        if (m_failsafe == null) {
+        	m_failsafe = new TuiUtil.CleanupHook();
+        	Runtime.getRuntime().addShutdownHook(m_failsafe);
+        }
+
+		if (m_restore) { m_tui = new TextUserInterface(m_tui.m_log); m_restore = false; }
 		if (m_tui == null) { m_tui = new TextUserInterface(logfile); }
 		return m_tui;
 	}
@@ -45,43 +70,66 @@ public class TextUserInterface {
 
 	private void clearScreen() throws IOException {
 		this.m_out.print("\033[2J");
+		this.m_out.print(String.format("%n%n%n%n%n%n%n%n")); // Fixing bug
+		this.m_out.print(String.format("%n%n%n%n%n%n%n%n"));
+		this.m_out.print(String.format("%n%n%n%n%n%n%n%n"));
+		this.m_out.print(String.format("%n%n%n%n%n%n%n%n"));
+		this.m_out.print(String.format("%n%n%n%n%n%n%n%n"));
 	}
 
-	private void printCursor() {
-		this.m_out.print("> ");
+	private void printCursor() throws IOException {
+		this.newLine();
+		this.setOutput("> ", false);
 	}
 
 	public void setOutput(String output) throws IOException {
-		System.out.println(output);
+		this.setOutput(output, true);
+	}
+
+	public void setOutput(String output, boolean flush) throws IOException {
+		this.m_buffer += output;
+		if (flush) { this.flush(); }
+	}
+
+	public void newLine() throws IOException {
+		this.setOutput(String.format("%n"), false);
+	}
+
+	public void flush() throws IOException {
 		this.clearScreen();
-		this.m_output = output;
-		this.m_out.println(String.format("%n") + output); // The newline fixes a small displacement bug when using CBreak term
+		System.out.println(this.m_buffer);
+		this.m_out.print(String.format("%n") + m_buffer); // The newline fixes a small displacement bug when using CBreak term
+		this.m_buffer = "";
 	}
 
 	public String getTextInput() throws IOException {
+		this.setOutput("Please enter a text command", false);
 		this.printCursor();
+		this.flush();
 		Scanner input = new Scanner(System.in);
 		return input.nextLine();
 	}
 
 	public String getActionInput() throws IOException, InterruptedException {
-		this.m_out.println("Controls: w, a, s, d, enter, esc");
-		this.m_out.print("> ");
+		this.setOutput("Controls: w, a, s, d, enter, q", false);
+		this.printCursor();
+		this.flush();
 		TuiUtil.setTerminalToCBreak();
 		int c = System.in.read();
 		TuiUtil.restoreTerminal();
-		switch (c) {
-			case 119:
+		System.out.println("User pressed " + Integer.toString(c));
+		switch ((char)c) {
+			case 'w':
 				return "UP";
-			case 97:
+			case 'a':
 				return "LEFT";
-			case 115:
+			case 's':
 				return "DOWN";
-			case 100:
+			case 'd':
 				return "RIGHT";
-			case 27: // Warning: This will consider anything that is not a character (such as arrow keys) as esc.
+			case 'q':
 				return "ESC";
-			case 10:
+			case '\n':
 				return "ENTER";
 			default:
 				return "";
@@ -91,16 +139,25 @@ public class TextUserInterface {
 	public static void main(String[] args) throws IOException, InterruptedException { // Test method
 		TextUserInterface tui = TextUserInterface.getTui();
 		while (true) {
-			tui.setOutput("Hello! Press 1 to get text input and 2 to get key input");
+			tui.setOutput("Hello! Press 1 to get text input and 2 to get key input", false);
+			tui.newLine();
 			String temp = tui.getTextInput();
 			if (temp.equals("1")) {
-				tui.clearScreen();
-				temp = tui.getTextInput();
-				System.out.println(temp);
+				while (!temp.equals("quit")) {
+					tui.clearScreen();
+					temp = tui.getTextInput();
+					tui.setOutput(temp, false); // Do not flush
+					tui.newLine();
+					System.out.println(temp);
+				}
 			} else {
-				tui.clearScreen();
-				temp = tui.getActionInput();
-				System.out.println(temp);
+				while (!temp.equals("ESC")) {
+					tui.clearScreen();
+					temp = tui.getActionInput();
+					tui.setOutput(temp, false); // Do not flush
+					tui.newLine();
+					System.out.println(temp);
+				}
 			}
 		}
 	}

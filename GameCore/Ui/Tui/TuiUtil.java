@@ -5,10 +5,23 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 public class TuiUtil {
-	
-	private static String ttyConfig;
 
-	public static void setTerminalToCBreak() throws IOException, InterruptedException {
+    protected static class CleanupHook extends Thread {
+        public void run() {
+            try {
+                TextUserInterface.restoreTerminalAccess();
+                TuiUtil.restoreTerminal();
+                System.out.println(String.format("%n") + "Exited successfully" + String.format("%n"));
+            } catch (Exception e) {
+                System.out.println(String.format("%n") + "Sorry for your terminal, bro" + String.format("%n"));
+            }
+        }
+    }
+	
+	private static String ttyConfig = "";
+    private static boolean isCBreak = false;
+
+	protected static void setTerminalToCBreak() throws IOException, InterruptedException {
 
         ttyConfig = stty("-g");
 
@@ -17,17 +30,21 @@ public class TuiUtil {
 
         // disable character echoing
         stty("-echo");
+
+        TuiUtil.isCBreak = true;
     }
 
-    public static void restoreTerminal() throws IOException, InterruptedException {
+    protected static void restoreTerminal() throws IOException, InterruptedException {
+        if (!TuiUtil.isCBreak) { return; }
     	stty( ttyConfig.trim() );
+        TuiUtil.isCBreak = false;
     }
 
      /*
      *  Execute the stty command with the specified arguments
      *  against the current active terminal.
      */
-    private static String stty(final String args)
+    protected static String stty(final String args)
                     throws IOException, InterruptedException {
         String cmd = "stty " + args + " < /dev/tty";
 
@@ -42,7 +59,7 @@ public class TuiUtil {
      *  Execute the specified command and return the output
      *  (both stdout and stderr).
      */
-    private static String exec(final String[] cmd)
+    protected static String exec(final String[] cmd)
                     throws IOException, InterruptedException {
         ByteArrayOutputStream bout = new ByteArrayOutputStream();
 

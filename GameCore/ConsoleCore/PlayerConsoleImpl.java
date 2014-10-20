@@ -57,8 +57,8 @@ public class PlayerConsoleImpl implements Console {
 					"battlefield" + String.format("%n") +
 					"hand" + String.format("%n") +
 					"graveyard" + String.format("%n") +
-					"end"
-					);
+					"end", false);
+				tui.newLine();
 			} else if (new String("battlefield").startsWith(com)) {
 				zone = GameEnums.Zone.BATTLEFIELD;
 			} else if (new String("hand").startsWith(com)) {
@@ -82,6 +82,12 @@ public class PlayerConsoleImpl implements Console {
 		while (ret == null) {
 			itr = game.iterator(this.player, zone);
 
+			if (!itr.hasNext()) {
+				tui.setOutput("No cards in specified zone", false);
+				tui.newLine();
+				return this.prompt();
+			}
+
 			if (com.equals("LEFT")) {
 				// If control reaches here then the player pressed left
 				for (int j = 0; j < i - 1; j++) { itr.next(); } // Only way to make an iterator move left.
@@ -91,7 +97,7 @@ public class PlayerConsoleImpl implements Console {
 
 			while (itr.hasNext()) {
 				Card tmp = itr.next();
-				tui.setOutput(tmp.toString() + String.format("%n%n") + "Use a and d to move, enter to select and esc to go back");
+				tui.setOutput(tmp.toString() + String.format("%n"), false);
 				com = tui.getActionInput();
 				if (com.equals("ENTER")) { return tmp; }
 				else if (com.equals("ESC")) { return this.prompt(); } // Lazy way out.
@@ -130,7 +136,16 @@ public class PlayerConsoleImpl implements Console {
 
 		s.play();
 
-		System.out.println("Chosen card: " + me.prompt().name);
+		while (true) {
+			s = me.prompt();
+			if (s == null) {
+				System.out.println("No card chosen");
+			} else {
+				System.out.println("Chosen card: " + s.name);
+				if (s.name().equals("Strangleroot Geist")) {
+					((Creature)s).kill();
+			}
+		}
 	}
 
 }
