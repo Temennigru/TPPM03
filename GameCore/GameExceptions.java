@@ -21,11 +21,18 @@ public class GameExceptions {
 		}
 
 	}
+
 	public static class WrongOwnerException extends GameException {
 		public WrongOwnerException(Card card, Player got, Player expected) {
 			this.msg = ("Error: Someone is trying to steal a card!" + String.format("%n") +
 				"Card: " + card.name + String.format("%n") +
 				"Expected " + expected.toString() + " but got " + got.toString());
+		}
+	}
+
+	public static class InvalidGameException extends GameException {
+		public WrongOwnerException(Card card, Player got, Player expected) {
+			this.msg = "Error: Game was not created." + String.format("%n");
 		}
 	}
 }
