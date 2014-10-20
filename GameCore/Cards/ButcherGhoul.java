@@ -1,6 +1,5 @@
 //reference: http://magiccards.info/avr/en/89.html
 
-//TODO: undying
 
 package GameCore.Cards;
 
@@ -11,9 +10,9 @@ import java.lang.System;
 public class ButcherGhoul extends Creature {
 
 	public ButcherGhoul () {
-        this.m_sub = { GameEnums.CreatureSubType.ZOMBIE}; 
-        this.power = 1;
-        this.toughness = 1;
+        this.reset();
+        this.m_sub = new GameEnums.CreatureSubType[1];
+        this.m_sub[0] = GameEnums.CreatureSubType.ZOMBIE;
         this.sick = true;
         this.manaCost = "1B";
         this.name = "Butcher Ghoul"
@@ -21,34 +20,38 @@ public class ButcherGhoul extends Creature {
         this.flavor = "Without a mind, it doesn`t fear death. Without a soul, it doesn`t mind killing.";
 	}
 
-	public play (GameCore game) {
+    private void reset() {
         this.power = 1;
         this.toughness = 1;
-        this.sick = true;
-	}
-	
-	public play (GameCore game, GameEnums.Zone zone){
-		this.power = 1;
-        this.toughness = 1;
-        this.sick = true;
-	}
-	
-	public void discard (GameCore game) {
-       	this.place (game, GameEnums.Zone.GRAVEYARD);
+        this.hasCounter = false;
+        this.untap();
     }
 
-    public void place (GameCore game, GameEnums.Zone zone) {
-		this.place (game, zone, 0);
-	}
-
-    public void kill (GameCore game) {
+    public void play () throws GameExceptions.GameException {
+        this.reset();
+        this.place (GameEnums.Zone.BATTLEFIELD);
     }
 
-    public String toString() {
-        return this.name + " - " + this.manaCost + System.lineSeparator() +
-        "Creature - Zombie" + System.lineSeparator() +
-        this.description + System.lineSeparator() +
-        this.flavor + System.lineSeparator() +
-        this.power.toString() + "/" + this.toughness.toString() + System.lineSeparator();
-	}
+
+    public void place (GameEnums.Zone zone, int position) throws GameExceptions.GameException {
+        this.reset();
+        this.location = zone;
+        GameCore game = GameCore.getGame();
+        game.registerOnZone(this, zone);
+    }
+
+    public void kill () throws GameExceptions.GameException {
+        // TODO: Make an exception if card is not in battlefield.
+        if (!this.hasCounter) {
+            this.play ();
+            this.power++;
+            this.toughness++;
+            this.hasCounter = true;
+        } else {
+            this.power--;
+            this.toughness--;
+            this.hasCounter = false;
+            this.place(GameEnums.Zone.GRAVEYARD);
+        }
+    }
 }
