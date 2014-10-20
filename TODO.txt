@@ -1,7 +1,7 @@
 TODO:
 1- Implement turn
 2- IA
-3- Console
+3- Console (turn is waiting)
 4- Image display
 √5- Implement state checks
 6- Set owner and controler on deck
@@ -15,6 +15,7 @@ TP3:
 5- Replacement effects
 6- Changing card types
 7- Remove protected members and reimplement in subclasses
+8- Implement mana prompt
 
 MAYBE:
 1- Implement planeswalkers
