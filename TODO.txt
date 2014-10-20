@@ -5,6 +5,7 @@ TODO:
 4- Image display
 √5- Implement state checks
 6- Set owner and controler on deck
+7- Console output refresh
 
 
 TP3:
