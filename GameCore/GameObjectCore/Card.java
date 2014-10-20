@@ -1,6 +1,6 @@
-package Cards.Abstract;
+package GameCore.GameObjectCore;
 
-import Core.*;
+import GameCore.*;
 
 import java.util.Vector;
 
@@ -17,14 +17,23 @@ public abstract class Card extends GameObject {
     protected String types = "";
     protected String manaCost = "";
 
-    public boolean cast () throws GameExceptions.GameException {
+    // Cards that 
+    public final boolean cast () throws GameExceptions.GameException {
+        this.cast(true);
+    }
+
+    public boolean cast (boolean payManaCost) {
         // TODO: use stack
         if (this.location != GameEnums.Zone.HAND) { throw new GameExceptions.WrongZoneException(this, this.location, GameEnums.Zone.HAND); }
         GameCore game = GameCore.getGame();
-        if (!game.)
+        if (payManaCost) {
+            if (!game.spendMana(this.m_controler, this.manaCost)) { return false; } // Mana is subtracted from whoever controls the spell when it is cast.
+        }
         this.play();
+        return true;
     }
 
+    // This is where the magic happens
     public abstract void play () throws GameExceptions.GameException;
 
     public void discard () throws GameExceptions.GameException {
