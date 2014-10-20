@@ -25,14 +25,9 @@ public abstract class Player {
 
 
 
-    private void manaPoolManip(String mana, GameEnums.ManaPoolDirection direction) {
+    private boolean manaPoolManip(String mana, GameEnums.ManaPoolDirection direction) {
         int addSub;
-        int manaR = 0;
-        int manaG = 0;
-        int manaB = 0;
-        int manaU = 0;
-        int manaW = 0;
-        int manaC = 0;
+        int[] resultingMana = new int[6];
 
         switch (direction) {
             case ADD:
@@ -46,28 +41,29 @@ public abstract class Player {
                 break;
         }
 
+        // Set mana modifiers
         for (int i = 0; i < mana.length(); i++) {
             switch (mana.charAt(i)) {
                 case 'R':
-                    manaR += addSub;
+                    resultingMana[0] += addSub;
                     break;
                 case 'G':
-                    manaG += addSub;
+                    resultingMana[1] += addSub;
                     break;
                 case 'B':
-                    manaB += addSub;
+                    resultingMana[2] += addSub;
                     break;
                 case 'U':
-                    manaU += addSub;
+                    resultingMana[3] += addSub;
                     break;
                 case 'W':
-                    manaW += addSub;
+                    resultingMana[4] += addSub;
                     break;
                 default:
                     if (Character.isDigit(mana.charAt(i))) {
                         int j = i;
                         while (Character.isDigit(mana.charAt(i))) { i++; }
-                        manaW += addSub * Integer.parseInt(mana.substring(j, i));
+                        resultingMana[5] += addSub * Integer.parseInt(mana.substring(j, i));
                     } else {
                         assert false;
                     }
@@ -75,16 +71,51 @@ public abstract class Player {
             }
         }
 
-        // TODO: Implement mana prompt
-        manaR += this.manaPool[0];
+        // Set resulting mana
+        // TODO: Implement mana prompt to chose color
+        for (int i = 0; i < 6; i++) {
+            resultingMana[i] += this.manaPool[i];
+        }
+
+        // Check if resulting mana is negative
+        for (int i = 0; i < 6; i++) {
+
+            if (resultingMana[i] < 0) {
+                if (i != 5) { return false; } // Not enough colored mana in pool
+
+                else { // Colorless mana can be negative
+                    // TODO: Implement support for multicolored decks (this only checks one color)
+                    for (int j = 0; j < 6; j++) { // mana[i] = colorless, mana[j] = colored
+                        if (resultingMana[j] + resultingMana[i] > 0) {
+                            resultingMana[j] += resultingMana[i]; // Add colorless debt from colored mana
+                            resultingMana[i] = 0; // Debt paid
+                        }
+                    } // Monocolored support only ends here
+
+                    if (resultingMana[i] < 0) { return false; } // If after subtracting colored mana there is still a debt, the transaction failed.
+                }
+            }
+        }
+
+        // Refresh values
+        for (int i = 0; i < 6; i++) {
+            this.manaPool[i] = resultingMana[i];
+        }
+        return true;
     }
 
-    public abstract void addMana(String mana) {
+    public void addMana(String mana) {
         manaPoolManip(mana, GameEnums.ManaPoolDirection.ADD);
     }
 
-    public abstract void removeMana(String mana) {
-        manaPoolManip(mana, GameEnums.ManaPoolDirection.SUB);
+    public boolean removeMana(String mana) {
+        return manaPoolManip(mana, GameEnums.ManaPoolDirection.SUB);
+    }
+
+    public void emptyManaPool() {
+        for (int i = 0; i < 6; i++) {
+            this.manaPool[i] = 0;
+        }
     }
 
     public void addToHand      (Card card) throws GameExceptions.GameException {
