@@ -43,6 +43,8 @@ public class Swamp extends Land {
 
     public Swamp () {
         this.reset();
+        this.m_type = new GameEnums.Type[1];
+        this.m_type[0] = GameEnums.Type.LAND;
         this.abilities = new Vector<Ability>();
         this.name = "Swamp";
         this.types = "Basic Land - Swamp";

@@ -4,7 +4,6 @@ import GameCore.*;
 
 public abstract class Creature extends Permanent {
     public GameEnums.CreatureSubType[] m_sub;
-    public GameEnums.Type[] m_type = { GameEnums.Type.CREATURE };
     protected boolean token = false;
     protected boolean sick = true;
 
