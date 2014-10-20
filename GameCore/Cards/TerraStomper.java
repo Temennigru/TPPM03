@@ -1,4 +1,4 @@
-//reference: http://magiccards.info/tr/en/133.html
+//reference: http://magiccards.info/m15/en/284.html
 package GameCore.Cards;
 
 //TODO: trample
