@@ -1,16 +1,12 @@
 package GameCore.GameObjectCore;
 
-import Core.*;
+import GameCore.*;
 
 public abstract class Creature extends Permanent {
     public GameEnums.CreatureSubType[] m_sub;
     public GameEnums.Type[] m_type = { GameEnums.Type.CREATURE };
-    protected int power;
-    protected int toughness;
     protected boolean token = false;
     protected boolean sick = true;
-
-    private int damage = 0;
 
     // Evergreen abilities
     protected boolean deathtouch = false;
@@ -31,31 +27,9 @@ public abstract class Creature extends Permanent {
     protected boolean vigilance = false;
     protected int regen = 0;
 
-    public abstract void kill() throws GameExceptions.GameException;
-
     public void attack (Player player) throws GameExceptions.GameException {
         GameCore game = GameCore.getGame();
-        game.declareAttacker(this, player);
+        //game.declareAttacker(this, player);
         if (!this.vigilance) { this.tap(); }
-    }
-
-    public final int toughness () { return this.toughness; }
-    public final int power () { return this.power; }
-    public final int damage () { return this.damage; }
-
-    public final void toughness (int value) { this.toughness = value; }
-    public final void power (int value) { this.power = value; }
-    public final void damage (int value) { this.damage = value; }
-
-    public String toString() {
-        String tmp = this.name;
-        tmp += " - " + this.manaCost;
-        if (this.isTapped()) { tmp += " T"; }
-        tmp += String.format("%n") +
-        this.types + String.format("%n") +
-        this.description + String.format("%n") +
-        this.flavor + String.format("%n") +
-        Integer.toString(this.power) + "/" + Integer.toString(this.toughness) + String.format("%n");
-        return tmp;
     }
 }

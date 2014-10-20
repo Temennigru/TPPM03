@@ -1,16 +1,21 @@
 package GameCore;
 
 import java.util.Vector;
-import Cards.Abstract.*;
+import GameCore.Cards.*;
+import GameCore.GameObjectCore.*;
+import GameCore.ConsoleCore.*;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public abstract class Player {
     public String name;
-    private int life;
+    protected int life;
     protected Deck library;
     protected Vector<Card> hand;
     protected Vector<Card> graveyard;
     private int[] manaPool;
-    //Console commandInterface;
+    protected Console commandInterface;
 
     protected boolean dead = false;
 
@@ -36,7 +41,8 @@ public abstract class Player {
             case SUB:
                 addSub = -1;
                 break;
-            default: // 
+            default: // Bad
+                addSub = 0;
                 assert false;
                 break;
         }
@@ -136,4 +142,8 @@ public abstract class Player {
     public final void lose () { this.dead = true; }
 
     public final boolean lost() { return this.dead; } // No cheating =)
+
+    public final Card prompt() throws IOException, InterruptedException { return this.commandInterface.prompt(); }
+
+    
 }

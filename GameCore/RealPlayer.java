@@ -1,19 +1,20 @@
 package GameCore;
 
-import Cards.Abstract.*;
+import GameCore.GameObjectCore.*;
+import GameCore.ConsoleCore.*;
 import java.util.Vector;
 
 
 public class RealPlayer extends Player {
     private int life;
     public int[] manaPool;
-    //Console commandInterface;
 
     // Damage dealing is the game's responsibility. The player can only lose life.
 
     public RealPlayer(String name, Deck deck) {
     	this.life = 20;
     	this.name = name;
+        this.commandInterface = new PlayerConsoleImpl(this);
     	//this.deck = deck;
     	this.hand = new Vector<Card>();
     	this.graveyard = new Vector<Card>();

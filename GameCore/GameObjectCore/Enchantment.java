@@ -1,6 +1,6 @@
 package GameCore.GameObjectCore;
 
-import Core.*;
+import GameCore.*;
 
 public abstract class Enchantment extends Permanent {
     GameEnums.EnchantmentType[] sub;

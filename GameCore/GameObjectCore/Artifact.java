@@ -1,6 +1,6 @@
 package Cards.Abstract;
 
-import Core.*;
+import GameCore.*;
 
 public abstract class Enchantment extends Permanent {
     GameEnums.ArtifactType[] sub;

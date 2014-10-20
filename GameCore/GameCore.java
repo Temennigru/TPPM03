@@ -13,15 +13,16 @@
 
 package GameCore;
 
-import Cards.Abstract.*;
+import GameCore.GameObjectCore.*;
 
 import java.lang.*;
 import java.util.Vector;
 import java.util.Random;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Arrays;
 
-public class GameCore implements GameCoreInterface {
+public class GameCore {
     private Player[] m_player;
     private boolean[] m_canLose; // TODO: implement this
 
@@ -38,14 +39,14 @@ public class GameCore implements GameCoreInterface {
 
     Player m_currentPlayer;
 
-    static GameCore m_game;
+    private static GameCore m_game = null;
 
     // Singleton methods
 
-    public valid() { return this.m_isValid; }
+    public boolean valid() { return this.m_isValid; }
 
-    public static GameCore getExistingGame() {
-        if (m_game == null) { return = new GameCore(); } // Invalid game
+    public static GameCore getGame() {
+        if (m_game == null) { return new GameCore(); } // Invalid game
         return m_game;
     }
 
@@ -63,8 +64,6 @@ public class GameCore implements GameCoreInterface {
         // TODO: implement game reset
         m_game = null;
     }
-
-    public static void 
 
     private GameCore() { // Constructs invalid games
         m_isValid = false;
@@ -84,9 +83,9 @@ public class GameCore implements GameCoreInterface {
         m_player[1] = player2;
 
         // TODO: Implement cannot lose
-        canLose = new Player[2];
-        canLose[0] = true;
-        canLose[1] = true;
+        m_canLose = new boolean[2];
+        m_canLose[0] = true;
+        m_canLose[1] = true;
 
         /*Random rand;
         
@@ -103,17 +102,19 @@ public class GameCore implements GameCoreInterface {
 
 
     public Iterator<Card> find (Card card) {
-        this.find (card, false);
+        return this.find (card, false);
     }
 
     private Iterator<Card> find (Card card, boolean byName) { // false if not by name
-        this.find (card, GameEnums.Zone.COMMAND, byName);
+        /*this.find (card, GameEnums.Zone.COMMAND, byName);
         this.find (card, GameEnums.Zone.BATTLEFIELD, byName);
         this.find (card, GameEnums.Zone.EXILE_FUP, byName);
         this.find (card, GameEnums.Zone.EXILE_FDN, byName);
         this.find (card, GameEnums.Zone.GRAVEYARD, byName);
-        //this.find (card, GameEnums.Zone.LIBRARY, byName);
+        this.find (card, GameEnums.Zone.LIBRARY, byName);
         this.find (card, GameEnums.Zone.HAND, byName);
+        */
+        return null;
     }
 
     // Decisions related to this method are too complex to solve right now.
@@ -185,49 +186,36 @@ public class GameCore implements GameCoreInterface {
     public Iterator<Card> iterator (GameEnums.Zone zone) {
         switch (zone) {
             case COMMAND:
-                itr = m_commandZone.iterator();
-                break;
+                return m_commandZone.iterator();
             case BATTLEFIELD:
-                itr = m_battlefield.iterator();
-                break;
+                return m_battlefield.iterator();
             case EXILE_FUP:
-                itr = m_exileFupZone.iterator();
-                break;
+                return m_exileFupZone.iterator();
             case EXILE_FDN:
-                itr = m_exileFdnZone.iterator();
-                break;
+                return m_exileFdnZone.iterator();
             default:
-                itr = null;
-                break;
+                return null;
         }
     }
 
     public Iterator<Card> iterator (Player player, GameEnums.Zone zone) {
         switch (zone) {
             case COMMAND:
-                itr = m_commandZone.iterator();
-                break;
+                return m_commandZone.iterator();
             case BATTLEFIELD:
-                itr = m_battlefield.iterator();
-                break;
+                return m_battlefield.iterator();
             case EXILE_FUP:
-                itr = m_exileFupZone.iterator();
-                break;
+                return m_exileFupZone.iterator();
             case EXILE_FDN:
-                itr = m_exileFdnZone.iterator();
-                break;
+                return m_exileFdnZone.iterator();
             case GRAVEYARD:
-                itr = player.graveyard.iterator();
-                break;
+                return player.graveyard.iterator();
             case LIBRARY:
-                itr = player.library.iterator();
-                break;
+                return player.library.iterator();
             case HAND:
-                itr = player.hand.iterator();
-                break;
+                return player.hand.iterator();
             default:
-                itr = null;
-                break;
+                return null;
         }
     }
 
@@ -291,20 +279,20 @@ public class GameCore implements GameCoreInterface {
         while (itr.hasNext()) {
             Card el = itr.next();
             if (Arrays.asList(el).contains(GameEnums.Type.CREATURE)) {
-                if (el.toughness() <= 0) { el.kill(); } // Killed by state-based action and not destroyed
-                else if (el.toughness() <= el.damage()) { el.destroy(); }
+                if (((Permanent)el).toughness() <= 0) { ((Permanent)el).kill(); } // Killed by state-based action and not destroyed
+                else if (((Permanent)el).toughness() <= ((Permanent)el).damage()) { ((Permanent)el).kill(); } // TODO: Change to destroy
             }
         }
         for (int i = 0; i < this.m_numPlayers; i++) {
             // TODO: Implement poison
-            if (this.player[i].life <= 0 && canLose[i]) {
-                this.player[i].lose();
+            if (m_player[i].life <= 0 && m_canLose[i]) {
+                m_player[i].lose();
             }
         }
     }
 
     public boolean spendMana(Player player, String mana) {
-        player.removeMana(mana);
+        return player.removeMana(mana);
     }
 
     public void emptyManaPool(Player player) {
@@ -314,6 +302,6 @@ public class GameCore implements GameCoreInterface {
     // Other
 
     public Player runGame() {
-
+        return null;
     }
 }

@@ -1,7 +1,7 @@
 package GameCore.Cards;
 
-import Cards.Abstract.*;
-import Core.*;
+import GameCore.GameObjectCore.*;
+import GameCore.*;
 import java.lang.*;
 import java.util.Vector;
 

@@ -2,7 +2,7 @@ package GameCore;
 
 import java.util.ArrayList;
 import java.util.Random;
-import Cards.Abstract.*;
+import GameCore.GameObjectCore.*;
 import java.util.Iterator;
 
 public abstract class Deck {

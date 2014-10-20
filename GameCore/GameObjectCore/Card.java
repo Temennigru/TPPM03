@@ -3,6 +3,7 @@ package GameCore.GameObjectCore;
 import GameCore.*;
 
 import java.util.Vector;
+import java.util.Arrays;
 
 public abstract class Card extends GameObject {
     public Vector<Ability> abilities;
@@ -10,6 +11,13 @@ public abstract class Card extends GameObject {
     public GameEnums.Zone location;
     public GameEnums.SuperType[] m_super = {};
     public GameEnums.Type[] m_type;
+
+    // For printing purpouses
+    protected int power = 0;
+    protected int toughness = 0;
+    protected boolean tapped = false;
+    public boolean isTapped() { return tapped; }
+
 
     public String name = "";
     protected String description = "";
@@ -19,10 +27,10 @@ public abstract class Card extends GameObject {
 
     // Cards that 
     public final boolean cast () throws GameExceptions.GameException {
-        this.cast(true);
+        return this.cast(true);
     }
 
-    public boolean cast (boolean payManaCost) {
+    public boolean cast (boolean payManaCost) throws GameExceptions.GameException {
         // TODO: use stack
         if (this.location != GameEnums.Zone.HAND) { throw new GameExceptions.WrongZoneException(this, this.location, GameEnums.Zone.HAND); }
         GameCore game = GameCore.getGame();
@@ -52,13 +60,48 @@ public abstract class Card extends GameObject {
     }
 
     public String toString() {
-        return this.name + " - " + this.manaCost + String.format("%n") +
-        this.types + String.format("%n") +
-        this.description + String.format("%n") +
-        this.flavor + String.format("%n");
+        // Creature
+        if (Arrays.asList(this.m_type).contains(GameEnums.Type.CREATURE)) {
+
+            String tmp = this.name;
+            tmp += " - " + this.manaCost;
+            if (this.isTapped()) { tmp += " T"; }
+            tmp += String.format("%n") +
+            this.types + String.format("%n") +
+            this.description + String.format("%n") +
+            this.flavor + String.format("%n") +
+            Integer.toString(this.power) + "/" + Integer.toString(this.toughness) + String.format("%n");
+            return tmp;
+        // Permanent
+        } else if (Arrays.asList(this.m_type).contains(GameEnums.Type.ENCHANTMENT)  ||
+                   Arrays.asList(this.m_type).contains(GameEnums.Type.LAND)         ||
+                   Arrays.asList(this.m_type).contains(GameEnums.Type.PLANESWALKER) ||
+                   Arrays.asList(this.m_type).contains(GameEnums.Type.ARTIFACT) ) {
+            String tmp = this.name;
+            tmp += " - " + this.manaCost;
+            if (this.isTapped()) { tmp += " T"; }
+            tmp += String.format("%n") +
+            this.types + String.format("%n") +
+            this.description + String.format("%n") +
+            this.flavor + String.format("%n");
+            return tmp;
+
+        // Regular
+        } else {
+            return this.name + " - " + this.manaCost + String.format("%n") +
+            this.types + String.format("%n") +
+            this.description + String.format("%n") +
+            this.flavor + String.format("%n");
+        }
     }
 
     public boolean activateAt(int ability) throws GameExceptions.GameException {
         return this.abilities.elementAt(ability).activate();
     }
+    
+    public final int toughness () { return this.toughness; }
+    public final int power () { return this.power; }
+
+    public final void toughness (int value) { this.toughness = value; }
+    public final void power (int value) { this.power = value; }
 }

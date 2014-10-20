@@ -1,6 +1,6 @@
 package GameCore;
 
-import Cards.Abstract.*;
+import GameCore.GameObjectCore.*;
 import java.lang.System;
 import java.lang.String;
 
@@ -31,7 +31,7 @@ public class GameExceptions {
 	}
 
 	public static class InvalidGameException extends GameException {
-		public WrongOwnerException(Card card, Player got, Player expected) {
+		public InvalidGameException(Card card, Player got, Player expected) {
 			this.msg = "Error: Game was not created." + String.format("%n");
 		}
 	}

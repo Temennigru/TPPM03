@@ -1,6 +1,6 @@
 package GameCore.GameObjectCore;
 
-import Core.*;
+import GameCore.*;
 
 import java.util.Vector;
 

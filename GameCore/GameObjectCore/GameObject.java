@@ -1,5 +1,7 @@
 package GameCore.GameObjectCore;
 
+import GameCore.*;
+
 import java.util.*;
 
 public abstract class GameObject {

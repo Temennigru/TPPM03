@@ -7,9 +7,10 @@ TODO:
 6- Set owner and controler on deck
 7- implement armyofthedamned, assassinate, damnation, endlessranksofthedead cards
 8- implement details on cards: barishi (remove from game, shuffle), blackcat (opp discards when killed),
-- terrastomper (trample, cantbecountered), garruks (trample), indrikstomp (when enters, destroy target),
-- kozilek (when cast draw 4 cards, annihilator, when put on graveyard shuffle)
-7- Console output refresh
+9- terrastomper (trample, cantbecountered), garruks (trample), indrikstomp (when enters, destroy target),
+10- kozilek (when cast draw 4 cards, annihilator, when put on graveyard shuffle)
+√11- Console output refresh
+12- Make cards not redeclare types
 
 TP3:
 1- Global effects
@@ -20,6 +21,7 @@ TP3:
 6- Changing card types
 7- Remove protected members and reimplement in subclasses
 8- Implement mana prompt
+9- Implement console as decorator
 
 MAYBE:
 1- Implement planeswalkers

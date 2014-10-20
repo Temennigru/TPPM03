@@ -1,11 +1,12 @@
 package GameCore;
 
-public interface GameCoreInterface {
+public class GameCore {
 
     // Singleton methods
     public static GameCoreInterface getGame(); // Get existing game. If no game exists, will return an invalid game.
     public static GameCoreInterface makeGame(Player player1, Player player2); // Used basically to create a game. If a game exists, returns an invalid game.
 
+    // Game state methods
     // NOT WORKING \/
     public void sameReset(); // Resets the game to default values.
     // NOT WORKING \/

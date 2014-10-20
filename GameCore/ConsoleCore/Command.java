@@ -1,11 +1,13 @@
 package GameCore.ConsoleCore;
 
-public interface CommandInterface {
+import GameCore.GameObjectCore.Card;
+
+public interface Command {
     public abstract String getName();
 
     public abstract String getDescription();
 
-    public abstract void Exec (String[] args);
+    public abstract Card Exec (String[] args);
 
 	public abstract void setOutput(String output);
 }

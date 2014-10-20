@@ -1,11 +1,11 @@
 package GameCore.GameObjectCore;
 
-import Core.*;
+import GameCore.*;
 
 public abstract class Permanent extends Card {
-    protected boolean tapped = false;
     protected boolean token = false;
 
+    private int damage = 0;
 
     private final void destroy() {}
     private final void sac() {}
@@ -28,14 +28,8 @@ public abstract class Permanent extends Card {
         game.registerOnZone(this, zone);
     }
 
-    public String toString() {
-        String tmp = this.name;
-        tmp += " - " + this.manaCost;
-        if (this.isTapped()) { tmp += " T"; }
-        tmp += String.format("%n") +
-        this.types + String.format("%n") +
-        this.description + String.format("%n") +
-        this.flavor + String.format("%n");
-        return tmp;
-    }
+    public void kill() throws GameExceptions.GameException {}
+
+    public final int damage () { return this.damage; }
+    public final void damage (int value) { this.damage = value; }
 }

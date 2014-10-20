@@ -1,6 +1,6 @@
 package GameCore.GameObjectCore;
 
-import Core.*;
+import GameCore.*;
 
 public abstract class Land extends Permanent {
     public boolean stackable() { return false; }
