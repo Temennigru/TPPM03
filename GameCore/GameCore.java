@@ -32,6 +32,7 @@ public class GameCore implements GameCoreInterface {
     private Map<Card, Player> attackers;
     private Map<Card, Card> blockers;
 
+    // TODO: Implement dynamic player number.
     private static final int m_numPlayers = 2;
     private boolean m_isValid;
 
@@ -115,7 +116,7 @@ public class GameCore implements GameCoreInterface {
         this.find (card, GameEnums.Zone.HAND, byName);
     }
 
-    // Card should never be in more than one zone
+    // Decisions related to this method are too complex to solve right now.
     public Iterator<Card> find (Card card, GameEnums.Zone zone, Player player, boolean byName, boolean byType) {
         // TODO: Implement find
         /*
@@ -303,9 +304,12 @@ public class GameCore implements GameCoreInterface {
     }
 
     public boolean spendMana(Player player, String mana) {
-        
+        player.removeMana(mana);
     }
 
+    public void emptyManaPool(Player player) {
+        player.emptyManaPool();
+    }
 
     // Other
 
