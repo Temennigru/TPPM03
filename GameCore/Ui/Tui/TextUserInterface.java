@@ -13,6 +13,7 @@ public class TextUserInterface {
 	private static TextUserInterface m_tui = null;
 	private static boolean m_restore = false;
     private static TuiUtil.CleanupHook m_failsafe = null;
+    private static String m_header = "";
 	private PrintStream m_out;
 	private PrintStream m_log;
 	private String m_buffer;
@@ -91,13 +92,22 @@ public class TextUserInterface {
 		if (flush) { this.flush(); }
 	}
 
+	public void setHeader(String header) {
+		m_header = header + String.format("%n%n");
+		m_log.println("Setting header" + String.format("%n%n") + m_header);
+	}
+
+	public void clearHeader() {
+		m_header = "";
+	}
+
 	public void newLine() throws IOException {
 		this.setOutput(String.format("%n"), false);
 	}
 
 	public void flush() throws IOException {
 		this.clearScreen();
-		System.out.println(this.m_buffer);
+		m_log.println(this.m_buffer);
 		this.m_out.print(String.format("%n") + m_buffer); // The newline fixes a small displacement bug when using CBreak term
 		this.m_buffer = "";
 	}
@@ -117,7 +127,7 @@ public class TextUserInterface {
 		TuiUtil.setTerminalToCBreak();
 		int c = System.in.read();
 		TuiUtil.restoreTerminal();
-		System.out.println("User pressed " + Integer.toString(c));
+		m_log.println("User pressed " + Integer.toString(c));
 		switch ((char)c) {
 			case 'w':
 				return "UP";
