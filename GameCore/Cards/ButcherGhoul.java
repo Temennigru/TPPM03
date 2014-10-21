@@ -18,8 +18,8 @@ public class ButcherGhoul extends Creature {
         this.m_sub[0] = GameEnums.CreatureSubType.ZOMBIE;
         this.manaCost = "1B";
         this.name = "Butcher Ghoul"
-        this.description = "Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner`s control with a +1/+1 counter on it. )";
-        this.flavor = "Without a mind, it doesn`t fear death. Without a soul, it doesn`t mind killing.";
+        this.description = "Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it. )";
+        this.flavor = "Without a mind, it doesn't fear death. Without a soul, it doesn't mind killing.";
 	}
 
     private void reset() {

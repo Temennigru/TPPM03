@@ -24,7 +24,7 @@ public class GeralfsMessenger extends Creature {
         this.description = "Geralf's Messenger enters the battlefield tapped."
         + "When Geralf's Messenger enters the battlefield, target opponent loses 2 life."
         + "Undying (when this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under it's owner's control with a +1/+1 counter on it.";
-        this.flavor = "Without a mind, it doesn`t fear death. Without a soul, it doesn`t mind killing.";
+        this.flavor = "Without a mind, it doesn't fear death. Without a soul, it doesn`t mind killing.";
 	}
 
     private void reset() {
