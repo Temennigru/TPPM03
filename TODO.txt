@@ -1,15 +1,15 @@
 TODO:
-1- Implement turn
+√1- Implement turn
 √2- Console (turn is waiting)
 √3- Image display
 √4- Implement state checks
 5- Set owner and controler on deck
-6- implement armyofthedamned, assassinate, damnation, endlessranksofthedead cards
-7- implement details on cards: barishi (remove from game, shuffle), blackcat (opp discards when killed),
-8- terrastomper (trample, cantbecountered), garruks (trample), indrikstomp (when enters, destroy target),
-9- kozilek (when cast draw 4 cards, annihilator, when put on graveyard shuffle)
-√10- Console output refresh
-√11- Make cards not redeclare types (subtypes still not fixed)
+6- implement armyofthedamned (place zombies), assassinate (destroy tapped),
+   damnation (destroy all creatures), endlessranksofthedead (place zombies).
+   barishi (remove from game, shuffle), blackcat (opp discards when killed), terrastomper (trample, cantbecountered)
+   garruks (trample), indrikstomp (when enters, destroy target), kozilek (when cast draw 4 cards, annihilator, when put on graveyard shuffle)
+√7- Console output refresh
+√8- Make cards not redeclare types (subtypes still not fixed)
 
 TP3:
 1- Global effects
