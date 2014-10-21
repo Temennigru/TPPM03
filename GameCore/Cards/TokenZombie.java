@@ -12,6 +12,7 @@ public class TokenZombie extends Creature {
 
 	public TokenZombie () {
         this.reset();
+        this.m_imgLocation = "GameCore/Cards/Img/TokenZombie.jpg";
         this.m_type = new GameEnums.Type[1];
         this.m_type[0] = GameEnums.Type.CREATURE;
         this.m_sub = new GameEnums.CreatureSubType[1];

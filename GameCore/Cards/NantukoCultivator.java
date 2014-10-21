@@ -6,38 +6,36 @@ package GameCore.Cards;
 public class NantukoCultivator extends Creature {
 
 	public NantukoCultivator () {
-        this.m_sub = { GameEnums.CreatureSubType.INSECT, GameEnums.CreatureSubType.DRUID };
-        this.power = 2;
-        this.toughness = 2;
-        this.sick = true;
+        this.reset();
+        this.m_imgLocation = "GameCore/Cards/Img/NantukoCultivator.jpg";
+        this.m_type = new GameEnums.Type[1];
+        this.m_type[0] = GameEnums.Type.CREATURE;
+        this.m_sub = new GameEnums.CreatureSubType[1];
+        this.m_sub[0] = GameEnums.CreatureSubType.INSECT; //GameEnums.CreatureSubType.DRUID
         this.manaCost = "3G";
         this.name = "Nantuko Cultivator"
         this.description = "When Nantuko Cultivator comes into play, you may discard any number of land cards from your hand. Put that many +1/+1 counters on Nantuko Cultivator and draw that many cards.";
         this.flavor = " ";
     }
 
-	public play (GameCore game) {
+    private void reset() { 
         this.power = 2;
         this.toughness = 2;
-        this.sick = true;
-    }
-	
-	public void discard (GameCore game) {
-        this.place (game, GameEnums.Zone.GRAVEYARD);
     }
 
-    public void place (GameCore game, GameEnums.Zone zone) {
-        this.place (game, zone, 0);
+    public void play () throws GameExceptions.GameException {
+        this.reset();
+        this.place (GameEnums.Zone.BATTLEFIELD);
     }
 
-    public void kill (GameCore game) {
+    public void place (GameEnums.Zone zone, int position) throws GameExceptions.GameException {
+        this.reset();
+        this.location = zone;
+        GameCore game = GameCore.getGame();
+        game.registerOnZone(this, zone);
     }
 
-    public String toString() {
-        return this.name + " - " + this.manaCost + System.lineSeparator() +
-        "Creature - Insect Druid" + System.lineSeparator() +
-        this.description + System.lineSeparator() +
-        this.flavor + System.lineSeparator() +
-        this.power.toString() + "/" + this.toughness.toString() + System.lineSeparator();
+    public void kill () throws GameExceptions.GameException {
+        this.place (GameEnums.Zone.GRAVEYARD);
     }
 }

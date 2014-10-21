@@ -8,13 +8,14 @@ public class TerraStomper extends Creature {
 
 	public TerraStomper () {
         this.reset();
+        this.m_imgLocation = "GameCore/Cards/Img/TerraStomper.jpg";
         this.m_type = new GameEnums.Type[1];
         this.m_type[0] = GameEnums.Type.CREATURE;
         this.m_sub = new GameEnums.CreatureSubType[1];
-        this.m_sub[0] = GameEnums.CreatureSubType.BEAST};
+        this.m_sub[0] = GameEnums.CreatureSubType.BEAST;
         this.manaCost = "3GGG";
         this.name = "Terra Stomper"
-        this.description = "Terra Stomper can't be countered." /*+ System.lineSeparator()*/
+        this.description = "Terra Stomper can't be countered." + System.lineSeparator()
         + "Trample (If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)";
         this.flavor = "Its footfalls cause violent earthquakes, hurtling boulders, and unseasonable dust storms.";
     }

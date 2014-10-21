@@ -37,18 +37,13 @@ public class LlanowarElves extends Creature {
 
     }
 
-    private void reset() {
-        this.power = 1;
-        this.toughness = 1;
-        this.sick = true;
-    }
-
 	public LlanowarElves () {
         this.reset();
-        this.m_sub = new GameEnums.CreatureSubType[2];
-        this.m_sub[0] = GameEnums.CreatureSubType.ELF;
-        this.m_sub[0] = GameEnums.CreatureSubType.DRUID;
-
+        this.m_imgLocation = "GameCore/Cards/Img/LlanowarElves.jpg";
+        this.m_type = new GameEnums.Type[1];
+        this.m_type[0] = GameEnums.Type.CREATURE;
+        this.m_sub = new GameEnums.CreatureSubType[1];
+        this.m_sub[0] = GameEnums.CreatureSubType.ELF; // GameEnums.CreatureSubType.DRUID;
         this.abilities = new Vector<Ability>();
         this.manaCost = "G";
         this.name = "Llanowar Elves";
@@ -59,7 +54,14 @@ public class LlanowarElves extends Creature {
         this.abilities.add(new TapForMana(this));
     }
 
+
+    private void reset() {
+        this.power = 1;
+        this.toughness = 1;
+    }
+
 	public void play () throws GameExceptions.GameException {
+        this.reset();
         this.place (GameEnums.Zone.BATTLEFIELD);
     }
 
