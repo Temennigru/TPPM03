@@ -22,14 +22,16 @@ public class ImageDisplay extends JFrame{
 	
 	public static String BuildAddress(Card card){
 		// Remove special characters
-		String cardname = card.name.replaceAll("\\s+", "");
+		/*String cardname = card.name.replaceAll("\\s+", "");
 		cardname = card.name.replaceAll("\'", "");
 		cardname = card.name.replaceAll("-", "");
+		*/
 
-		String prefix = new String ("GameCore/Cards/Img/");
+		return card.m_imgLocation;
+		/*String prefix = new String ("GameCore/Cards/Img/");
 		String sufix = new String (".jpg");
 		String address = prefix + cardname + sufix;
-		return address;
+		return address;*/
 	}
 
 	public ImageDisplay()
@@ -67,7 +69,8 @@ public class ImageDisplay extends JFrame{
 		String add2 = ImageDisplay.BuildAddress(card2);
 		System.out.println (add1);
 		System.out.println (add2);
-		ImageDisplay sera = new ImageDisplay(add1);
+		ImageDisplay sera = new ImageDisplay();
+		sera.displayNew(add1);
 		
 		/*
 		try {

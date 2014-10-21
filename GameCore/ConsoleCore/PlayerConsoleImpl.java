@@ -11,6 +11,7 @@ import GameCore.GameObjectCore.*;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.swing.*;
+import java.awt.event.WindowEvent;
 
 
 import java.util.Scanner;
@@ -54,73 +55,97 @@ public class PlayerConsoleImpl implements Console {
 
 		ImageDisplay gui = new ImageDisplay(); // Gui card display                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 
-		while (zone == null){
-			com = tui.getTextInput();
-			if (new String("help").startsWith(com)) {
-				tui.setOutput(
-					"Commands:" + String.format("%n") +
-					"battlefield" + String.format("%n") +
-					"hand" + String.format("%n") +
-					"graveyard" + String.format("%n") +
-					"end", false);
-				tui.newLine();
-			} else if (new String("battlefield").startsWith(com)) {
-				zone = GameEnums.Zone.BATTLEFIELD;
-			} else if (new String("hand").startsWith(com)) {
-				zone = GameEnums.Zone.HAND;
-			} else if (new String("graveyard").startsWith(com)) {
-				zone = GameEnums.Zone.GRAVEYARD;
-			} else if (new String("end").startsWith(com)) {
-				return null;
-			} else {
-				tui.setOutput("Try again. (type \"help\" for help)", false);
-				tui.newLine();
+		boolean goRound = false;
+		do {
+			goRound = false;
+			gui.displayNew("");
+			while (zone == null){
+				com = tui.getTextInput();
+				if (new String("help").startsWith(com)) {
+					tui.setOutput(
+						"Commands:" + String.format("%n") +
+						"battlefield" + String.format("%n") +
+						"hand" + String.format("%n") +
+						"graveyard" + String.format("%n") +
+						"end", false);
+					tui.newLine();
+				} else if (new String("battlefield").startsWith(com)) {
+					zone = GameEnums.Zone.BATTLEFIELD;
+				} else if (new String("hand").startsWith(com)) {
+					zone = GameEnums.Zone.HAND;
+				} else if (new String("graveyard").startsWith(com)) {
+					zone = GameEnums.Zone.GRAVEYARD;
+				} else if (new String("end").startsWith(com)) {
+					gui.dispose();
+					return null;
+				} else {
+					tui.setOutput("Try again. (type \"help\" for help)", false);
+					tui.newLine();
+				}
+				// Other zones are pointless for the time being.
 			}
-			// Other zones are pointless for the time being.
-		}
 
-		Card ret = null;
+			Card ret = null;
 
-		// Left counter
-		int i = 0;
-		com = "";
+			// Left counter
+			int i = 0;
+			com = "";
 
-		while (ret == null) {
 			itr = game.iterator(this.player, zone);
+			while (ret == null && !goRound) {
+				if (!itr.hasNext()) { i = 0; }
 
-			if (!itr.hasNext()) {
-				tui.setOutput("No cards in specified zone", false);
-				tui.newLine();
-				return this.prompt();
+
+				system.out.println(Integer.toString(i));
+				itr = game.iterator(this.player, zone);
+
+
+				if (!itr.hasNext()) {
+					tui.setOutput("No cards in specified zone", false);
+					tui.newLine();
+					goRound = true;
+					break;
+				}
+
+				if (com.equals("LEFT")) {
+					// If control reaches here then the player pressed left
+					if (i == 0) { // Go back round
+						Iterator<Card> prev = game.iterator(this.player, zone);
+						Iterator<Card> current = game.iterator(this.player, zone);
+						current.next();
+						while (current.hasNext()) {
+							current.next();
+							prev.next();
+							i++;
+						}
+						itr = prev;
+					} else {
+						for (int j = 0; j < i - 1; j++) { itr.next(); } // Only way to make an iterator move left.
+						i--;
+					}
+				}
+
+				while (itr.hasNext()) {
+					Card tmp = itr.next();
+					tui.setOutput(tmp.toString() + String.format("%n"), false);
+
+
+					// Display card
+
+					gui.displayNew(ImageDisplay.BuildAddress(tmp));
+
+					// End display card
+
+					com = tui.getActionInput();
+					if (com.equals("ENTER")) { return tmp; }
+					else if (com.equals("ESC")) { goRound = true; zone = null; break; }
+					else if (com.equals("LEFT") || com.equals("")) { break; }
+					// RIGHT will work naturally
+					i++;
+				}
 			}
+		} while (goRound);
 
-			if (com.equals("LEFT")) {
-				// If control reaches here then the player pressed left
-				for (int j = 0; j < i - 1; j++) { itr.next(); } // Only way to make an iterator move left.
-			}
-
-			i = 0;
-
-			while (itr.hasNext()) {
-				Card tmp = itr.next();
-				tui.setOutput(tmp.toString() + String.format("%n"), false);
-
-
-				// Display card
-
-				gui.displayNew(ImageDisplay.BuildAddress(tmp));
-
-				// End display card
-
-				com = tui.getActionInput();
-				if (com.equals("ENTER")) { return tmp; }
-				else if (com.equals("ESC")) { return this.prompt(); } // Lazy way out.
-				else if (com.equals("LEFT") || com.equals("")) { break; }
-				// RIGHT will work naturally
-				i++;
-			}
-
-		}
 		// Hard coded ends here
 		return null;
 	}
