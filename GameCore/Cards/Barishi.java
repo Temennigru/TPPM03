@@ -12,6 +12,8 @@ public class Barishi extends Creature {
 
     public Barishi () {
         this.reset();
+        this.m_type = new GameEnums.Type[1];
+        this.m_type[0] = GameEnums.Type.CREATURE;
         this.m_sub = new GameEnums.CreatureSubType[1];
         this.m_sub[0] = GameEnums.CreatureSubType.ELEMENTAL;
         this.manaCost = "2GG";
@@ -24,7 +26,6 @@ public class Barishi extends Creature {
     private void reset() {
         this.power = 4;
         this.toughness = 3;
-        this.sick = true;
     }
 
     public void play () throws GameExceptions.GameException {

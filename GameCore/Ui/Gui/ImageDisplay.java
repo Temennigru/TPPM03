@@ -61,26 +61,25 @@ public class ImageDisplay extends JFrame{
 	
 	public static void main (String[] args)
 	{
-		String card1 = new String ("BlackCat"); String card2 = new String ("Barishi");
+		String card1 = new String ("StranglerootGeist");
+		String card2 = new String ("Forest");
 		String add1 = ImageDisplay.BuildAddress(card1);
 		String add2 = ImageDisplay.BuildAddress(card2);
-		System.out.println (add1);	System.out.println (add2);
-		ImageDisplay sera = new ImageDisplay();
+		System.out.println (add1);
+		System.out.println (add2);
+		ImageDisplay sera = new ImageDisplay(add1);
 		
-
+		/*
 		try {
 		    Thread.sleep(2000); //2000 milliseconds
 		} catch(InterruptedException ex) {
 		    Thread.currentThread().interrupt();
 		}
 		
-		sera.displayNew(add1);
-		try {
-		    Thread.sleep(2000); //2000 milliseconds
-		} catch(InterruptedException ex) {
-		    Thread.currentThread().interrupt();
-		}
-
-		sera.displayNew(add2);
+		sera.icon = new ImageIcon(add2);
+		sera.label.setIcon(icon);
+		sera.panel.revalidate();
+		sera.panel.repaint();
+		*/
 	}
 }

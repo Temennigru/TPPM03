@@ -10,10 +10,11 @@ package GameCore.Cards;
 public class WorldspineWurm extends Creature {
 
 	public WorldspineWurm () {
-        this.m_sub = { GameEnums.CreatureSubType.WURM };
-        this.power = 15;
-        this.toughness = 15;
-        this.sick = true;
+        this.reset();
+        this.m_type = new GameEnums.Type[1];
+        this.m_type[0] = GameEnums.Type.CREATURE;
+        this.m_sub = new GameEnums.CreatureSubType[1];
+        this.m_sub[0] = GameEnums.CreatureSubType.WURM;
         this.manaCost = "8GGG";
         this.name = "Worldspine Wurm"
         this.description = "When Worldspine Wurm dies, put three 5/5 green Wurm creature tokens with trample onto the battlefield."
@@ -22,28 +23,24 @@ public class WorldspineWurm extends Creature {
         this.flavor = " ";
     }
 
-	public play (GameCore game) {
+    private void reset() {
         this.power = 15;
         this.toughness = 15;
-        this.sick = true;
-    }
-	
-	public void discard (GameCore game) {
-        this.place (game, GameEnums.Zone.GRAVEYARD);
     }
 
-    public void place (GameCore game, GameEnums.Zone zone) {
-        this.place (game, zone, 0);
+    public void play () throws GameExceptions.GameException {
+        this.reset();
+        this.place (GameEnums.Zone.BATTLEFIELD);
     }
 
-    public void kill (GameCore game) {
+    public void place (GameEnums.Zone zone, int position) throws GameExceptions.GameException {
+        this.reset();
+        this.location = zone;
+        GameCore game = GameCore.getGame();
+        game.registerOnZone(this, zone);
     }
 
-    public String toString() {
-        return this.name + " - " + this.manaCost + System.lineSeparator() +
-        "Creature - Wurm" + System.lineSeparator() +
-        this.description + System.lineSeparator() +
-        this.flavor + System.lineSeparator() +
-        this.power.toString() + "/" + this.toughness.toString() + System.lineSeparator();
+    public void kill () throws GameExceptions.GameException {
+        this.place (GameEnums.Zone.GRAVEYARD);
     }
 }
