@@ -20,7 +20,7 @@ public class Barishi extends Creature {
         this.manaCost = "2GG";
         this.name = "Barishi";
         this.types = "Creature - Elemental";
-        this.description = "If Barishi is put into any graveyard from play, remove Barishi from the game, then shuffle all creature cards from your graveyard into your library.";
+        this.description = "When Barishi dies, exile Barishi, then shuffle all creature cards from your graveyard into your library.";
         this.flavor = " ";
     }
 
