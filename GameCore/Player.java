@@ -14,7 +14,7 @@ public abstract class Player {
     protected Deck library;
     protected Vector<Card> hand;
     protected Vector<Card> graveyard;
-    private int[] manaPool;
+    private int[] manaPool = new int[6]; // RGBUWC
     protected Console commandInterface;
     protected int numberLandDrops = 1;
 
@@ -23,12 +23,19 @@ public abstract class Player {
     // Damage dealing is the game's responsibility. The player can only lose life.
 
     protected Player() {}
-    public Player(String name, Deck deck) {}
+    public Player(String name) {}
 
     public abstract void removeLife(int ammount);
-    public abstract void shuffle(GameEnums.Zone zone);
+
     public abstract void takeTurn();
 
+    public void setDeck(Deck deck) {
+        this.library = deck;
+    }
+
+    public void shuffle(GameEnums.Zone zone) {
+        this.library.shuffle();
+    }
 
     public boolean landDrop() {
         if (numberLandDrops < 1) {
@@ -151,11 +158,13 @@ public abstract class Player {
         this.graveyard.add(card);
     }
 
-    public final void lose() { this.dead = true; }
+    public final void lose() { System.out.println (this.name + " has lost"); this.dead = true; }
 
     public final boolean lost() { return this.dead; } // No cheating =)
 
     public final Card prompt() throws IOException, InterruptedException { return this.commandInterface.prompt(); }
+
+    public final Card prompt(boolean playerOnly) throws IOException, InterruptedException { return this.commandInterface.prompt(playerOnly); }
 
     
 }

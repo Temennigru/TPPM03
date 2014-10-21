@@ -10,6 +10,8 @@ import java.io.InputStream;
 
 public class TextUserInterface {
 
+	// TODO: Stack headers
+
 	private static TextUserInterface m_tui = null;
 	private static boolean m_restore = false;
     private static TuiUtil.CleanupHook m_failsafe = null;
@@ -93,7 +95,7 @@ public class TextUserInterface {
 	}
 
 	public void setHeader(String header) {
-		m_header = header + String.format("%n%n");
+		m_header += header + String.format("%n%n");
 		m_log.println("Setting header" + String.format("%n%n") + m_header);
 	}
 
@@ -108,7 +110,7 @@ public class TextUserInterface {
 	public void flush() throws IOException {
 		this.clearScreen();
 		m_log.println(this.m_buffer);
-		this.m_out.print(String.format("%n") + m_buffer); // The newline fixes a small displacement bug when using CBreak term
+		this.m_out.print(String.format("%n") + m_header + m_buffer); // The newline fixes a small displacement bug when using CBreak term
 		this.m_buffer = "";
 	}
 

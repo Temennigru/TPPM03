@@ -5,7 +5,7 @@ import Core.*;
 
 public class main {
 	public static void main(String[] args) throws GameExceptions.GameException {
-		RealPlayer me = new RealPlayer("Loops", null);
+		RealPlayer me = new RealPlayer("Loops");
 
 		Core.GameCore game = Core.GameCore.getGame(me, null);
 

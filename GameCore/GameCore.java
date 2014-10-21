@@ -20,6 +20,7 @@ import java.util.Vector;
 import java.util.Random;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.Arrays;
 
 public class GameCore {
@@ -69,7 +70,6 @@ public class GameCore {
         m_isValid = false;
     }
 
-
     private GameCore(Player player1, Player player2) {
         m_isValid = true;
 
@@ -77,6 +77,8 @@ public class GameCore {
         m_exileFupZone = new Vector<Card>();
         m_exileFdnZone = new Vector<Card>();
         m_commandZone = new Vector<Card>();
+        attackers = new Vector<Card>();
+        blockers = new HashMap<Card, Card>();
 
         m_player = new Player[2];
         m_player[0] = player1;
@@ -198,6 +200,7 @@ public class GameCore {
         }
     }
 
+    // TODO: Get only cards controled by player
     public Iterator<Card> iterator (Player player, GameEnums.Zone zone) {
         switch (zone) {
             case COMMAND:
@@ -224,7 +227,7 @@ public class GameCore {
     }
 
     public Iterator<Map.Entry<Card,Card>> getBlockers() {
-        return blocker.entrySet().iterator();
+        return blockers.entrySet().iterator();
     }
 
     public Card elementAt (Player player, GameEnums.Zone zone, int pos) {
@@ -335,7 +338,7 @@ public class GameCore {
         Iterator<Card> itr = this.m_battlefield.iterator();
         while (itr.hasNext()) {
             Card el = itr.next();
-            if (Arrays.asList(el).contains(GameEnums.Type.CREATURE)) {
+            if (Arrays.asList(el.m_type).contains(GameEnums.Type.CREATURE)) {
                 if (((Permanent)el).toughness() <= 0) { ((Permanent)el).kill(); } // Killed by state-based action and not destroyed
                 else if (((Permanent)el).toughness() <= ((Permanent)el).damage()) { ((Permanent)el).kill(); } // TODO: Change to destroy
             }
@@ -362,7 +365,7 @@ public class GameCore {
     }
 
     public void declareBlocker(Card blocker, Card attacker) {
-        this.blocker.put(blocker, attacker);
+        this.blockers.put(blocker, attacker);
     }
 
     // Other

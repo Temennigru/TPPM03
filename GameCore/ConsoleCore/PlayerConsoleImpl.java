@@ -59,6 +59,8 @@ public class PlayerConsoleImpl implements Console {
 		ImageDisplay gui = new ImageDisplay(); // Gui card display                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 
 		boolean goRound = false;
+
+		boolean alwaysTrue = true; // If you set this you will die
 		do {
 			goRound = false;
 			gui.displayNew("");
@@ -91,11 +93,9 @@ public class PlayerConsoleImpl implements Console {
 
 			int i = 0;
 
-			Card ret = null;
-
 			com = "";
 
-			while (ret == null && !goRound) {
+			while (!goRound) {
 
 				// Check if there is anything to display
 
@@ -132,21 +132,22 @@ public class PlayerConsoleImpl implements Console {
 
 					com = tui.getActionInput();
 					if (com.equals("ENTER")) { gui.dispose(); return tmp; }
-					else if (com.equals("ESC")) { goRound = true; zone = null; ret = null; break; }
+					else if (com.equals("ESC")) { goRound = true; zone = null; break; }
 					else if (com.equals("LEFT")) { if (i == 0) { i = game.zoneSize(m_player, zone) - 1; } else { i--; } }
 					else if (com.equals("RIGHT")) { i = (i + 1) % game.zoneSize(m_player, zone); }
-					else if (com.equals("")) { break; }
-				} while (ret == null);
+					else if (com.equals("")) { goRound = true; break; }
+				} while (true);
 			}
 
-		} while (goRound);
+		} while (alwaysTrue);
 
 		// Hard coded ends here
+		System.out.println("Something weird has happened");
 		return null;
 	}
 
 	public static void main(String[] args) throws IOException, InterruptedException, GameExceptions.GameException {
-		RealPlayer me = new RealPlayer("Loops", null);
+		RealPlayer me = new RealPlayer("Loops");
 		GameCore game = GameCore.makeGame(me, null);
 
 

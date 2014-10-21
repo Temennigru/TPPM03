@@ -11,4 +11,6 @@ public interface Console {
 	public void installCommand(Command command);
 	public Vector<Command> findCommand (String commandName, String[] args);
 	public Card prompt() throws IOException, InterruptedException ;
+	public Card prompt(boolean playerOnly) throws IOException, InterruptedException;
+
 }

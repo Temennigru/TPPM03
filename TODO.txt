@@ -10,6 +10,7 @@ TODO:
 9- kozilek (when cast draw 4 cards, annihilator, when put on graveyard shuffle)
 √10- Console output refresh
 √11- Make cards not redeclare types (subtypes still not fixed)
+12- Empty mana pool
 
 TP3:
 1- Global effects
@@ -25,6 +26,8 @@ TP3:
 11- Add support for multiple land drops
 12- Add support for teams (player allignment)
 13- Implement dynamic ability chosing
+14- Turn card into interface
+15- TUI header stack
 
 MAYBE:
 1- Implement planeswalkers

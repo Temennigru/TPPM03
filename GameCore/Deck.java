@@ -10,11 +10,12 @@ public abstract class Deck {
     protected ArrayList<Card> cards = new ArrayList<Card>();
     //private ArrayList<Card> discardedCards = new ArrayList<Card>();
     private Random rand;
+    protected Player m_owner;
     
     //Construtor
     private Deck(){}
-    public Deck (Player player){}
-    
+    public Deck (Player player){ m_owner = player; this.createDeck(); }
+
     //enche o deck com cartas
     protected abstract void createDeck();
     
@@ -24,9 +25,10 @@ public abstract class Deck {
 
     //embaralha o deck
     public final void shuffle(){
+        rand = new Random();
         for (int i=0 ; i < cards.size(); i++){
-            int x = rand.nextInt(cards.size());
-            int y = rand.nextInt(cards.size());
+            int x = rand.nextInt(cards.size() - 1);
+            int y = rand.nextInt(cards.size() - 1);
             Card temp = cards.get(x);
             cards.set(x,cards.get(y));
             cards.set(y,temp);

@@ -21,6 +21,7 @@ public abstract class Card extends GameObject {
     public boolean sick = true;
     public boolean isTapped() { return tapped; }
 
+    public boolean haste = false;
 
     public String name = "";
     protected String description = "";
@@ -72,14 +73,19 @@ public abstract class Card extends GameObject {
 
             String tmp = "Owner: " + this.m_owner.name + String.format("%n") +
             "Controler: " + this.m_controler.name + String.format("%n");
-            if (sick) { tmp += "Sick" + String.format("%n"); }
+
+            if (sick && !haste) { tmp += "Sick" + String.format("%n"); }
+
             tmp += this.name + " - " + this.manaCost;
+
             if (this.isTapped()) { tmp += " T"; }
+
             tmp += String.format("%n") +
             this.types + String.format("%n") +
             this.description + String.format("%n") +
             this.flavor + String.format("%n") +
-            Integer.toString(this.power) + "/" + Integer.toString(this.toughness - this.damage + String.format("%n");
+            Integer.toString(this.power) + "/" + Integer.toString(this.toughness - this.damage) + String.format("%n");
+
             return tmp;
         // Permanent
         } else if (Arrays.asList(this.m_type).contains(GameEnums.Type.ENCHANTMENT)  ||

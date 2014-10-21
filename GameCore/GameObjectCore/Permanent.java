@@ -5,8 +5,6 @@ import GameCore.*;
 public abstract class Permanent extends Card {
     protected boolean token = false;
 
-    private int damage = 0;
-
     private final void destroy() {}
     private final void sac() {}
 

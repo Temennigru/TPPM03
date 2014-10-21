@@ -6,8 +6,7 @@ import GameCore.GameObjectCore.*;
 import java.lang.System;
 
 public class StranglerootGeist extends Creature {
-    boolean hasCounter;
-
+    private boolean hasCounter;
 
     public StranglerootGeist () {
         this.reset();

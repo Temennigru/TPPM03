@@ -13,7 +13,6 @@ public abstract class Creature extends Permanent {
     protected boolean firststrike = false;
     protected boolean flash = false;
     protected boolean flying = false;
-    protected boolean haste = false;
     protected boolean hexproof = false;
     protected boolean indestructible = false;
     protected boolean intimidate = false;
