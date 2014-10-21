@@ -7,6 +7,7 @@ package GameCore.Cards;
 import Core.*;
 import Cards.Abstract.*;
 import java.lang.System;
+import ui.tui.*;
 
 public class BlackCat extends Creature {
 

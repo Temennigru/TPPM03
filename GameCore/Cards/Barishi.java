@@ -42,8 +42,7 @@ public class Barishi extends Creature {
     }
 
     public void kill () throws GameExceptions.GameException {
-        this.place (GameEnums.Zone.GRAVEYARD);
-        //this.place (GameEnums.Zone.EXILE_FUP);
+        this.place (GameEnums.Zone.EXILE_FUP); //reimplement when checking graveyard becomes an issue
         //TODO: shuffle all creatures from graveyard into library
     }
 }

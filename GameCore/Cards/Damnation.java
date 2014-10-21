@@ -5,6 +5,7 @@ package GameCore.Cards;
 import Core.*;
 import Cards.Abstract.*;
 import java.lang.System;
+import ui.tui.*;
 
 //TODO: destroy all creatures
 
@@ -23,8 +24,28 @@ public class Damnation extends Sorcery {
 	private void reset() {
     }
 
-    public void play () throws GameExceptions.GameException {
+    private void destroyAll(){
+        /*
+        TextUserInterface tui = TextUserInterface.getTui();
+        tui.setHeader("Destroying all creatures" + String.format("%n%n"));
 
+        Card card = m_player.prompt(true);
+        while (card != null) {
+            if (card.location != GameEnums.Zone.BATTLEFIELD ||
+                    !Arrays.asList(card.m_type).contains(GameEnums.Type.CREATURE){
+                        //not a creature on the battlefield
+            } else {
+                GameCore game = GameCore.getGame();
+                ((Creature)card).kill(); // Action
+            }
+        }
+        tui.clearHeader();
+        game.checkState();
+        */
+    }
+
+    public void play () throws GameExceptions.GameException {
+        destroyAll();
     	this.place (GameEnums.Zone.GRAVEYARD);
     }
 

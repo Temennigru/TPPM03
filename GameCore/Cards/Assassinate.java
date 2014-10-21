@@ -5,8 +5,7 @@ package GameCore.Cards;
 import Core.*;
 import Cards.Abstract.*;
 import java.lang.System;
-
-//TODO: destroy tapped
+import ui.tui.*;
 
 public class Assassinate extends Sorcery {
 	
@@ -23,10 +22,29 @@ public class Assassinate extends Sorcery {
 	private void reset() {
     }
 
+    private void destroyTapped(){
+        TextUserInterface tui = TextUserInterface.getTui();
+        tui.setHeader("Select target" + String.format("%n%n"));
+
+        Card card = m_player.prompt(true);
+        while (card != null) {
+            if (card.location != GameEnums.Zone.BATTLEFIELD ||
+                    !Arrays.asList(card.m_type).contains(GameEnums.Type.CREATURE) ||
+                    !card.isTapped(){
+                tui.setOutput("Error: Choose another target", false);
+                tui.newLine();
+            } else {
+                GameCore game = GameCore.getGame();
+                ((Creature)card).kill(); // Action
+            }
+        }
+        tui.clearHeader();
+        game.checkState();
+    }
+
     public void play () throws GameExceptions.GameException {
-
+        destroyTapped();
     	this.place (GameEnums.Zone.GRAVEYARD);
-
     }
 
     public void place (GameEnums.Zone zone, int position) throws GameExceptions.GameException {

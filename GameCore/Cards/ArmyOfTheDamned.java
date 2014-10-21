@@ -6,9 +6,6 @@ import Core.*;
 import Cards.Abstract.*;
 import java.lang.System;
 
-//TODO: 13 zombie tokens
-//TODO: flashback
-
 public class ArmyOfTheDamned extends Sorcery {
 	
 	public ArmyOfTheDamned () {
@@ -26,12 +23,18 @@ public class ArmyOfTheDamned extends Sorcery {
     }
 
     public void play () throws GameExceptions.GameException {
-    	for (i=0, i<13, i++){
-    		zombie = new TokenZombie();
-    		zombie.m_owner = this.m_controler;
-			zombie.m_controler = this.m_controler;
-			zombie.play();
-    	}
+        
+        for (i=0, i<13, i++){
+            zombie = new TokenZombie();
+            zombie.m_owner = this.m_controler;
+            zombie.m_controler = this.m_controler;
+            zombie.play();
+        }
+
+        if (this.location == GameEnums.Zone.GRAVEYARD){
+        this.place (GameEnums.Zone.EXILE_FUP);
+        }
+
     	this.place (GameEnums.Zone.GRAVEYARD);
     }
 
@@ -40,6 +43,25 @@ public class ArmyOfTheDamned extends Sorcery {
         this.location = zone;
         GameCore game = GameCore.getGame();
         game.registerOnZone(this, zone);
+    }
+
+    public boolean cast () throws GameExceptions.GameException {
+        return this.cast(true);
+    }
+
+    public boolean cast (boolean payManaCost) throws GameExceptions.GameException {
+        // TODO: use stack
+        if (this.location != GameEnums.Zone.HAND && this.location != GameEnums.Zone.GRAVEYARD) { throw new GameExceptions.WrongZoneException(this, this.location, GameEnums.Zone.HAND); }
+        GameCore game = GameCore.getGame();
+        if (payManaCost) {
+            if (this.location == GameEnums.Zone.GRAVEYARD){
+                if (!game.spendMana(this.m_controler, "7BBB")) { return false; } // Mana is subtracted from whoever controls the spell when it is cast.
+            }
+            //if not on graveyard then it's on the hand
+            else if (!game.spendMana(this.m_controler, this.manaCost)) { return false; } // Mana is subtracted from whoever controls the spell when it is cast.
+        }
+        this.play();
+        return true;
     }
 
 
