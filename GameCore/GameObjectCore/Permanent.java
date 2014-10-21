@@ -29,7 +29,4 @@ public abstract class Permanent extends Card {
     }
 
     public void kill() throws GameExceptions.GameException {}
-
-    public final int damage () { return this.damage; }
-    public final void damage (int value) { this.damage = value; }
 }

@@ -5,7 +5,6 @@ import GameCore.*;
 public abstract class Creature extends Permanent {
     public GameEnums.CreatureSubType[] m_sub;
     protected boolean token = false;
-    protected boolean sick = true;
 
     // Evergreen abilities
     protected boolean deathtouch = false;
@@ -22,13 +21,13 @@ public abstract class Creature extends Permanent {
     protected boolean lifelink = false;
     protected boolean protection = false;
     protected boolean reach = false;
-    protected boolean trample = false;
+    public boolean trample = false; // TODO: Make this OO frinedly
     protected boolean vigilance = false;
     protected int regen = 0;
 
     public void attack (Player player) throws GameExceptions.GameException {
         GameCore game = GameCore.getGame();
-        //game.declareAttacker(this, player);
+        game.declareAttacker(this, player);
         if (!this.vigilance) { this.tap(); }
     }
 }

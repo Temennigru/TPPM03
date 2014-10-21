@@ -20,12 +20,12 @@ import java.util.Iterator;
 
 public class PlayerConsoleImpl implements Console {
 	private Vector<Command> commands;
-	private Player player;
+	private Player m_player;
 
 	private PlayerConsoleImpl(){} // Don't use this
 
 	public PlayerConsoleImpl(Player player) {
-		this.player = player;
+		this.m_player = player;
 		this.commands = new Vector<Command>();
 	}
 
@@ -43,14 +43,17 @@ public class PlayerConsoleImpl implements Console {
 		return results;
 	}
 
-	public Card prompt() throws IOException, InterruptedException {
+	// TODO: Prompt for specific card sets.
+
+	public Card prompt() throws IOException, InterruptedException { return this.prompt(false); }
+
+	public Card prompt(boolean playerOnly) throws IOException, InterruptedException {
 		TextUserInterface tui = TextUserInterface.getTui();
 		GameCore game = GameCore.getGame();
 		if (!game.valid()) {} // TODO: Throw exception
 		String com;
 		// TODO: Implement actual commands
 
-		Iterator<Card> itr = null;
 		GameEnums.Zone zone = null;
 
 		ImageDisplay gui = new ImageDisplay(); // Gui card display                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
@@ -85,65 +88,57 @@ public class PlayerConsoleImpl implements Console {
 				// Other zones are pointless for the time being.
 			}
 
+
+			int i = 0;
+
 			Card ret = null;
 
-			// Left counter
-			int i = 0;
 			com = "";
 
-			itr = game.iterator(this.player, zone);
 			while (ret == null && !goRound) {
-				if (!itr.hasNext()) { i = 0; }
 
+				// Check if there is anything to display
 
-				system.out.println(Integer.toString(i));
-				itr = game.iterator(this.player, zone);
+				boolean exists = false;
 
+				for (Iterator<Card> itr = game.iterator(m_player, zone); itr.hasNext(); ) {
+					Card tmp = itr.next();
+					if (!playerOnly || tmp.m_controler == m_player) { exists = true; }
+				}
 
-				if (!itr.hasNext()) {
+				if (!exists) {
 					tui.setOutput("No cards in specified zone", false);
 					tui.newLine();
 					goRound = true;
+					zone = null;
 					break;
 				}
 
-				if (com.equals("LEFT")) {
-					// If control reaches here then the player pressed left
-					if (i == 0) { // Go back round
-						Iterator<Card> prev = game.iterator(this.player, zone);
-						Iterator<Card> current = game.iterator(this.player, zone);
-						current.next();
-						while (current.hasNext()) {
-							current.next();
-							prev.next();
-							i++;
-						}
-						itr = prev;
-					} else {
-						for (int j = 0; j < i - 1; j++) { itr.next(); } // Only way to make an iterator move left.
-						i--;
+				do {
+					Card tmp = game.elementAt(m_player, zone, i);
+
+					if (playerOnly && tmp.m_controler != m_player) {
+						if(com.equals("LEFT")) { if (i == 0) { i = game.zoneSize(m_player, zone); } else { i--; } }
+						else if (com.equals("RIGHT")) { i = (i + 1) % game.zoneSize(m_player, zone); }
+						continue;
 					}
-				}
-
-				while (itr.hasNext()) {
-					Card tmp = itr.next();
-					tui.setOutput(tmp.toString() + String.format("%n"), false);
-
 
 					// Display card
 
+					tui.setOutput(tmp.toString() + String.format("%n"), false);
 					gui.displayNew(ImageDisplay.BuildAddress(tmp));
 
 					// End display card
 
 					com = tui.getActionInput();
-					if (com.equals("ENTER")) { return tmp; }
-					else if (com.equals("ESC")) { goRound = true; zone = null; break; }
-					else if (com.equals("LEFT") || com.equals("")) { break; }
-					// RIGHT will work naturally
-					i++;
-				}
+					if (com.equals("ENTER")) { gui.dispose(); return tmp; }
+					else if (com.equals("ESC")) { goRound = true; zone = null; ret = null; break; }
+					else if (com.equals("LEFT")) { if (i == 0) { i = game.zoneSize(m_player, zone) - 1; } else { i--; } }
+					else if (com.equals("RIGHT")) { i = (i + 1) % game.zoneSize(m_player, zone); }
+					else if (com.equals("")) { break; }
+				} while (ret == null);
 			}
+
 		} while (goRound);
 
 		// Hard coded ends here

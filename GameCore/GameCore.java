@@ -30,7 +30,7 @@ public class GameCore {
     private Vector<Card> m_exileFupZone;
     private Vector<Card> m_exileFdnZone;
     private Vector<Card> m_commandZone;
-    private Map<Card, Player> attackers;
+    private Vector<Card> attackers;
     private Map<Card, Card> blockers;
 
     // TODO: Implement dynamic player number.
@@ -219,6 +219,63 @@ public class GameCore {
         }
     }
 
+    public Iterator<Card> getAttackers() {
+        return attackers.iterator();
+    }
+
+    public Iterator<Map.Entry<Card,Card>> getBlockers() {
+        return blocker.entrySet().iterator();
+    }
+
+    public Card elementAt (Player player, GameEnums.Zone zone, int pos) {
+        switch (zone) {
+            case COMMAND:
+                return m_commandZone.elementAt(pos);
+            case BATTLEFIELD:
+                return m_battlefield.elementAt(pos);
+            case EXILE_FUP:
+                return m_exileFupZone.elementAt(pos);
+            case EXILE_FDN:
+                return m_exileFdnZone.elementAt(pos);
+            case GRAVEYARD:
+                return player.graveyard.elementAt(pos);
+            // TODO: Implement library random access
+            //case LIBRARY:
+                //return player.library.elementAt(pos);
+            case HAND:
+                return player.hand.elementAt(pos);
+            default:
+                return null;
+        }
+    }
+
+    public int zoneSize(Player player, GameEnums.Zone zone) {
+        switch (zone) {
+            case COMMAND:
+                return m_commandZone.size();
+            case BATTLEFIELD:
+                return m_battlefield.size();
+            case EXILE_FUP:
+                return m_exileFupZone.size();
+            case EXILE_FDN:
+                return m_exileFdnZone.size();
+            case GRAVEYARD:
+                return player.graveyard.size();
+            // TODO: Implement library random access
+            //case LIBRARY:
+                //return player.library.size();
+            case HAND:
+                return player.hand.size();
+            default:
+                return 0;
+        }
+    }
+
+    // TODO: Add multiplayer support
+    public Player opponent (Player player) {
+        if (player == m_player[0]) { return m_player[1]; }
+        else { return m_player[0]; }
+    }
 
     // Element manipulation
     private void removeFromZone (Card card, GameEnums.Zone zone) {
@@ -297,6 +354,15 @@ public class GameCore {
 
     public void emptyManaPool(Player player) {
         player.emptyManaPool();
+    }
+
+    public void declareAttacker(Card card, Player player) {
+        // TODO: Add multiplayer support
+        this.attackers.add(card);
+    }
+
+    public void declareBlocker(Card blocker, Card attacker) {
+        this.blocker.put(blocker, attacker);
     }
 
     // Other

@@ -16,7 +16,9 @@ public abstract class Card extends GameObject {
     // For printing purpouses
     protected int power = 0;
     protected int toughness = 0;
+    private int damage = 0;
     protected boolean tapped = false;
+    public boolean sick = true;
     public boolean isTapped() { return tapped; }
 
 
@@ -27,7 +29,7 @@ public abstract class Card extends GameObject {
     protected String manaCost = "";
 
     // Cards that 
-    public final boolean cast () throws GameExceptions.GameException {
+    public boolean cast () throws GameExceptions.GameException {
         return this.cast(true);
     }
 
@@ -60,25 +62,33 @@ public abstract class Card extends GameObject {
         game.registerOnZone(this, zone);
     }
 
+    public final int damage () { return this.damage; }
+    public final void damage (int value) { this.damage = value; }
+
     public String toString() {
+
         // Creature
         if (Arrays.asList(this.m_type).contains(GameEnums.Type.CREATURE)) {
 
-            String tmp = this.name;
-            tmp += " - " + this.manaCost;
+            String tmp = "Owner: " + this.m_owner.name + String.format("%n") +
+            "Controler: " + this.m_controler.name + String.format("%n");
+            if (sick) { tmp += "Sick" + String.format("%n"); }
+            tmp += this.name + " - " + this.manaCost;
             if (this.isTapped()) { tmp += " T"; }
             tmp += String.format("%n") +
             this.types + String.format("%n") +
             this.description + String.format("%n") +
             this.flavor + String.format("%n") +
-            Integer.toString(this.power) + "/" + Integer.toString(this.toughness) + String.format("%n");
+            Integer.toString(this.power) + "/" + Integer.toString(this.toughness - this.damage + String.format("%n");
             return tmp;
         // Permanent
         } else if (Arrays.asList(this.m_type).contains(GameEnums.Type.ENCHANTMENT)  ||
                    Arrays.asList(this.m_type).contains(GameEnums.Type.LAND)         ||
                    Arrays.asList(this.m_type).contains(GameEnums.Type.PLANESWALKER) ||
                    Arrays.asList(this.m_type).contains(GameEnums.Type.ARTIFACT) ) {
-            String tmp = this.name;
+            String tmp = "Owner: " + this.m_owner.name + String.format("%n") +
+            "Controler: " + this.m_controler.name + String.format("%n") +
+            this.name;
             tmp += " - " + this.manaCost;
             if (this.isTapped()) { tmp += " T"; }
             tmp += String.format("%n") +
@@ -89,7 +99,9 @@ public abstract class Card extends GameObject {
 
         // Regular
         } else {
-            return this.name + " - " + this.manaCost + String.format("%n") +
+            return "Owner: " + this.m_owner.name + String.format("%n") +
+            "Controler: " + this.m_controler.name + String.format("%n") +
+            this.name + " - " + this.manaCost + String.format("%n") +
             this.types + String.format("%n") +
             this.description + String.format("%n") +
             this.flavor + String.format("%n");

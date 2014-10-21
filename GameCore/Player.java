@@ -16,6 +16,7 @@ public abstract class Player {
     protected Vector<Card> graveyard;
     private int[] manaPool;
     protected Console commandInterface;
+    protected int numberLandDrops = 1;
 
     protected boolean dead = false;
 
@@ -29,6 +30,17 @@ public abstract class Player {
     public abstract void takeTurn();
 
 
+    public boolean landDrop() {
+        if (numberLandDrops < 1) {
+            return false;
+        }
+        numberLandDrops--;
+        return true;
+    }
+
+    public void landDrop(int val) {
+        this.numberLandDrops = val;
+    }
 
     private boolean manaPoolManip(String mana, GameEnums.ManaPoolDirection direction) {
         int addSub;
@@ -139,7 +151,7 @@ public abstract class Player {
         this.graveyard.add(card);
     }
 
-    public final void lose () { this.dead = true; }
+    public final void lose() { this.dead = true; }
 
     public final boolean lost() { return this.dead; } // No cheating =)
 
