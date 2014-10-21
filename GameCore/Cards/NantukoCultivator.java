@@ -1,6 +1,10 @@
 //reference: http://magiccards.info/tr/en/133.html
 package GameCore.Cards;
 
+import GameCore.*;
+import GameCore.GameObjectCore.*;
+import java.lang.System;
+
 //TODO: comes into play, discard lands put +1+1 counters, draw cards
 
 public class NantukoCultivator extends Creature {

@@ -1,6 +1,10 @@
 //reference: http://magiccards.info/dka/en/64.html
 package GameCore.Cards;
 
+import GameCore.*;
+import GameCore.GameObjectCore.*;
+import java.lang.System;
+
 //TODO: cant block
 //TODO: cast from graveyard
 

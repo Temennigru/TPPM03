@@ -2,6 +2,10 @@
 
 package GameCore.Cards;
 
+import GameCore.*;
+import GameCore.GameObjectCore.*;
+import java.lang.System;
+
 public class LeatherbackBaloth extends Creature {
 
 	 public LeatherbackBaloth () {

@@ -2,10 +2,10 @@
 
 //TODO: remove from game, shuffle
 
-package Cards;
+package GameCore.Cards;
 
-import Core.*;
-import Cards.Abstract.*;
+import GameCore.*;
+import GameCore.GameObjectCore.*;
 import java.lang.System;
 
 public class Barishi extends Creature {

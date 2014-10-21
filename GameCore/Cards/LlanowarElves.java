@@ -1,8 +1,9 @@
 //reference: http://magiccards.info/m12/en/182.html
 package GameCore.Cards;
 
-import Core.*;
-import Cards.Abstract.*;
+import GameCore.*;
+import GameCore.GameObjectCore.*;
+import java.lang.System;
 import java.util.Vector;
 
 public class LlanowarElves extends Creature {

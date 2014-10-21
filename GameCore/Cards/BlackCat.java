@@ -4,8 +4,8 @@
 
 package GameCore.Cards;
 
-import Core.*;
-import Cards.Abstract.*;
+import GameCore.*;
+import GameCore.GameObjectCore.*;
 import java.lang.System;
 import ui.tui.*;
 

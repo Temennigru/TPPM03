@@ -2,8 +2,8 @@
 
 package GameCore.Cards;
 
-import Core.*;
-import Cards.Abstract.*;
+import GameCore.*;
+import GameCore.GameObjectCore.*;
 import java.lang.System;
 
 //TODO: upkeep place zombies
@@ -30,6 +30,9 @@ public class EndlessRanksOfTheDead extends ENCHANTMENT {
 
     //ACTIVATE
     /*
+    GameCore.Iterator<Card> 
+    public Iterator<Card> iterator (Player player, GameEnums.Zone zone) {
+    gamecore.iterator battlefield
     int x; //x is half the number of zombies you control rounded down
     for (i=0, i<x, i++){
     	zombie = new TokenZombie();

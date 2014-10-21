@@ -1,5 +1,10 @@
 //reference: http://magiccards.info/gvl/en/10.html
+
 package GameCore.Cards;
+
+import GameCore.*;
+import GameCore.GameObjectCore.*;
+import java.lang.System;
 
 //TODO: when enters, destroy target...
 

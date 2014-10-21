@@ -1,6 +1,10 @@
 //reference: http://magiccards.info/m15/en/284.html
 package GameCore.Cards;
 
+import GameCore.*;
+import GameCore.GameObjectCore.*;
+import java.lang.System;
+
 //TODO: cant be countered -> counters are irrelevant in current version
 
 public class TerraStomper extends Creature {
