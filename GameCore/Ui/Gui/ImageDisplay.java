@@ -36,7 +36,7 @@ public class ImageDisplay extends JFrame{
 
 	public ImageDisplay()
 	{
-		setSize(312,445); //exact size of card image files
+		setSize(350,500); //exact size of card image files
 		this.panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		this.icon = new ImageIcon(defaultImg);
