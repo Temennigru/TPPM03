@@ -1,31 +1,82 @@
-PlayerDeck
 
-3x Black Cat
-4x Butcher Ghoul
-4x Geralf's Messenger
-4x Gravecrawler
-3x Warpath Ghoul
-1x Army of the Damned
-3x Assassinate
-2x Damnation
-2x Endless Ranks of the Dead
-16x Swamp
+	blackDeck[0] = BlackCat();
+	blackDeck[1] = BlackCat();
+	blackDeck[2] = ButcherGhoul();
+	blackDeck[3] = ButcherGhoul();
+	blackDeck[4] = ButcherGhoul();
+	blackDeck[5] = ButcherGhoul();
+	blackDeck[6] = GeralfsMessenger();
+	blackDeck[7] = GeralfsMessenger();
+	blackDeck[8] = GeralfsMessenger();
+	blackDeck[9] = GeralfsMessenger();
+	blackDeck[10] = Gravecrawler();
+	blackDeck[11] = Gravecrawler();
+	blackDeck[12] = Gravecrawler();
+	blackDeck[13] = WarpathGhoul();
+	blackDeck[14] = WarpathGhoul();
+	blackDeck[15] = WarpathGhoul();
+	blackDeck[16] = ArmyOfTheDamned();
+	blackDeck[17] = Assassinate();
+	blackDeck[18] = Assassinate();
+	blackDeck[19] = Assassinate();
+	blackDeck[20] = Damnnation();
+	blackDeck[21] = Damnnation();
+	blackDeck[22] = EndlessRanksOfTheDead();
+	blackDeck[23] = EndlessRanksOfTheDead();
 
-Creature (18)
-Sorcery (6)
-Enchantment (2)
-Land (16)
+for (i=24,i<40,i++){
+	blackDeck[i] = Swamp();
+}
 
-AIDeck
-4x Barishi
-4x Garruk's Companion
-2x Indrik Stomphowler
-1x Kozilek, Butcher of Truth
-4x Leatherback Baloth
-4x Llanowar Elves
-4x Strangleroot Geist
-1x Terra Stomper
-16x Forest
+/*
+	3 BlackCat();
+	4 ButcherGhoul();
+	4 GeralfsMessenger();
+	4 Gravecrawler();
+	3 WarpathGhoul();
+	1 ArmyOfTheDamned();
+	3 Assassinate();
+	2 Damnnation();
+	2 EndlessRanksOfTheDead();
+	16 Swamp();
+*/
+	greenDeck[0] = Barishi();
+	greenDeck[1] = Barishi();
+	greenDeck[2] = Barishi();
+	greenDeck[3] = Barishi();
+	greenDeck[4] = GarruksCompanion();
+	greenDeck[5] = GarruksCompanion();
+	greenDeck[6] = GarruksCompanion();
+	greenDeck[7] = GarruksCompanion();
+	greenDeck[8] = IndrikStomphowler();
+	greenDeck[9] = IndrikStomphowler();
+	greenDeck[10] = KozilekButcherOfTruth();
+	greenDeck[11] = LeatherbackBaloth();
+	greenDeck[12] = LeatherbackBaloth();
+	greenDeck[13] = LeatherbackBaloth();
+	greenDeck[14] = LeatherbackBaloth();
+	greenDeck[15] = LlanowarElves();
+	greenDeck[16] = LlanowarElves();
+	greenDeck[17] = LlanowarElves();
+	greenDeck[18] = LlanowarElves();
+	greenDeck[19] = StranglerootGeist();
+	greenDeck[20] = StranglerootGeist();
+	greenDeck[21] = StranglerootGeist();
+	greenDeck[22] = StranglerootGeist();
+	greenDeck[23] = TerraStomper();
 
-Creature (24)
-Land (16)
+for (i=24,i<40,i++){
+	greenDeck[i] = Forest();
+}
+
+/*
+4 Barishi();
+4 GarruksCompanion();
+2 IndrikStomphowler();
+1 KozilekButcherOfTruth();
+4 LeatherbackBaloth();
+4 LlanowarElves();
+4 StranglerootGeist();
+1 TerraStomper();
+16 Forest();
+*/
