@@ -1,16 +1,15 @@
 //reference: http://magiccards.info/m12/en/175.html
 
-//TODO: implementar o trample
-
 package GameCore.Cards;
 
-import Core.*;
-import Cards.Abstract.*;
+import GameCore.*;
+import GameCore.GameObjectCore.*;
 import java.lang.System;
 
 public class GarruksCompanion extends Creature {
 
 	public GarruksCompanion () {
+        this.trample = true;
         this.reset();
         this.m_imgLocation = "GameCore/Cards/Img/GarruksCompanion.jpg";
         this.m_type = new GameEnums.Type[1];

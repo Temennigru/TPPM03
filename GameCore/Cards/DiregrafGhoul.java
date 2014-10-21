@@ -1,10 +1,9 @@
 //reference: http://magiccards.info/isd/en/97.html
 
-
 package GameCore.Cards;
 
-import Core.*;
-import Cards.Abstract.*;
+import GameCore.*;
+import GameCore.GameObjectCore.*;
 import java.lang.System;
 
 public class DiregrafGhoul extends Creature {

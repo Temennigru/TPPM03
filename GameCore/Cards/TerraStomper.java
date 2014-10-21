@@ -1,12 +1,16 @@
 //reference: http://magiccards.info/m15/en/284.html
 package GameCore.Cards;
 
-//TODO: trample
-//TODO: cant be countered
+import GameCore.*;
+import GameCore.GameObjectCore.*;
+import java.lang.System;
+
+//TODO: cant be countered -> counters are irrelevant in current version
 
 public class TerraStomper extends Creature {
 
 	public TerraStomper () {
+        this.trample = true;
         this.reset();
         this.m_imgLocation = "GameCore/Cards/Img/TerraStomper.jpg";
         this.m_type = new GameEnums.Type[1];

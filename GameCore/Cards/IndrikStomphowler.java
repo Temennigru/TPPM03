@@ -1,5 +1,10 @@
 //reference: http://magiccards.info/gvl/en/10.html
+
 package GameCore.Cards;
+
+import GameCore.*;
+import GameCore.GameObjectCore.*;
+import java.lang.System;
 
 //TODO: when enters, destroy target...
 
@@ -26,6 +31,25 @@ public class IndrikStomphowler extends Creature {
     public void play () throws GameExceptions.GameException {
         this.reset();
         this.place (GameEnums.Zone.BATTLEFIELD);
+
+        //destroy target artifact or enchantment
+        TextUserInterface tui = TextUserInterface.getTui();
+        tui.setHeader("Select target artifact or enchantment" + String.format("%n%n"));
+
+        Card card = m_player.prompt(true);
+        while (card != null) {
+            if (card.location != GameEnums.Zone.BATTLEFIELD ||
+                    !Arrays.asList(card.m_type).contains(GameEnums.Type.ENCHANTMENT) ||
+                    !Arrays.asList(card.m_type).contains(GameEnums.Type.ARTIFACT)){
+                tui.setOutput("Error: Choose another target", false);
+                tui.newLine();
+            } else {
+                GameCore game = GameCore.getGame();
+                ((Enchantment)card).place (GameEnums.Zone.GRAVEYARD);
+            }
+        }
+        tui.clearHeader();
+        game.checkState();
     }
 
     public void place (GameEnums.Zone zone, int position) throws GameExceptions.GameException {

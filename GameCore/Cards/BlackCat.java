@@ -4,9 +4,10 @@
 
 package GameCore.Cards;
 
-import Core.*;
-import Cards.Abstract.*;
+import GameCore.*;
+import GameCore.GameObjectCore.*;
 import java.lang.System;
+import ui.tui.*;
 
 public class BlackCat extends Creature {
 
@@ -41,6 +42,9 @@ public class BlackCat extends Creature {
     }
 
     public void kill () throws GameExceptions.GameException {
+        //DISCARD gameCore.opponent (this.m_controller)
         this.place (GameEnums.Zone.GRAVEYARD);
     }
 }
+
+

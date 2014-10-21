@@ -1,6 +1,10 @@
 //reference: http://magiccards.info/rtr/en/140.html
 package GameCore.Cards;
 
+import GameCore.*;
+import GameCore.GameObjectCore.*;
+import java.lang.System;
+
 //TODO: token 5/5 wurm with trample http://magiccards.info/extra/token/return-to-ravnica/wurm.html
 //TODO: trample
 //TODO: when dies, put three 5/5

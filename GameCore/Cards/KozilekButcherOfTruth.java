@@ -2,6 +2,10 @@
 
 package GameCore.Cards;
 
+import GameCore.*;
+import GameCore.GameObjectCore.*;
+import java.lang.System;
+
 //TODO: when cast, draw 4 cards
 //TODO: annihilator 4
 //TODO: when put into graveyard, shuffles graveyard into library
