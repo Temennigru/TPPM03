@@ -43,6 +43,7 @@ public class Swamp extends Land {
 
     public Swamp () {
         this.reset();
+        this.m_imgLocation = "GameCore/Cards/Img/Swamp.jpg";
         this.m_type = new GameEnums.Type[1];
         this.m_type[0] = GameEnums.Type.LAND;
         this.abilities = new Vector<Ability>();

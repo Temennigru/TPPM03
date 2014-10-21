@@ -11,6 +11,7 @@ public abstract class Card extends GameObject {
     public GameEnums.Zone location;
     public GameEnums.SuperType[] m_super = {};
     public GameEnums.Type[] m_type;
+    public String m_imgLocation = "";
 
     // For printing purpouses
     protected int power = 0;
