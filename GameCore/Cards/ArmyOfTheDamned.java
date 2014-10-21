@@ -26,7 +26,12 @@ public class ArmyOfTheDamned extends Sorcery {
     }
 
     public void play () throws GameExceptions.GameException {
-
+    	for (i=0, i<13, i++){
+    		zombie = new TokenZombie();
+    		zombie.m_owner = this.m_controler;
+			zombie.m_controler = this.m_controler;
+			zombie.play();
+    	}
     	this.place (GameEnums.Zone.GRAVEYARD);
     }
 

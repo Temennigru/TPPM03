@@ -24,10 +24,20 @@ public class EndlessRanksOfTheDead extends ENCHANTMENT {
     }
 
     public void play () throws GameExceptions.GameException {
-
     	this.place (GameEnums.Zone.BATTLEFIELD);
 
     }
+
+    //ACTIVATE
+    /*
+    int x; //x is half the number of zombies you control rounded down
+    for (i=0, i<x, i++){
+    	zombie = new TokenZombie();
+    	zombie.m_owner = this.m_controler;
+		zombie.m_controler = this.m_controler;
+		zombie.play();
+    }
+    */
 
     public void place (GameEnums.Zone zone, int position) throws GameExceptions.GameException {
         this.reset();
