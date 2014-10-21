@@ -23,7 +23,7 @@ public class BlackCat extends Creature {
         this.flavor = "Its last life is spent tormenting your deams.";
 	}
 
-private void reset() {
+    private void reset() {
         this.power = 1;
         this.toughness = 1;
     }
