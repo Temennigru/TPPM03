@@ -1,16 +1,15 @@
 TODO:
 1- Implement turn
-2- IA
-3- Console (turn is waiting)
-4- Image display
-√5- Implement state checks
-6- Set owner and controler on deck
-7- implement armyofthedamned, assassinate, damnation, endlessranksofthedead cards
-8- implement details on cards: barishi (remove from game, shuffle), blackcat (opp discards when killed),
-9- terrastomper (trample, cantbecountered), garruks (trample), indrikstomp (when enters, destroy target),
-10- kozilek (when cast draw 4 cards, annihilator, when put on graveyard shuffle)
-√11- Console output refresh
-12- Make cards not redeclare types
+√2- Console (turn is waiting)
+√3- Image display
+√4- Implement state checks
+5- Set owner and controler on deck
+6- implement armyofthedamned, assassinate, damnation, endlessranksofthedead cards
+7- implement details on cards: barishi (remove from game, shuffle), blackcat (opp discards when killed),
+8- terrastomper (trample, cantbecountered), garruks (trample), indrikstomp (when enters, destroy target),
+9- kozilek (when cast draw 4 cards, annihilator, when put on graveyard shuffle)
+√10- Console output refresh
+√11- Make cards not redeclare types (subtypes still not fixed)
 
 TP3:
 1- Global effects
@@ -22,6 +21,10 @@ TP3:
 7- Remove protected members and reimplement in subclasses
 8- Implement mana prompt
 9- Implement console as decorator
+10- IA
+11- Add support for multiple land drops
+12- Add support for teams (player allignment)
+13- Implement dynamic ability chosing
 
 MAYBE:
 1- Implement planeswalkers
