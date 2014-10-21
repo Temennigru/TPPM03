@@ -3,12 +3,14 @@ package GameCore.ConsoleCore;
 import GameCore.*;
 import GameCore.GameObjectCore.Card;
 import GameCore.Ui.Tui.TextUserInterface;
+import GameCore.Ui.Gui.ImageDisplay;
 import GameCore.Cards.*;
 import GameCore.GameObjectCore.*;
 
 
 import java.io.IOException;
 import java.io.InputStream;
+import javax.swing.*;
 
 
 import java.util.Scanner;
@@ -49,6 +51,8 @@ public class PlayerConsoleImpl implements Console {
 
 		Iterator<Card> itr = null;
 		GameEnums.Zone zone = null;
+
+		ImageDisplay gui = new ImageDisplay(); // Gui card display                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 
 		while (zone == null){
 			com = tui.getTextInput();
@@ -100,6 +104,14 @@ public class PlayerConsoleImpl implements Console {
 			while (itr.hasNext()) {
 				Card tmp = itr.next();
 				tui.setOutput(tmp.toString() + String.format("%n"), false);
+
+
+				// Display card
+
+				gui.displayNew(ImageDisplay.BuildAddress(tmp));
+
+				// End display card
+
 				com = tui.getActionInput();
 				if (com.equals("ENTER")) { return tmp; }
 				else if (com.equals("ESC")) { return this.prompt(); } // Lazy way out.
