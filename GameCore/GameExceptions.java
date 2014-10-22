@@ -35,4 +35,12 @@ public class GameExceptions {
 			this.msg = "Error: Game was not created." + String.format("%n");
 		}
 	}
+
+	public static class CurrentPlayerLostException extends GameException {
+		protected Player player;
+		public CurrentPlayerLostException(Player player) {
+			this.player = player;
+			this.msg = "Error: " + player.name + " has lost the game" + String.format("%n");
+		}
+	}
 }

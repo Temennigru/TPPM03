@@ -6,8 +6,6 @@ import java.util.Vector;
 
 
 public class RealPlayer extends Player {
-    private int life;
-
     // Damage dealing is the game's responsibility. The player can only lose life.
 
     public RealPlayer(String name) {

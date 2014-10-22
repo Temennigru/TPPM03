@@ -125,6 +125,7 @@ public class PlayerConsoleImpl implements Console {
 
 					// Display card
 
+					tui.setOutput("Card number " + Integer.toString(i + 1) + String.format("%n"), false);
 					tui.setOutput(tmp.toString() + String.format("%n"), false);
 					gui.displayNew(ImageDisplay.BuildAddress(tmp));
 

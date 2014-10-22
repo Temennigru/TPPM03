@@ -38,7 +38,7 @@ public class GameCore {
     private static final int m_numPlayers = 2;
     private boolean m_isValid;
 
-    Player m_currentPlayer;
+    public Player m_currentPlayer;
 
     private static GameCore m_game = null;
 
@@ -335,14 +335,17 @@ public class GameCore {
     }
 
     public void stateCheck() throws GameExceptions.GameException {
-        Iterator<Card> itr = this.m_battlefield.iterator();
-        while (itr.hasNext()) {
-            Card el = itr.next();
+        // TODO: Check all states before killing creatures
+        Vector<Card> toBeKilled = new Vector<Card>();
+        for (int i = 0; i < m_battlefield.size(); i++) {
+            Card el = m_battlefield.elementAt(i);
             if (Arrays.asList(el.m_type).contains(GameEnums.Type.CREATURE)) {
-                if (((Permanent)el).toughness() <= 0) { ((Permanent)el).kill(); } // Killed by state-based action and not destroyed
-                else if (((Permanent)el).toughness() <= ((Permanent)el).damage()) { ((Permanent)el).kill(); } // TODO: Change to destroy
+                System.out.println("Found " + el.name + String.format("%n") + "toughness " + el.toughness() + "damage " + el.damage() + String.format("%n"));
+                if (((Permanent)el).toughness() <= 0) { toBeKilled.add(el); } // Killed by state-based action and not destroyed
+                else if (((Permanent)el).toughness() - ((Permanent)el).damage() <= 0) { toBeKilled.add(el); } // TODO: Change to destroy
             }
         }
+        for (Iterator itr = toBeKilled.iterator(); itr.hasNext(); ((Permanent)itr.next()).kill()) {}
         for (int i = 0; i < this.m_numPlayers; i++) {
             // TODO: Implement poison
             if (m_player[i].life <= 0 && m_canLose[i]) {
@@ -359,6 +362,12 @@ public class GameCore {
         player.emptyManaPool();
     }
 
+    public void clearMana() {
+        for (int i = 0; i < m_numPlayers; i++) {
+            this.emptyManaPool(m_player[i]);
+        }
+    }
+
     public void declareAttacker(Card card, Player player) {
         // TODO: Add multiplayer support
         this.attackers.add(card);
@@ -368,7 +377,21 @@ public class GameCore {
         this.blockers.put(blocker, attacker);
     }
 
+    public void endCombat() {
+        this.attackers.clear();
+        this.blockers.clear();
+    }
+
     // Other
+
+    public String getHud(Player player) {
+        String ret = player.name + String.format("%n") +
+        "Life: " + Integer.toString(player.life) + String.format("%n") +
+        "Cards in hand: " + Integer.toString(player.hand.size()) + String.format("%n") +
+        "Cards in library: " + Integer.toString(player.library.cards.size()) + String.format("%n") + 
+        "Mana pool: " + player.getManaPool() + String.format("%n");
+        return ret;
+    }
 
     public Player runGame() {
         return null;

@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.Scanner;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.Stack;
 
 public class TextUserInterface {
 

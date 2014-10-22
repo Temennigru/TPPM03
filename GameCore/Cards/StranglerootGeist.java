@@ -30,6 +30,7 @@ public class StranglerootGeist extends Creature {
         this.toughness = 1;
         this.hasCounter = false;
         this.untap();
+        this.damage = 0;
     }
 
     public void play () throws GameExceptions.GameException {

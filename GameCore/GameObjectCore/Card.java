@@ -16,7 +16,7 @@ public abstract class Card extends GameObject {
     // For printing purpouses
     protected int power = 0;
     protected int toughness = 0;
-    private int damage = 0;
+    protected int damage = 0;
     protected boolean tapped = false;
     public boolean sick = true;
     public boolean isTapped() { return tapped; }
@@ -60,7 +60,13 @@ public abstract class Card extends GameObject {
     public void place (GameEnums.Zone zone, int position) throws GameExceptions.GameException {
         this.location = zone;
         GameCore game = GameCore.getGame();
+        if (zone == GameEnums.Zone.BATTLEFIELD) {
+            this.sick = true;
+        } else {
+            this.sick = false;
+        }
         game.registerOnZone(this, zone);
+        this.damage(0);
     }
 
     public final int damage () { return this.damage; }

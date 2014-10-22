@@ -33,7 +33,7 @@ public abstract class Player {
         this.library = deck;
     }
 
-    public void shuffle(GameEnums.Zone zone) {
+    public void shuffle() {
         this.library.shuffle();
     }
 
@@ -52,6 +52,12 @@ public abstract class Player {
     private boolean manaPoolManip(String mana, GameEnums.ManaPoolDirection direction) {
         int addSub;
         int[] resultingMana = new int[6];
+        resultingMana[0] = 0;
+        resultingMana[1] = 0;
+        resultingMana[2] = 0;
+        resultingMana[3] = 0;
+        resultingMana[4] = 0;
+        resultingMana[5] = 0;
 
         switch (direction) {
             case ADD:
@@ -68,27 +74,29 @@ public abstract class Player {
 
         // Set mana modifiers
         for (int i = 0; i < mana.length(); i++) {
+            // TODO: Implement variable cost
             switch (mana.charAt(i)) {
                 case 'R':
-                    resultingMana[0] += addSub;
+                    resultingMana[0] += addSub * 1;
                     break;
                 case 'G':
-                    resultingMana[1] += addSub;
+                    resultingMana[1] += addSub * 1;
                     break;
                 case 'B':
-                    resultingMana[2] += addSub;
+                    resultingMana[2] += addSub * 1;
                     break;
                 case 'U':
-                    resultingMana[3] += addSub;
+                    resultingMana[3] += addSub * 1;
                     break;
                 case 'W':
-                    resultingMana[4] += addSub;
+                    resultingMana[4] += addSub * 1;
                     break;
                 default:
                     if (Character.isDigit(mana.charAt(i))) {
                         int j = i;
-                        while (Character.isDigit(mana.charAt(i))) { i++; }
+                        while (i < mana.length() && Character.isDigit(mana.charAt(i))) { i++; }
                         resultingMana[5] += addSub * Integer.parseInt(mana.substring(j, i));
+                        i--;
                     } else {
                         assert false;
                     }
@@ -111,7 +119,7 @@ public abstract class Player {
                 else { // Colorless mana can be negative
                     // TODO: Implement support for multicolored decks (this only checks one color)
                     for (int j = 0; j < 6; j++) { // mana[i] = colorless, mana[j] = colored
-                        if (resultingMana[j] + resultingMana[i] > 0) {
+                        if (resultingMana[j] + resultingMana[i] >= 0) {
                             resultingMana[j] += resultingMana[i]; // Add colorless debt from colored mana
                             resultingMana[i] = 0; // Debt paid
                         }
@@ -139,8 +147,38 @@ public abstract class Player {
 
     public void emptyManaPool() {
         for (int i = 0; i < 6; i++) {
-            this.manaPool[i] = 0;
+            this.manaPool[i] = 4;
         }
+    }
+
+    public String getManaPool() {
+        String ret = "";
+        if (this.manaPool[5] != 0) { ret += Integer.toString(manaPool[5]); }
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < this.manaPool[i]; j++) {
+                switch (i) {
+                    case 0:
+                        ret += "R";
+                        break;
+                    case 1:
+                        ret += "G";
+                        break;
+                    case 2:
+                        ret += "B";
+                        break;
+                    case 3:
+                        ret += "U";
+                        break;
+                    case 4:
+                        ret += "W";
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        System.out.println("Mana pool: " + ret + String.format("%n"));
+        return ret;
     }
 
     public void addToHand      (Card card) throws GameExceptions.GameException {
@@ -158,7 +196,14 @@ public abstract class Player {
         this.graveyard.add(card);
     }
 
-    public final void lose() { System.out.println (this.name + " has lost"); this.dead = true; }
+    public final void lose() throws GameExceptions.GameException {
+        this.dead = true;
+        System.out.println (this.name + " has lost");
+        GameCore game = GameCore.getGame();
+        if (game.m_currentPlayer == this) {
+            throw new GameExceptions.CurrentPlayerLostException(this);
+        }
+    }
 
     public final boolean lost() { return this.dead; } // No cheating =)
 

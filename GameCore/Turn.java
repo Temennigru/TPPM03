@@ -12,13 +12,16 @@ public class Turn {
 
     private Player m_player;
     private GameCore game;
+    private TextUserInterface tui;
 
     private Turn() {} // Don't use this
 
     // TODO: Add dynamic turns (skipping steps, etc.)
     private Turn (Player player) throws IOException, InterruptedException, GameExceptions.GameException {
+        tui = TextUserInterface.getTui();
         game = GameCore.getGame();
         this.m_player = player;
+        tui.setHeader("New turn" + String.format("%n%n"));
         this.untap();
         this.draw();
         if (m_player.lost()) { return; } // Only way to currently lose during your turn
@@ -43,8 +46,10 @@ public class Turn {
         while (itr.hasNext()) {
             Permanent el = (Permanent)(itr.next());
             el.untap();
+            if (el.m_controler == m_player) { el.sick = false; }
         }
         m_player.landDrop(1); // Hard coded
+        game.clearMana();
     }
 
     public void draw() throws IOException, InterruptedException, GameExceptions.GameException {
@@ -54,6 +59,7 @@ public class Turn {
         } else {
             drawn.place(GameEnums.Zone.HAND);
         }
+        game.clearMana();
     }
 
     public void upkeep() throws IOException, InterruptedException, GameExceptions.GameException {
@@ -73,19 +79,19 @@ public class Turn {
                 ((EndlessRanksOfTheDead)card).activateCard();
             }
         }*/
+        game.clearMana();
     }
 
     public void main1() throws IOException, InterruptedException, GameExceptions.GameException {
         // TODO: Dynamic log setting
-        TextUserInterface tui = TextUserInterface.getTui();
 
-        tui.setHeader("Main phase" + String.format("%n%n"));
+        tui.setHeader(game.getHud(this.m_player) + String.format("%n%n") + "Main phase" + String.format("%n%n"));
 
         Card card = m_player.prompt();
         while (card != null) {
             if (card.location == GameEnums.Zone.HAND) {
                 if (!card.cast()) {
-                    tui.setOutput("Error: Cannot cast card", false);
+                    tui.setOutput("Error: Cannot play card", false);
                     tui.newLine();
                 }
             } else if (card.location == GameEnums.Zone.BATTLEFIELD) {
@@ -116,16 +122,18 @@ public class Turn {
                 tui.newLine();
             }
             game.stateCheck();
+            tui.clearHeader();
+            tui.setHeader(game.getHud(this.m_player) + String.format("%n%n") + "Main phase" + String.format("%n%n"));
             card = m_player.prompt();
         }
         tui.clearHeader();
+        game.clearMana();
     }
     
     public void combatDeclareAttackers() throws IOException, InterruptedException, GameExceptions.GameException {
         // TODO: Dynamic log setting
-        TextUserInterface tui = TextUserInterface.getTui();
 
-        tui.setHeader("Combat phase" + String.format("%n%n"));
+        tui.setHeader(game.getHud(this.m_player) + String.format("%n%n") + "Combat phase" + String.format("%n%n"));
 
         tui.setHeader("Select attackers" + String.format("%n%n"));
 
@@ -151,7 +159,6 @@ public class Turn {
 
     public void combatDeclareBlockers() throws IOException, InterruptedException, GameExceptions.GameException {
         // TODO: Blocked flag
-        TextUserInterface tui = TextUserInterface.getTui();
 
         tui.setHeader("Combat phase" + String.format("%n%n"));
 
@@ -160,7 +167,7 @@ public class Turn {
 
             tui.clearHeader();
 
-            tui.setHeader("Combat phase" + String.format("%n%n"));
+            tui.setHeader(game.getHud(game.opponent(this.m_player)) + String.format("%n%n") + "Combat phase" + String.format("%n%n"));
             tui.setHeader("Select blockers for:" + String.format("%n%n") + attacker.toString());
 
             Card card = game.opponent(m_player).prompt(true);
@@ -173,7 +180,7 @@ public class Turn {
                     tui.newLine();
                 } else {
                     // TODO: Implement block()
-                    game.declareBlocker(card, attacker);
+                    game.declareBlocker(((Creature)card), attacker);
                 }
 
                 card = m_player.prompt(true);
@@ -185,22 +192,19 @@ public class Turn {
 
     public void combatDamage() throws IOException, InterruptedException, GameExceptions.GameException {
 
-        TextUserInterface tui = TextUserInterface.getTui();
-
-        tui.setHeader("Combat phase" + String.format("%n%n"));
+        tui.setHeader(game.getHud(this.m_player) + String.format("%n%n") + "Combat phase" + String.format("%n%n"));
 
         // TODO: Implement first strike attack round
         // TODO: Implement damage triggers
         for (Iterator<Card> itr = game.getAttackers(); itr.hasNext(); ) {
             boolean blocked = false;
             Card attacker = itr.next();
-            itr.remove();
             int damageToDeal = attacker.power();
 
             for (Iterator<Map.Entry<Card,Card>> itr2 = game.getBlockers(); itr2.hasNext();) {
                 Map.Entry<Card,Card> temp = itr2.next();
-                itr2.remove();
                 Card blocker = temp.getKey();
+                System.out.println("Blocker: " + blocker.location.toString());
                 if (temp.getValue() == attacker) { // Blocked
                     blocked = true;
                     attacker.damage(blocker.power() + attacker.damage());
@@ -221,15 +225,21 @@ public class Turn {
                 game.opponent(m_player).removeLife(damageToDeal);
             }
         }
+        game.endCombat();
+        tui.clearHeader();
         game.stateCheck();
+        game.clearMana();
     }
 
     public void main2() {} // No cards in this release will know how to distinguish between main phases
-    public void end() {} // Same as upkeep
-    public void cleanup() throws IOException, InterruptedException, GameExceptions.GameException {
-        TextUserInterface tui = TextUserInterface.getTui();
 
-        tui.setHeader("Cleanup phase" + String.format("%n%n"));
+    public void end() {
+        game.clearMana();
+    } // Nothing to do here
+
+    public void cleanup() throws IOException, InterruptedException, GameExceptions.GameException {
+
+        tui.setHeader(game.getHud(this.m_player) + String.format("%n%n") + "Cleanup phase" + String.format("%n%n"));
 
         for (Iterator<Card> itr = game.iterator(GameEnums.Zone.BATTLEFIELD); itr.hasNext();) {
             Card card = itr.next();
@@ -295,9 +305,26 @@ public class Turn {
 
         me.library.shuffle();
 
+        Card drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+        drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+        drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+        drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+        drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+        drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+        drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+
+
         while (!me.lost()) {
             takeTurn(me);
         }
+
         System.out.println("You lost");
     }
 }
