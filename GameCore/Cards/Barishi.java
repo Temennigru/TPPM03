@@ -43,6 +43,14 @@ public class Barishi extends Creature {
 
     public void kill () throws GameExceptions.GameException {
         this.place (GameEnums.Zone.EXILE_FUP); //reimplement when checking graveyard becomes an issue
-        //TODO: shuffle all creatures from graveyard into library
-    }
+       
+        //test
+        Iterator<Card> iterator (Player player, GameEnums.Zone zone) {
+        for (Iterator<Card> itr = game.iterator(this.m_owner, GameEnums.Zone.GRAVEYARD); itr.hasNext(); ) {
+            Card card = itr.next();
+            if (Arrays.asList(card.m_type).contains(GameEnums.Type.CREATURE)){
+                card.place (GameEnums.Zone.LIBRARY);
+            }
+            card.m_owner.shuffle();
+        }
 }
