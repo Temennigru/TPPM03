@@ -44,7 +44,8 @@ public class BlackCat extends Creature {
     }
 
     public void kill () throws GameExceptions.GameException {
-        //DISCARD gameCore.opponent (this.m_controller)
+        //DISCARD
+        //gameCore.opponent (this.m_controller)
         this.place (GameEnums.Zone.GRAVEYARD);
     }
 }
