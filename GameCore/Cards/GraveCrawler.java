@@ -6,7 +6,7 @@ import GameCore.GameObjectCore.*;
 import java.lang.System;
 
 //TODO: cant block
-//TODO: cast from graveyard
+//TODO: cast from graveyard if you control a zombie
 
 public class Gravecrawler extends Creature {
 
@@ -47,5 +47,25 @@ public class Gravecrawler extends Creature {
 
     public void kill () throws GameExceptions.GameException {
         this.place (GameEnums.Zone.GRAVEYARD);
+    }
+
+    public boolean cast () throws GameExceptions.GameException {
+        return this.cast(true);
+    }
+
+    public boolean cast (boolean payManaCost) throws GameExceptions.GameException {
+        // TODO: use stack
+        if (this.location != GameEnums.Zone.HAND && this.location != GameEnums.Zone.GRAVEYARD) { throw new GameExceptions.WrongZoneException(this, this.location, GameEnums.Zone.HAND); }
+        GameCore game = GameCore.getGame();
+        if (payManaCost) {
+            if (this.location == GameEnums.Zone.GRAVEYARD){
+                //TODO: IF YOU CONTROL A ZOMBIE
+                if (!game.spendMana(this.m_controler, this.manaCost)) { return false; } // Mana is subtracted from whoever controls the spell when it is cast.
+            }
+            //if not on graveyard then it's on the hand
+            else if (!game.spendMana(this.m_controler, this.manaCost)) { return false; } // Mana is subtracted from whoever controls the spell when it is cast.
+        }
+        this.play();
+        return true;
     }
 }

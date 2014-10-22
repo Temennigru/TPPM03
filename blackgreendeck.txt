@@ -1,82 +1,95 @@
 
-	blackDeck[0] = BlackCat();
-	blackDeck[1] = BlackCat();
-	blackDeck[2] = ButcherGhoul();
-	blackDeck[3] = ButcherGhoul();
-	blackDeck[4] = ButcherGhoul();
-	blackDeck[5] = ButcherGhoul();
-	blackDeck[6] = GeralfsMessenger();
-	blackDeck[7] = GeralfsMessenger();
-	blackDeck[8] = GeralfsMessenger();
-	blackDeck[9] = GeralfsMessenger();
-	blackDeck[10] = Gravecrawler();
-	blackDeck[11] = Gravecrawler();
-	blackDeck[12] = Gravecrawler();
-	blackDeck[13] = WarpathGhoul();
-	blackDeck[14] = WarpathGhoul();
-	blackDeck[15] = WarpathGhoul();
-	blackDeck[16] = ArmyOfTheDamned();
-	blackDeck[17] = Assassinate();
-	blackDeck[18] = Assassinate();
-	blackDeck[19] = Assassinate();
-	blackDeck[20] = Damnnation();
-	blackDeck[21] = Damnnation();
-	blackDeck[22] = EndlessRanksOfTheDead();
-	blackDeck[23] = EndlessRanksOfTheDead();
+    private static class BlackDeck extends Deck {
+        public BlackDeck (Player player) { super(player); }
+        protected void createDeck() {
+            Card s = null;
+            for (int i = 0; i < 40; i++) {
+                       if (i >= 0 && i < 4) {
+                    s = new ButcherGhoul();
+                } else if (i >= 4 && i < 8) {
+                    s = new GeralfsMessenger();
+                } else if (i >= 8 && i < 11) {
+                    s = new WarpathGhoul();
+                } else if (i >= 11 && i < 14) {
+                    s = new Assassinate();
+                } else if (i >= 14 && i < 17) {
+                    s = new Gravecrawler();
+                } else if (i >= 17 && i < 19) {
+                    s = new BlackCat();
+                } else if (i >= 19 && i < 21) {    
+                    s = new Damnnation();
+                } else if (i >= 21 && i < 23) {
+                    s = new EndlessRanksOfTheDead();
+                } else if (i = 24) {
+                    s = new ArmyOfTheDamned();
+                } else if (i > 24) {
+                    s = new Swamp();
+                }
 
-for (i=24,i<40,i++){
-	blackDeck[i] = Swamp();
-}
+                s.m_owner = this.m_owner;
+                s.m_controler = this.m_owner;
+                s.location = GameEnums.Zone.LIBRARY;
+                this.add(s);
+                this.numCards = 40;
+            }
+        }
+    }
 
-/*
-	3 BlackCat();
+    /*	BLACKDECK
 	4 ButcherGhoul();
 	4 GeralfsMessenger();
 	4 Gravecrawler();
+	3 BlackCat();
 	3 WarpathGhoul();
-	1 ArmyOfTheDamned();
 	3 Assassinate();
 	2 Damnnation();
 	2 EndlessRanksOfTheDead();
+	1 ArmyOfTheDamned();
 	16 Swamp();
-*/
-	greenDeck[0] = Barishi();
-	greenDeck[1] = Barishi();
-	greenDeck[2] = Barishi();
-	greenDeck[3] = Barishi();
-	greenDeck[4] = GarruksCompanion();
-	greenDeck[5] = GarruksCompanion();
-	greenDeck[6] = GarruksCompanion();
-	greenDeck[7] = GarruksCompanion();
-	greenDeck[8] = IndrikStomphowler();
-	greenDeck[9] = IndrikStomphowler();
-	greenDeck[10] = KozilekButcherOfTruth();
-	greenDeck[11] = LeatherbackBaloth();
-	greenDeck[12] = LeatherbackBaloth();
-	greenDeck[13] = LeatherbackBaloth();
-	greenDeck[14] = LeatherbackBaloth();
-	greenDeck[15] = LlanowarElves();
-	greenDeck[16] = LlanowarElves();
-	greenDeck[17] = LlanowarElves();
-	greenDeck[18] = LlanowarElves();
-	greenDeck[19] = StranglerootGeist();
-	greenDeck[20] = StranglerootGeist();
-	greenDeck[21] = StranglerootGeist();
-	greenDeck[22] = StranglerootGeist();
-	greenDeck[23] = TerraStomper();
+	*/
 
-for (i=24,i<40,i++){
-	greenDeck[i] = Forest();
-}
+    private static class GreenDeck extends Deck {
+        public GreenDeck (Player player) { super(player); }
+        protected void createDeck() {
+            Card s = null;
+            for (int i = 0; i < 40; i++) {
+                       if (i >= 0 && i < 4) {
+                    s = new Barishi();
+                } else if (i >= 4 && i < 8) {
+                    s = new GarruksCompanion();
+                } else if (i >= 8 && i < 12) {
+                    s = new LeatherbackBaloth();
+                } else if (i >= 12 && i < 16) {
+                    s = new LlanowarElves();
+                } else if (i >= 16 && i < 20) {
+                    s = new StranglerootGeist();
+                } else if (i >= 20 && i < 22) {
+                    s = new IndrikStomphowler();
+                } else if (i = 23) {    
+                    s = new KozilekButcherOfTruth();
+                } else if (i = 24) {
+                    s = new TerraStomper();
+                } else if (i > 24) {
+                    s = new Forest();
+                }
 
-/*
-4 Barishi();
-4 GarruksCompanion();
-2 IndrikStomphowler();
-1 KozilekButcherOfTruth();
-4 LeatherbackBaloth();
-4 LlanowarElves();
-4 StranglerootGeist();
-1 TerraStomper();
-16 Forest();
-*/
+                s.m_owner = this.m_owner;
+                s.m_controler = this.m_owner;
+                s.location = GameEnums.Zone.LIBRARY;
+                this.add(s);
+                this.numCards = 40;
+            }
+        }
+    }
+
+	/* GREENDECK
+	4 Barishi();
+	4 GarruksCompanion();
+	4 LeatherbackBaloth();
+	4 LlanowarElves();
+	4 StranglerootGeist();
+	2 IndrikStomphowler();
+	1 KozilekButcherOfTruth();
+	1 TerraStomper();
+	16 Forest();
+	*/
