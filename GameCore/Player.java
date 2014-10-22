@@ -147,7 +147,7 @@ public abstract class Player {
 
     public void emptyManaPool() {
         for (int i = 0; i < 6; i++) {
-            this.manaPool[i] = 4;
+            this.manaPool[i] = 0;
         }
     }
 
@@ -200,9 +200,9 @@ public abstract class Player {
         this.dead = true;
         System.out.println (this.name + " has lost");
         GameCore game = GameCore.getGame();
-        if (game.m_currentPlayer == this) {
+        //if (game.m_currentPlayer == this) {
             throw new GameExceptions.CurrentPlayerLostException(this);
-        }
+        //}
     }
 
     public final boolean lost() { return this.dead; } // No cheating =)

@@ -27,6 +27,8 @@ public class TerraStomper extends Creature {
     private void reset() {
         this.power = 8;
         this.toughness = 8;
+        this.untap();
+        this.damage = 0;
     }
 
 	public play (GameCore game) {

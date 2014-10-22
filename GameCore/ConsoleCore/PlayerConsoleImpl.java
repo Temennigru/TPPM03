@@ -48,6 +48,7 @@ public class PlayerConsoleImpl implements Console {
 	public Card prompt() throws IOException, InterruptedException { return this.prompt(false); }
 
 	public Card prompt(boolean playerOnly) throws IOException, InterruptedException {
+		playerOnly = false; // Bugged
 		TextUserInterface tui = TextUserInterface.getTui();
 		GameCore game = GameCore.getGame();
 		if (!game.valid()) {} // TODO: Throw exception

@@ -11,6 +11,7 @@ import java.lang.System;
 public class GeralfsMessenger extends Creature {
 
     boolean istapped = true;
+    boolean hasCounter = false;
 
 	public GeralfsMessenger () {
         this.reset();
@@ -20,7 +21,7 @@ public class GeralfsMessenger extends Creature {
         this.m_sub = new GameEnums.CreatureSubType[1];
         this.m_sub[0] = GameEnums.CreatureSubType.ZOMBIE;
         this.manaCost = "BBB";
-        this.name = "Geralf's Messenger"
+        this.name = "Geralf's Messenger";
         this.description = "Geralf's Messenger enters the battlefield tapped."
         + "When Geralf's Messenger enters the battlefield, target opponent loses 2 life."
         + "Undying (when this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under it's owner's control with a +1/+1 counter on it.";
@@ -31,6 +32,7 @@ public class GeralfsMessenger extends Creature {
         this.power = 3;
         this.toughness = 2;
         this.hasCounter = false;
+        this.damage = 0;
         this.untap();
     }
 
@@ -44,6 +46,9 @@ public class GeralfsMessenger extends Creature {
         this.location = zone;
         GameCore game = GameCore.getGame();
         game.registerOnZone(this, zone);
+        if (zone == GameEnums.Zone.BATTLEFIELD) {
+            game.opponent(this.m_controler).removeLife(2);
+        }
     }
 
     public void kill () throws GameExceptions.GameException {

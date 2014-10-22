@@ -1,5 +1,5 @@
 TODO:
-1- Implement turn
+√1- Implement turn
 √2- Console (turn is waiting)
 √3- Image display
 √4- Implement state checks
@@ -10,7 +10,7 @@ TODO:
 9- kozilek (when cast draw 4 cards, annihilator, when put on graveyard shuffle)
 √10- Console output refresh
 √11- Make cards not redeclare types (subtypes still not fixed)
-12- Empty mana pool
+√12- Empty mana pool
 
 TP3:
 1- Global effects

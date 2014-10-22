@@ -17,7 +17,7 @@ public class GarruksCompanion extends Creature {
         this.m_sub = new GameEnums.CreatureSubType[1];
         this.m_sub[0] = GameEnums.CreatureSubType.BEAST;
         this.manaCost = "GG";
-        this.name = "Garruk's Companion"
+        this.name = "Garruk's Companion";
         this.description = "Trample"
         + "(If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)";
         this.flavor = "They seek out living trees to glean age-old secrets from sap and wood.";
@@ -26,10 +26,11 @@ public class GarruksCompanion extends Creature {
     private void reset() {
         this.power = 3;
         this.toughness = 2;
+        this.untap();
+        this.damage = 0;
     }
 
     public void play () throws GameExceptions.GameException {
-        this.reset();
         this.place (GameEnums.Zone.BATTLEFIELD);
     }
 

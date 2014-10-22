@@ -31,6 +31,8 @@ public class WorldspineWurm extends Creature {
     private void reset() {
         this.power = 15;
         this.toughness = 15;
+        this.untap();
+        this.damage = 0;
     }
 
     public void play () throws GameExceptions.GameException {

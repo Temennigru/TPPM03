@@ -1,70 +1,74 @@
-import Cards.*;
+import GameCore.Cards.*;
 import java.lang.System;
-import Core.*;
+import GameCore.*;
+import GameCore.GameObjectCore.*;
+import java.io.IOException;
 
 
 public class main {
-	public static void main(String[] args) throws GameExceptions.GameException {
-		RealPlayer me = new RealPlayer("Loops");
 
-		Core.GameCore game = Core.GameCore.getGame(me, null);
+    private static class GreenDeck extends Deck {
+        public GreenDeck(Player player) { super(player); }
+        protected void createDeck() {
+            Card s = null;
 
-		Cards.Abstract.Card s = new StranglerootGeist();
-		s.m_owner = me;
-		s.m_controler = me;
+            for (int i = 0; i < 26; i++) {
+                if (i >= 0 && i < 8) {
+                    s = new StranglerootGeist();
+                } else if (i >= 8 && i < 16) {
+                    s = new Forest();
+                } else if (i >= 16) {
+                    s = new GarruksCompanion();
+                }
 
-		s.play();
-		System.out.println(s.toString());
+                s.m_owner = this.m_owner;
+                s.m_controler = this.m_owner;
+                s.location = GameEnums.Zone.LIBRARY;
 
-		System.out.println("Killing geist\n");
-		((Cards.Abstract.Creature)s).kill();
-		System.out.println(s.location.toString());
-		System.out.println(s.toString());
+                this.add(s);
 
-		System.out.println("Killing geist\n");
-		((Cards.Abstract.Creature)s).kill();
-		System.out.println(s.location.toString());
-		System.out.println(s.toString());
+                this.numCards = 16;
+            }
+        }
+    }
 
+    private static class BlackDeck extends Deck {
+        public BlackDeck(Player player) { super(player); }
+        protected void createDeck() {
+            Card s = null;
 
+            for (int i = 0; i < 26; i++) {
+                if (i >= 0 && i < 8) {
+                    s = new GeralfsMessenger();
+                } else if (i >= 8 && i < 16) {
+                    s = new ButcherGhoul();
+                } else if (i >= 16) {
+                    s = new Swamp();
+                }
 
-		Cards.Abstract.Card f = new Forest();
+                s.m_owner = this.m_owner;
+                s.m_controler = this.m_owner;
+                s.location = GameEnums.Zone.LIBRARY;
 
-		f.m_owner = me;
-		f.m_controler = me;
+                this.add(s);
 
-		f.play();
+                this.numCards = 16;
+            }
+        }
+    }
 
-		System.out.println(f.toString());
-		
-		System.out.println("Green mana: " + Integer.toString(me.manaPool[1]) + "\n");
+	public static void main(String[] args) throws GameExceptions.GameException, IOException, InterruptedException {
+		RealPlayer plyr1 = new RealPlayer("Jean");
+        Deck blackDeck = new BlackDeck(plyr1);
+        plyr1.setDeck(blackDeck);
 
-		f.activateAt(0);
+		RealPlayer plyr2 = new RealPlayer("Joao");
+        Deck greenDeck = new GreenDeck(plyr2);
+        plyr2.setDeck(greenDeck);
 
-		System.out.println("Tapped Forest\n");
+        GameCore game = GameCore.makeGame(plyr1, plyr2);
 
-		System.out.println(f.toString());
+        game.runGame();
 
-		System.out.println("Green mana: " + Integer.toString(me.manaPool[1]));
-
-		Cards.Abstract.Card e = new LlanowarElves();
-		e.m_owner = me;
-		e.m_controler = me;
-
-		e.play();
-
-		e.activateAt(0);
-
-		System.out.println("Tapped Elves\n");
-
-		System.out.println(e.toString());
-
-		System.out.println("Green mana: " + Integer.toString(me.manaPool[1]));
-
-		System.out.println(e.location.toString());
-
-		e.activateAt(0);
-
-		System.out.println("Green mana: " + Integer.toString(me.manaPool[1]));
 	}
 }

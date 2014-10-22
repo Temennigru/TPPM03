@@ -31,6 +31,7 @@ public class Gravecrawler extends Creature {
     private void reset() { 
         this.power = 2;
         this.toughness = 1;
+        this.damage = 0;
     }
 
     public void play () throws GameExceptions.GameException {

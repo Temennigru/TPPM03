@@ -26,6 +26,7 @@ public class GravebornMuse extends Creature {
     private void reset() { 
         this.power = 3;
         this.toughness = 3;
+        this.damage = 0;
     }
 
     public void play () throws GameExceptions.GameException {

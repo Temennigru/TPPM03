@@ -183,7 +183,7 @@ public class Turn {
                     game.declareBlocker(((Creature)card), attacker);
                 }
 
-                card = m_player.prompt(true);
+                card = game.opponent(m_player).prompt(true);
             }
         }
         game.stateCheck();
@@ -274,15 +274,19 @@ public class Turn {
         protected void createDeck() {
             Card s = null;
 
-            for (int i = 0; i < 16; i++) {
+            for (int i = 0; i < 24; i++) {
                 if (i >= 0 && i < 4) {
                     s = new StranglerootGeist();
                 } else if (i >= 4 && i < 8) {
                     s = new Forest();
                 } else if (i >= 8 && i < 12) {
                     s = new Swamp();
-                } else if (i >= 12) {
+                } else if (i >= 12 && i < 16) {
                     s = new ButcherGhoul();
+                } else if (i >= 16 && i < 20) {
+                    s = new GarruksCompanion();
+                } else if (i >= 20 && i < 24) {
+                    s = new GeralfsMessenger();
                 }
 
                 s.m_owner = this.m_owner;

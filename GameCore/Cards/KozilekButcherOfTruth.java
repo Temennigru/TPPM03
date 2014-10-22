@@ -30,6 +30,8 @@ public class KozilekButcherOfTruth extends Creature {
     private void reset() { 
         this.power = 12;
         this.toughness = 12;
+        this.untap();
+        this.damage = 0;
     }
 
     public void play () throws GameExceptions.GameException {

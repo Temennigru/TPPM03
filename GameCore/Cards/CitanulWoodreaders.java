@@ -28,6 +28,8 @@ public class CitanulWoodreaders extends Creature {
 private void reset() {
         this.power = 1;
         this.toughness = 4;
+        this.untap();
+        this.damage = 0;
     }
 
     public void play () throws GameExceptions.GameException {

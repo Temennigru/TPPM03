@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Arrays;
+import java.io.IOException;
 
 public class GameCore {
     private Player[] m_player;
@@ -89,12 +90,9 @@ public class GameCore {
         m_canLose[0] = true;
         m_canLose[1] = true;
 
-        /*Random rand;
+        Random rand = new Random();
         
-        this.m_currentPlayer = m_player[rand.getNextInt(1)];
-        */
-        // Hard-coded player for testing purpouses
-        m_currentPlayer = m_player[0];
+        this.m_currentPlayer = m_player[rand.nextInt(1)];
     }
 
     // Element access
@@ -393,7 +391,55 @@ public class GameCore {
         return ret;
     }
 
-    public Player runGame() {
-        return null;
+    public Player runGame() throws GameExceptions.GameException, IOException, InterruptedException {
+        Card drawn;
+        Player me = m_player[0];
+
+        me.library.shuffle();
+
+        drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+        drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+        drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+        drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+        drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+        drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+        drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+
+        me = m_player[1];
+
+        me.library.shuffle();
+
+        drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+        drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+        drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+        drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+        drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+        drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+        drawn = me.library.draw();
+        drawn.place(GameEnums.Zone.HAND);
+
+        int i = (m_currentPlayer == m_player[0]) ? 0 : 1;
+        try {
+            while (true) {
+                i = (i + 1) % m_numPlayers;
+                m_currentPlayer = m_player[i];
+                Turn.takeTurn(m_currentPlayer);
+            }
+        } catch (GameExceptions.CurrentPlayerLostException e) {
+            return this.opponent(e.player);
+        }
     }
 }

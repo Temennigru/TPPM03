@@ -26,6 +26,8 @@ public class IndrikStomphowler extends Creature {
     private void reset() { 
         this.power = 4;
         this.toughness = 4;
+        this.untap();
+        this.damage = 0;
     }
 
     public void play () throws GameExceptions.GameException {

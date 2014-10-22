@@ -31,6 +31,8 @@ public class UlamogTheInfiniteGyre extends Creature {
     private void reset() {
         this.power = 10;
         this.toughness = 10;
+        this.untap();
+        this.damage = 0;
     }
     
 	public play (GameCore game) {

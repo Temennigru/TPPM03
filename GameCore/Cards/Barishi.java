@@ -27,6 +27,8 @@ public class Barishi extends Creature {
     private void reset() {
         this.power = 4;
         this.toughness = 3;
+        this.untap();
+        this.damage = 0;
     }
 
     public void play () throws GameExceptions.GameException {

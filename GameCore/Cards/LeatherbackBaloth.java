@@ -24,6 +24,8 @@ public class LeatherbackBaloth extends Creature {
     private void reset() { 
         this.power = 4;
         this.toughness = 5;
+        this.untap();
+        this.damage = 0;
     }
 
     public void play () throws GameExceptions.GameException {

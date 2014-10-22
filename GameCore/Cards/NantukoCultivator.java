@@ -25,6 +25,8 @@ public class NantukoCultivator extends Creature {
     private void reset() { 
         this.power = 2;
         this.toughness = 2;
+        this.untap();
+        this.damage = 0;
     }
 
     public void play () throws GameExceptions.GameException {

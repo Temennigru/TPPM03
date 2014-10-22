@@ -27,6 +27,8 @@ public class BlackCat extends Creature {
     private void reset() {
         this.power = 1;
         this.toughness = 1;
+        this.untap();
+        this.damage = 0;
     }
 
     public void play () throws GameExceptions.GameException {

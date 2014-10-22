@@ -15,7 +15,7 @@ PACKAGES := \
     GameCore/Ui/Gui \
 
 #CLASSES := $(shell find $(PACKAGES) -type f -name '*.java')
-CLASSES := $(shell find $(PACKAGES) -type f -name PlayerConsoleImpl.java)
+CLASSES := $(shell find $(PACKAGES) -type f -name main.java)
 
 .PHONY: default clean
 
@@ -25,3 +25,6 @@ classes: $(CLASSES:.java=.class)
 
 clean:
 	$(RM) $(shell find $(PACKAGES) -type f -name '*.class')
+
+run:
+	java main
