@@ -32,7 +32,7 @@ public class IndrikStomphowler extends Creature {
         this.reset();
         this.place (GameEnums.Zone.BATTLEFIELD);
 
-        //destroy target artifact or enchantment
+        /* //destroy target artifact or enchantment
         TextUserInterface tui = TextUserInterface.getTui();
         tui.setHeader("Select target artifact or enchantment" + String.format("%n%n"));
 
@@ -50,6 +50,7 @@ public class IndrikStomphowler extends Creature {
         }
         tui.clearHeader();
         game.checkState();
+        */
     }
 
     public void place (GameEnums.Zone zone, int position) throws GameExceptions.GameException {
