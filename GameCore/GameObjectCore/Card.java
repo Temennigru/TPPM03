@@ -5,128 +5,96 @@ import GameCore.*;
 import java.util.Vector;
 import java.util.Arrays;
 
-public abstract class Card extends GameObject {
-    public Vector<Ability> abilities;
+public abstract interface Card extends GameObject {
 
-    public GameEnums.Zone location;
-    public GameEnums.SuperType[] m_super = {};
-    public GameEnums.Type[] m_type;
-    public String m_imgLocation = "";
+    // Card reflection
+    public GameEnums.SuperType[] superTypes() throws GameExceptions.GameException;
+    public void superTypes(GameEnums.SuperType[] subtypes) throws GameExceptions.GameException;
 
-    // For printing purpouses
-    protected int power = 0;
-    protected int toughness = 0;
-    protected int damage = 0;
-    protected boolean tapped = false;
-    public boolean sick = true;
-    public boolean isTapped() { return tapped; }
+    public GameEnums.Type[] types() throws GameExceptions.GameException;
+    public void types(GameEnums.Type[] subtypes) throws GameExceptions.GameException;
 
-    public boolean haste = false;
-
-    public String name = "";
-    protected String description = "";
-    protected String flavor = "";
-    protected String types = "";
-    protected String manaCost = "";
-
-    // Cards that 
-    public boolean cast () throws GameExceptions.GameException {
-        return this.cast(true);
-    }
-
-    public boolean cast (boolean payManaCost) throws GameExceptions.GameException {
-        // TODO: use stack
-        if (this.location != GameEnums.Zone.HAND) { throw new GameExceptions.WrongZoneException(this, this.location, GameEnums.Zone.HAND); }
-        GameCore game = GameCore.getGame();
-        if (payManaCost) {
-            if (!game.spendMana(this.m_controler, this.manaCost)) { return false; } // Mana is subtracted from whoever controls the spell when it is cast.
-        }
-        this.play();
-        return true;
-    }
+    public GameEnums.SubType[] subTypes() throws GameExceptions.GameException;
+    public void subTypes(GameEnums.SubType[] subtypes) throws GameExceptions.GameException;
 
     // This is where the magic happens
+    public boolean cast () throws GameExceptions.GameException;
+
+    public boolean cast (boolean payManaCost) throws GameExceptions.GameException;
+
     public abstract void play () throws GameExceptions.GameException;
 
-    public void discard () throws GameExceptions.GameException {
-        if (this.location != GameEnums.Zone.HAND) { throw new GameExceptions.WrongZoneException(this, this.location, GameEnums.Zone.HAND); }
-        this.place (GameEnums.Zone.GRAVEYARD);
-    }
+    public abstract void discard () throws GameExceptions.GameException;
 
-    public void place (GameEnums.Zone zone) throws GameExceptions.GameException {
-        this.place (zone, 0);
-    }
+    public abstract void place (GameEnums.Zone zone) throws GameExceptions.GameException;
 
-    public void place (GameEnums.Zone zone, int position) throws GameExceptions.GameException {
-        this.location = zone;
-        GameCore game = GameCore.getGame();
-        if (zone == GameEnums.Zone.BATTLEFIELD) {
-            this.sick = true;
-        } else {
-            this.sick = false;
-        }
-        game.registerOnZone(this, zone);
-        this.damage(0);
-    }
+    public abstract void place (GameEnums.Zone zone, int position) throws GameExceptions.GameException;
 
-    public final int damage () { return this.damage; }
-    public final void damage (int value) { this.damage = value; }
+    // Print card details
+    public abstract String toString() throws GameExceptions.GameException;
 
-    public String toString() {
+    // Activate ability
+    public abstract boolean activateAt(int ability) throws GameExceptions.GameException;
 
-        // Creature
-        if (Arrays.asList(this.m_type).contains(GameEnums.Type.CREATURE)) {
+    // Modifiers / Member access
+    public abstract void reset(String field) throws GameExceptions.GameException;
 
-            String tmp = "Owner: " + this.m_owner.name + String.format("%n") +
-            "Controler: " + this.m_controler.name + String.format("%n");
+    public abstract int power () throws GameExceptions.GameException;
+    public abstract void power (int value) throws GameExceptions.GameException;
 
-            if (sick && !haste) { tmp += "Sick" + String.format("%n"); }
+    public abstract int toughness () throws GameExceptions.GameException;
+    public abstract void toughness (int value) throws GameExceptions.GameException;
 
-            tmp += this.name + " - " + this.manaCost;
+    public abstract int damage () throws GameExceptions.GameException;
+    public abstract void damage (int value) throws GameExceptions.GameException;
 
-            if (this.isTapped()) { tmp += " T"; }
+    // Evergreen abilities
+    public abstract boolean deathtouch() throws GameExceptions.GameException;
+    public abstract void deathtouch(boolean val) throws GameExceptions.GameException;
 
-            tmp += String.format("%n") +
-            this.types + String.format("%n") +
-            this.description + String.format("%n") +
-            this.flavor + String.format("%n") +
-            Integer.toString(this.power) + "/" + Integer.toString(this.toughness - this.damage) + String.format("%n");
+    public abstract boolean defender() throws GameExceptions.GameException;
+    public abstract void defender(boolean val) throws GameExceptions.GameException;
 
-            return tmp;
-        // Permanent
-        } else if (Arrays.asList(this.m_type).contains(GameEnums.Type.ENCHANTMENT)  ||
-                   Arrays.asList(this.m_type).contains(GameEnums.Type.LAND)         ||
-                   Arrays.asList(this.m_type).contains(GameEnums.Type.PLANESWALKER) ||
-                   Arrays.asList(this.m_type).contains(GameEnums.Type.ARTIFACT) ) {
-            String tmp = "Owner: " + this.m_owner.name + String.format("%n") +
-            "Controler: " + this.m_controler.name + String.format("%n") +
-            this.name;
-            tmp += " - " + this.manaCost;
-            if (this.isTapped()) { tmp += " T"; }
-            tmp += String.format("%n") +
-            this.types + String.format("%n") +
-            this.description + String.format("%n") +
-            this.flavor + String.format("%n");
-            return tmp;
+    public abstract boolean doublestrike() throws GameExceptions.GameException;
+    public abstract void doublestrike(boolean val) throws GameExceptions.GameException;
 
-        // Regular
-        } else {
-            return "Owner: " + this.m_owner.name + String.format("%n") +
-            "Controler: " + this.m_controler.name + String.format("%n") +
-            this.name + " - " + this.manaCost + String.format("%n") +
-            this.types + String.format("%n") +
-            this.description + String.format("%n") +
-            this.flavor + String.format("%n");
-        }
-    }
+    public abstract boolean firststrike() throws GameExceptions.GameException;
+    public abstract void firststrike(boolean val) throws GameExceptions.GameException;
 
-    public boolean activateAt(int ability) throws GameExceptions.GameException {
-        return this.abilities.elementAt(ability).activate();
-    }
-    
-    public final int toughness () { return this.toughness; }
-    public final int power () { return this.power; }
+    public abstract boolean flash() throws GameExceptions.GameException;
+    public abstract void flash(boolean val) throws GameExceptions.GameException;
 
-    public final void toughness (int value) { this.toughness = value; }
-    public final void power (int value) { this.power = value; }
+    public abstract boolean flying() throws GameExceptions.GameException;
+    public abstract void flying(boolean val) throws GameExceptions.GameException;
+
+    public abstract boolean hexproof() throws GameExceptions.GameException;
+    public abstract void hexproof(boolean val) throws GameExceptions.GameException;
+
+    public abstract boolean indestructible() throws GameExceptions.GameException;
+    public abstract void indestructible(boolean val) throws GameExceptions.GameException;
+
+    public abstract boolean intimidate() throws GameExceptions.GameException;
+    public abstract void intimidate(boolean val) throws GameExceptions.GameException;
+
+    public abstract boolean landwalk() throws GameExceptions.GameException;
+    public abstract void landwalk(boolean val) throws GameExceptions.GameException;
+
+    public abstract boolean lifelink() throws GameExceptions.GameException;
+    public abstract void lifelink(boolean val) throws GameExceptions.GameException;
+
+    public abstract boolean protection() throws GameExceptions.GameException;
+    public abstract void protection(boolean val) throws GameExceptions.GameException;
+
+    public abstract boolean reach() throws GameExceptions.GameException;
+    public abstract void reach(boolean val) throws GameExceptions.GameException;
+
+    public abstract boolean trample() throws GameExceptions.GameException;
+    public abstract void trample(boolean val) throws GameExceptions.GameException;
+
+    public abstract boolean vigilance() throws GameExceptions.GameException;
+    public abstract void vigilance(boolean val) throws GameExceptions.GameException;
+
+    public abstract int regen() throws GameExceptions.GameException;
+    public abstract void regen(int val) throws GameExceptions.GameException;
+
 }

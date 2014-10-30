@@ -14,29 +14,17 @@ public class GameEnums {
 
     }
 
-    public enum EnchantmentSubType {
+    public enum SubType {
 
         // Enchantments
-        AURA, CURSE, SHRINE
-
-    }
-
-    public enum ArtifactSubType {
+        AURA, CURSE, SHRINE,
 
         // Artifacts
-        CONTRAPTION, EQUIPMENT, FORTIFICATION
-
-    }
-
-    public enum LandSubType {
+        CONTRAPTION, EQUIPMENT, FORTIFICATION,
 
         // Lands
         DESERT, GATE, LAIR, LOCUS, URZAS, MINE, POWER_PLANT, TOWER,
-        PLAINS, ISLAND, SWAMP, MOUNTAIN, FOREST
-
-    }
-
-    public enum PlaneSubType {
+        PLAINS, ISLAND, SWAMP, MOUNTAIN, FOREST,
 
         // Planes (not used)
         ALARA, ARKHOS, AZGOL, BELENON, BOLAS_MEDITAION_REALM, DOMINARA,
@@ -44,27 +32,15 @@ public class GameEnums {
         KAMIGAWA, KARSUS, KEPHALAI, KOLBAHAN, KYNETH, LORWYN, LUVION,
         MERCADIA, MIRRODIN, MOAG, MONGSENG, NEW_PHYREXIA, PHYREXIA,
         PYRULEA, RABIAH, RATH, RAVNICA, REGATHA, SEGOVIA, SERRAS_REALM,
-        SHADOWMOOR, SHANDALAR, ULGROTHA, VALLA, VRYN, WILDFIRE, ZENDIKAR
-
-    }
-
-    public enum PlanesWalkerSubType {
+        SHADOWMOOR, SHANDALAR, ULGROTHA, VALLA, VRYN, WILDFIRE, ZENDIKAR,
 
         // Planeswalker
         AJANI, BOLAS, CHANDRA, DOMRI, ELSPETH, GARRUK, GIDEON, JACE,
         KARN, KOTH, LILIANA, NISSA, SARKHAN, SORIN, TAMIYO, TEZZERET,
-        TIBALT, VENSER, VRASKA
-
-
-    }
-    public enum SpellSubType {
+        TIBALT, VENSER, VRASKA,
 
         // Spell
-        ARCANE, TRAP
-
-    }
-
-    public enum CreatureSubType {
+        ARCANE, TRAP,
 
         // Creature
         ADVISOR, ALLY, ANGEL, ANTEATER, ANTELOPE, APE, ARCHER, ARCHON,
@@ -141,7 +117,7 @@ public class GameEnums {
     }
 
     public enum AbilityType {
-        ACTIVE, TRIGGERED, PASSIVE
+        ACTIVE, TRIGGERED, STATIC
     }
 
     public enum ManaPoolDirection {

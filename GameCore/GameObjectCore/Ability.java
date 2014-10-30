@@ -2,13 +2,13 @@ package GameCore.GameObjectCore;
 
 import GameCore.*;
 
-public abstract class Ability extends GameObject {
+public abstract class Ability implements GameObject {
 
-	public Ability (GameObject father){}
+	public Ability (GameObject father) {}
 
-	protected Ability() {}
+	private Ability() {}
 
-    private GameEnums.AbilityType m_abilityType;
+    public abstract GameEnums.AbilityType m_abilityType() throws GameExceptions.GameException;
 
     public abstract String[] activateCost() throws GameExceptions.GameException;
 
