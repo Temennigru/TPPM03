@@ -1,3 +1,20 @@
+Projeto Final:
+
+√1 - Triggers
+ 2 - Stack
+ 3 - GUI
+   4 - Turn usando a GUI (e não o TUI)
+ 5 - Habilidades ativáveis das cartas
+ 6 - talvez habilidades globais
+√7 - Cartas como Interface
+   8 - GameCore trabalhando corretamente com cartas (que agora são Interface)
+   9 - Reimplementação das cartas
+10 - Documentação
+  11 - Diagrama UML de Classe
+  12 - Diagrama UML de ATIVIDADES
+
+----------------------------------------------------------------------------------
+
 TODO:
 √1- Implement turn
 √2- Console (turn is waiting)
