@@ -11,7 +11,6 @@ Projeto Final:
    9 - Reimplementação das cartas
 10 - Documentação
   11 - Diagrama UML de Classe
-  12 - Diagrama UML de ATIVIDADES
 
 ----------------------------------------------------------------------------------
 
