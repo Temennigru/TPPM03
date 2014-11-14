@@ -9,7 +9,7 @@ public class MainLayout extends javax.swing.JFrame {
     public MainLayout() {
         initComponents();
     }
-
+	
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
@@ -18,15 +18,11 @@ public class MainLayout extends javax.swing.JFrame {
         infoSplitPane = new javax.swing.JSplitPane();
         cardViewSplitPane = new javax.swing.JSplitPane();
         batllefieldSplitPane = new javax.swing.JSplitPane();
-        opponentBattlefieldSplitPane = new javax.swing.JSplitPane();
-        opponentTopBattlefieldSplitPane = new javax.swing.JPanel();
-        opponentBottomBattlefieldSplitPane = new javax.swing.JPanel();
-        playerBattlefieldSplitPane = new javax.swing.JSplitPane();
-        playerBatllefieldTopSplitPane = new javax.swing.JPanel();
-        playerBattlefieldBottomSplitPane = new javax.swing.JPanel();
+        p2Battlefield = new javax.swing.JScrollPane();
+        p1Battlefield = new javax.swing.JScrollPane();
         cardViewScrollPane = new javax.swing.JScrollPane();
         cardInfoPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        cardInfo = new javax.swing.JLabel();
         infoScrollPane = new javax.swing.JScrollPane();
         infoPanel = new javax.swing.JPanel();
         p2Lifepoints = new javax.swing.JLabel();
@@ -39,11 +35,16 @@ public class MainLayout extends javax.swing.JFrame {
         blueMana = new javax.swing.JLabel();
         whiteMana = new javax.swing.JLabel();
         uncoloredMana = new javax.swing.JLabel();
+        turnPlayer = new javax.swing.JLabel();
+        turnPhase = new javax.swing.JLabel();
+        priority = new javax.swing.JLabel();
+        stack = new javax.swing.JLabel();
         handTabbedPane = new javax.swing.JTabbedPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        handPane = new javax.swing.JScrollPane();
+        graveyardPane = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Magic The Gathering");
 
         verticalSplitPane.setDividerLocation(400);
         verticalSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
@@ -55,71 +56,15 @@ public class MainLayout extends javax.swing.JFrame {
         batllefieldSplitPane.setDividerLocation(200);
         batllefieldSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        opponentBattlefieldSplitPane.setDividerLocation(90);
-        opponentBattlefieldSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        p2Battlefield.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        batllefieldSplitPane.setTopComponent(p2Battlefield);
 
-        javax.swing.GroupLayout opponentTopBattlefieldSplitPaneLayout = new javax.swing.GroupLayout(opponentTopBattlefieldSplitPane);
-        opponentTopBattlefieldSplitPane.setLayout(opponentTopBattlefieldSplitPaneLayout);
-        opponentTopBattlefieldSplitPaneLayout.setHorizontalGroup(
-            opponentTopBattlefieldSplitPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 583, Short.MAX_VALUE)
-        );
-        opponentTopBattlefieldSplitPaneLayout.setVerticalGroup(
-            opponentTopBattlefieldSplitPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        opponentBattlefieldSplitPane.setTopComponent(opponentTopBattlefieldSplitPane);
-
-        javax.swing.GroupLayout opponentBottomBattlefieldSplitPaneLayout = new javax.swing.GroupLayout(opponentBottomBattlefieldSplitPane);
-        opponentBottomBattlefieldSplitPane.setLayout(opponentBottomBattlefieldSplitPaneLayout);
-        opponentBottomBattlefieldSplitPaneLayout.setHorizontalGroup(
-            opponentBottomBattlefieldSplitPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 583, Short.MAX_VALUE)
-        );
-        opponentBottomBattlefieldSplitPaneLayout.setVerticalGroup(
-            opponentBottomBattlefieldSplitPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 103, Short.MAX_VALUE)
-        );
-
-        opponentBattlefieldSplitPane.setRightComponent(opponentBottomBattlefieldSplitPane);
-
-        batllefieldSplitPane.setTopComponent(opponentBattlefieldSplitPane);
-
-        playerBattlefieldSplitPane.setDividerLocation(90);
-        playerBattlefieldSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-
-        javax.swing.GroupLayout playerBatllefieldTopSplitPaneLayout = new javax.swing.GroupLayout(playerBatllefieldTopSplitPane);
-        playerBatllefieldTopSplitPane.setLayout(playerBatllefieldTopSplitPaneLayout);
-        playerBatllefieldTopSplitPaneLayout.setHorizontalGroup(
-            playerBatllefieldTopSplitPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 583, Short.MAX_VALUE)
-        );
-        playerBatllefieldTopSplitPaneLayout.setVerticalGroup(
-            playerBatllefieldTopSplitPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        playerBattlefieldSplitPane.setTopComponent(playerBatllefieldTopSplitPane);
-
-        javax.swing.GroupLayout playerBattlefieldBottomSplitPaneLayout = new javax.swing.GroupLayout(playerBattlefieldBottomSplitPane);
-        playerBattlefieldBottomSplitPane.setLayout(playerBattlefieldBottomSplitPaneLayout);
-        playerBattlefieldBottomSplitPaneLayout.setHorizontalGroup(
-            playerBattlefieldBottomSplitPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 583, Short.MAX_VALUE)
-        );
-        playerBattlefieldBottomSplitPaneLayout.setVerticalGroup(
-            playerBattlefieldBottomSplitPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 93, Short.MAX_VALUE)
-        );
-
-        playerBattlefieldSplitPane.setRightComponent(playerBattlefieldBottomSplitPane);
-
-        batllefieldSplitPane.setRightComponent(playerBattlefieldSplitPane);
+        p1Battlefield.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        batllefieldSplitPane.setRightComponent(p1Battlefield);
 
         cardViewSplitPane.setRightComponent(batllefieldSplitPane);
 
-        jLabel1.setText("Card Info");
+        cardInfo.setText("Card Info");
 
         javax.swing.GroupLayout cardInfoPanelLayout = new javax.swing.GroupLayout(cardInfoPanel);
         cardInfoPanel.setLayout(cardInfoPanelLayout);
@@ -127,14 +72,14 @@ public class MainLayout extends javax.swing.JFrame {
             cardInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cardInfoPanelLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
-                .addComponent(jLabel1)
+                .addComponent(cardInfo)
                 .addContainerGap(66, Short.MAX_VALUE))
         );
         cardInfoPanelLayout.setVerticalGroup(
             cardInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cardInfoPanelLayout.createSequentialGroup()
                 .addGap(155, 155, 155)
-                .addComponent(jLabel1)
+                .addComponent(cardInfo)
                 .addContainerGap(224, Short.MAX_VALUE))
         );
 
@@ -164,6 +109,14 @@ public class MainLayout extends javax.swing.JFrame {
 
         uncoloredMana.setText("Uncolored Mana");
 
+        turnPlayer.setText("Turn: Player1");
+
+        turnPhase.setText("Phase: Main");
+
+        priority.setText("Priority: Player1");
+
+        stack.setText("Stack: Empty");
+
         javax.swing.GroupLayout infoPanelLayout = new javax.swing.GroupLayout(infoPanel);
         infoPanel.setLayout(infoPanelLayout);
         infoPanelLayout.setHorizontalGroup(
@@ -171,6 +124,10 @@ public class MainLayout extends javax.swing.JFrame {
             .addGroup(infoPanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(stack)
+                    .addComponent(priority)
+                    .addComponent(turnPhase)
+                    .addComponent(turnPlayer)
                     .addComponent(uncoloredMana)
                     .addComponent(whiteMana)
                     .addComponent(blueMana)
@@ -186,15 +143,15 @@ public class MainLayout extends javax.swing.JFrame {
         infoPanelLayout.setVerticalGroup(
             infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(infoPanelLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(16, 16, 16)
                 .addComponent(p2Lifepoints)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(p2Cards)
-                .addGap(60, 60, 60)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(p1Lifepoints)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(p1Cards)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(blackMana)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(greenMana)
@@ -206,7 +163,15 @@ public class MainLayout extends javax.swing.JFrame {
                 .addComponent(whiteMana)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(uncoloredMana)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(turnPlayer)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(turnPhase)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(priority)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(stack)
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         infoScrollPane.setViewportView(infoPanel);
@@ -215,8 +180,10 @@ public class MainLayout extends javax.swing.JFrame {
 
         verticalSplitPane.setTopComponent(infoSplitPane);
 
-        handTabbedPane.addTab("Hand", jScrollPane1);
-        handTabbedPane.addTab("Graveyard", jScrollPane2);
+        handTabbedPane.addTab("Hand", handPane);
+
+        graveyardPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        handTabbedPane.addTab("Graveyard", graveyardPane);
 
         verticalSplitPane.setRightComponent(handTabbedPane);
 
@@ -269,32 +236,32 @@ public class MainLayout extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration                  
+    // Variables declaration                   
     private javax.swing.JSplitPane batllefieldSplitPane;
     private javax.swing.JLabel blackMana;
     private javax.swing.JLabel blueMana;
+    private javax.swing.JLabel cardInfo;
     private javax.swing.JPanel cardInfoPanel;
     private javax.swing.JScrollPane cardViewScrollPane;
     private javax.swing.JSplitPane cardViewSplitPane;
+    private javax.swing.JScrollPane graveyardPane;
     private javax.swing.JLabel greenMana;
+    private javax.swing.JScrollPane handPane;
     private javax.swing.JTabbedPane handTabbedPane;
     private javax.swing.JPanel infoPanel;
     private javax.swing.JScrollPane infoScrollPane;
     private javax.swing.JSplitPane infoSplitPane;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSplitPane opponentBattlefieldSplitPane;
-    private javax.swing.JPanel opponentBottomBattlefieldSplitPane;
-    private javax.swing.JPanel opponentTopBattlefieldSplitPane;
+    private javax.swing.JScrollPane p1Battlefield;
     private javax.swing.JLabel p1Cards;
     private javax.swing.JLabel p1Lifepoints;
+    private javax.swing.JScrollPane p2Battlefield;
     private javax.swing.JLabel p2Cards;
     private javax.swing.JLabel p2Lifepoints;
-    private javax.swing.JPanel playerBatllefieldTopSplitPane;
-    private javax.swing.JPanel playerBattlefieldBottomSplitPane;
-    private javax.swing.JSplitPane playerBattlefieldSplitPane;
+    private javax.swing.JLabel priority;
     private javax.swing.JLabel redMana;
+    private javax.swing.JLabel stack;
+    private javax.swing.JLabel turnPhase;
+    private javax.swing.JLabel turnPlayer;
     private javax.swing.JLabel uncoloredMana;
     private javax.swing.JSplitPane verticalSplitPane;
     private javax.swing.JLabel whiteMana;
