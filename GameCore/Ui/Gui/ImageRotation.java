@@ -1,9 +1,14 @@
 package GameCore.Ui.Gui;
 import GameCore.GameObjectCore.*;
-import java.awt.*;
-import javax.swing.*;
+
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class ImageRotation {
     
