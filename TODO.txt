@@ -12,6 +12,27 @@ Projeto Final:
 10 - Documentação
   11 - Diagrama UML de Classe
 
+Sobre a GUI...
+FALTA FAZER:
+- clicar numa carta ATIVA ela. exemplos:
+  - clicar numa Land faz ela girar (sem nova janela) obs: olhar classe imagerotation
+  - clicar numa carta da Hand ABRE JANELA NOVA pedindo para definir de onde vai gastar a mana
+  - clicar numa carta do battlefield ABRE JANELA NOVA para checar qual habilidade quer usar
+  - clicar numa creature do battlefield durante o assign attackers: 
+
+- JANELA NOVA definindo de onde vai gastar mana
+  - fazer o layout
+  - botão cinza se ainda não preencheu o tanto necessário de mana
+  - cancel
+
+- JANELA NOVA definindo qual habilidade vai usar
+  - opções em texto para clicar indicando qual habilidade
+
+ENTENDER COMO FUNCIONA OS MOUSE EVENTS
+- pelo que eu entendi, dá para usar o label.addMouseListener direto para fazer o que a gente precisa...mas ainda não consegui bons resultados :(
+
+
+
 ----------------------------------------------------------------------------------
 
 TODO:
