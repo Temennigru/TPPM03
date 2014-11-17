@@ -14,25 +14,29 @@ Projeto Final:
 
 Sobre a GUI...
 FALTA FAZER:
-- clicar numa carta ATIVA ela. exemplos:
-  - clicar numa Land faz ela girar (sem nova janela) obs: olhar classe imagerotation
-  - clicar numa carta da Hand ABRE JANELA NOVA pedindo para definir de onde vai gastar a mana
-  - clicar numa carta do battlefield ABRE JANELA NOVA para checar qual habilidade quer usar
-  - clicar numa creature do battlefield durante o assign attackers: 
 
-- JANELA NOVA definindo de onde vai gastar mana
-  - fazer o layout
-  - botão cinza se ainda não preencheu o tanto necessário de mana
-  - cancel
+dialog inicial (opcional mas...)
+ - setar nome dos jogadores, escolher deck
+ - novo jogo: abre o main layout
 
-- JANELA NOVA definindo qual habilidade vai usar
-  - opções em texto para clicar indicando qual habilidade
-
-ENTENDER COMO FUNCIONA OS MOUSE EVENTS
-- pelo que eu entendi, dá para usar o label.addMouseListener direto para fazer o que a gente precisa...mas ainda não consegui bons resultados :(
-
-
-
+main layout
+ - criar os jpanel "dinâmicos" aonde for necessario (cartas na hand, na mesa, etc)
+ - clicar num jpanel desses abre um dialog "select ability"
+ - mostrar a carta grande com um mouse-hover
+ 
+select ability
+ - janela nova com as opções possiveis (dinamico)
+ (uma land pode ser virada para ativar mana)
+ (uma criatura pode ser usada para assign attackers)
+ (uma carta pode usar uma habilidade)
+ 
+se for carta da hand e quer castar
+ - janela com distribuição de mana
+ 
+se for uma habilidade mais complexa
+ - janela para escolher os targets
+ (voce clica nos targets no main layout, ele mostra na janela, e voce confirma)
+ 
 ----------------------------------------------------------------------------------
 
 TODO:
