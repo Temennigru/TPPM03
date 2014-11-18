@@ -17,14 +17,6 @@ public class MainLayout extends javax.swing.JFrame {
        	jLabel2.setText("");
        	jLabel3.setText("");
        	
-       	ImageIcon iconBlack = new ImageIcon("C:\\Users\\40\\Desktop\\20black.png");
-       	ImageIcon iconWhite = new ImageIcon("C:\\Users\\40\\Desktop\\20white.png");
-       	ImageIcon iconRed = new ImageIcon("C:\\Users\\40\\Desktop\\20red.png");
-       	ImageIcon iconBlue = new ImageIcon("C:\\Users\\40\\Desktop\\20blue.png");
-       	ImageIcon iconGreen = new ImageIcon("C:\\Users\\40\\Desktop\\20green.png");
-       	ImageIcon iconUncolored = new ImageIcon("C:\\Users\\40\\Desktop\\20x.png");
-       	ImageIcon iconCardBack = new ImageIcon ("C:\\Users\\40\\Desktop\\cardback.jpg");
-       	
        	cardInfo.setIcon(iconCardBack);
        	cardInfo.setText("");
        	
@@ -76,6 +68,7 @@ public class MainLayout extends javax.swing.JFrame {
         cardViewScrollPane = new javax.swing.JScrollPane();
         cardInfoPanel = new javax.swing.JPanel();
         cardInfo = new javax.swing.JLabel();
+        cardDescription = new javax.swing.JLabel();
         infoScrollPane = new javax.swing.JScrollPane();
         infoPanel = new javax.swing.JPanel();
         p2Lifepoints = new javax.swing.JLabel();
@@ -149,20 +142,25 @@ public class MainLayout extends javax.swing.JFrame {
         cardViewSplitPane.setRightComponent(batllefieldSplitPane);
 
         cardInfo.setText("Card Info");
+        cardDescription.setText("Card Description");
 
         javax.swing.GroupLayout cardInfoPanelLayout = new javax.swing.GroupLayout(cardInfoPanel);
         cardInfoPanel.setLayout(cardInfoPanelLayout);
         cardInfoPanelLayout.setHorizontalGroup(
             cardInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cardInfoPanelLayout.createSequentialGroup()
-                .addComponent(cardInfo)
-                .addGap(0, 251, Short.MAX_VALUE))
+                .addGroup(cardInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cardInfo)
+                    .addComponent(cardDescription))
+                .addGap(0, 264, Short.MAX_VALUE))
         );
         cardInfoPanelLayout.setVerticalGroup(
             cardInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cardInfoPanelLayout.createSequentialGroup()
                 .addComponent(cardInfo)
-                .addGap(0, 579, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cardDescription)
+                .addGap(0, 559, Short.MAX_VALUE))
         );
 
         cardViewScrollPane.setViewportView(cardInfoPanel);
@@ -440,10 +438,11 @@ public class MainLayout extends javax.swing.JFrame {
             }
         });
     }
-                   
+
     private javax.swing.JSplitPane batllefieldSplitPane;
     private javax.swing.JLabel blackMana;
     private javax.swing.JLabel blueMana;
+    private javax.swing.JLabel cardDescription;
     private javax.swing.JLabel cardInfo;
     private javax.swing.JPanel cardInfoPanel;
     private javax.swing.JScrollPane cardViewScrollPane;
@@ -477,5 +476,12 @@ public class MainLayout extends javax.swing.JFrame {
     private javax.swing.JLabel uncoloredMana;
     private javax.swing.JSplitPane verticalSplitPane;
     private javax.swing.JLabel whiteMana;
+   	private ImageIcon iconBlack = new ImageIcon("C:\\Users\\40\\Desktop\\20black.png");
+   	private ImageIcon iconWhite = new ImageIcon("C:\\Users\\40\\Desktop\\20white.png");
+   	private ImageIcon iconRed = new ImageIcon("C:\\Users\\40\\Desktop\\20red.png");
+   	private ImageIcon iconBlue = new ImageIcon("C:\\Users\\40\\Desktop\\20blue.png");
+   	private ImageIcon iconGreen = new ImageIcon("C:\\Users\\40\\Desktop\\20green.png");
+   	private ImageIcon iconUncolored = new ImageIcon("C:\\Users\\40\\Desktop\\20x.png");
+   	private ImageIcon iconCardBack = new ImageIcon ("C:\\Users\\40\\Desktop\\cardback.jpg");
     // End of variables declaration                   
 }
