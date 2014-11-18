@@ -1,7 +1,7 @@
 package GameCore;
 
 import java.util.Vector;
-import GameCore.Cards.*;
+import GameCore.GameObjectImpl.Cards.*;
 import GameCore.GameObjectCore.*;
 import GameCore.ConsoleCore.*;
 

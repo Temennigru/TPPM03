@@ -1,6 +1,7 @@
 package GameCore.GameObjectCore;
 
-import GameCore.*;
+import GameCore.Player;
+import GameCore.GameExceptions;
 
 import java.util.*;
 
@@ -14,8 +15,7 @@ public abstract interface GameObject {
     public abstract GameObject destination() throws GameExceptions.GameException;
     public abstract void destination(GameObject val) throws GameExceptions.GameException;
 
-    public abstract Player owner() throws GameExceptions.GameException;
-    public abstract void owner(Player val) throws GameExceptions.GameException;
+    public abstract Player owner() throws GameExceptions.GameException; // Owner can't change
 
     public abstract Player controler() throws GameExceptions.GameException;
     public abstract void controler(Player val) throws GameExceptions.GameException;

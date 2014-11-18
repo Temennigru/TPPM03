@@ -1,6 +1,8 @@
 package GameCore.GameObjectCore;
 
-import GameCore.*;
+import GameCore.GameEnums;
+import GameCore.GameExceptions;
+import GameCore.GameObjectCore.GameObject;
 
 public abstract class Ability implements GameObject {
 
@@ -8,10 +10,10 @@ public abstract class Ability implements GameObject {
 
 	private Ability() {}
 
-    public abstract GameEnums.AbilityType m_abilityType() throws GameExceptions.GameException;
+    public abstract GameEnums.AbilityType abilityType() throws GameExceptions.GameException;
 
     public abstract String[] activateCost() throws GameExceptions.GameException;
 
-    public abstract boolean activate () throws GameExceptions.GameException;
+    public abstract boolean activate () throws GameExceptions.GameException; 
 
 }

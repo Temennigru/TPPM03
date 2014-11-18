@@ -8,6 +8,14 @@ import java.util.Arrays;
 public abstract interface Card extends GameObject {
 
     // Card reflection
+    public String name() throws GameExceptions.GameException;
+    public void name(String name) throws GameExceptions.GameException;
+
+    public Player controler() throws GameExceptions.GameException;
+    public void controler(Player player) throws GameExceptions.GameException;
+
+    public Player owner() throws GameExceptions.GameException; // Owner can't be changed
+
     public GameEnums.SuperType[] superTypes() throws GameExceptions.GameException;
     public void superTypes(GameEnums.SuperType[] subtypes) throws GameExceptions.GameException;
 
@@ -76,7 +84,7 @@ public abstract interface Card extends GameObject {
     public abstract boolean intimidate() throws GameExceptions.GameException;
     public abstract void intimidate(boolean val) throws GameExceptions.GameException;
 
-    public abstract boolean landwalk() throws GameExceptions.GameException;
+    public abstract String landwalk() throws GameExceptions.GameException;
     public abstract void landwalk(boolean val) throws GameExceptions.GameException;
 
     public abstract boolean lifelink() throws GameExceptions.GameException;

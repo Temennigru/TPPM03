@@ -14,6 +14,7 @@ public class TuiUtil {
                 System.out.println(String.format("%n") + "Exited successfully" + String.format("%n"));
             } catch (Exception e) {
                 System.out.println(String.format("%n") + "Sorry for your terminal, bro" + String.format("%n"));
+                // Could not fix terminal input mode
             }
         }
     }
