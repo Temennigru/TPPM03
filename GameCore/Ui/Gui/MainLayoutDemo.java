@@ -19,7 +19,7 @@ public class MainLayoutDemo extends javax.swing.JFrame {
         ImageIcon iconBlack = new ImageIcon("GameCore/img/other/iconblack.png");
         ImageIcon iconWhite = new ImageIcon("GameCore/img/other/iconwhite.png");
         ImageIcon iconRed = new ImageIcon("GameCore/img/other/iconred.png");
-        ImageIcon iconBlue = new ImageIcon("GameCore/img/other/iconblue.png");
+        ImageIcon iconBlue = necaw ImageIcon("GameCore/img/other/iconblue.png");
         ImageIcon iconGreen = new ImageIcon("GameCore/img/other/icongreen.png");
         ImageIcon iconUncolored = new ImageIcon("GameCore/img/other/iconuncolored.png");
         ImageIcon iconCardBack = new ImageIcon ("GameCore/img/cards/large/CardBack.jpg");
@@ -166,8 +166,6 @@ public class MainLayoutDemo extends javax.swing.JFrame {
         batllefieldSplitPane.setRightComponent(p1Battlefield);
 
         cardViewSplitPane.setRightComponent(batllefieldSplitPane);
-
-        cardInfo.setText("Card Info");
 
         javax.swing.GroupLayout cardInfoPanelLayout = new javax.swing.GroupLayout(cardInfoPanel);
         cardInfoPanel.setLayout(cardInfoPanelLayout);
