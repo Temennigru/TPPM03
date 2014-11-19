@@ -278,15 +278,19 @@ public class LogicSolver {
 
 	// Unit test
 	public static void main (String[] args) {
-		/*
+		
 		java.util.Scanner scanner = new java.util.Scanner(System.in);
 		scanner.useDelimiter(String.format("%n"));
 		System.out.println("logic:");
-		String logic = scanner.next();
+		String logic_w = scanner.next();
 		scanner.useDelimiter(String.format("%n"));
 		System.out.println("event:");
-		String event = scanner.next();
-		*/
+		String event_w = scanner.next();
+		
+		try { System.out.println(Boolean.toString(getSat(event_w, logic_w))); }
+		catch (GameExceptions.GameException e) {
+			System.out.println(e.getMessage());
+		}
 
 
 		int i = 1;
