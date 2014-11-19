@@ -1,10 +1,78 @@
+import java.awt.*;
+import javax.swing.*;
+import java.util.Vector;
+
 //package GameCore.Ui.Gui
 
 public class Gui {
 	
 	public boolean player_passed = false;
-	boolean player_played_something = false;
-	boolean something_cast = true;
+	public boolean player_played_something = false;
+	public boolean something_cast = true;
+	private GameCore game;
+	private Vector<CardRep> playerHandList;
+	private Vector<CardRep> playerGraveyardList;
+	private Vector<CardRep> playerBattlefieldList;
+	private Vector<CardRep> opponentBattlefieldList;
+	
+	private static class CardRep{
+		Card c;
+		JLabel j;
+		
+		public CardRep(Card c, JLabel j){
+			this.c = c;
+			this.j = j;
+		}
+	}
+	
+	public Gui(){
+		game = GameCore.getGame();
+		if (! game.valid() ){
+			throw new GameExceptions.InvalidGameException();
+		}
+	}
+	
+	private void draw(){
+		for( CardRep cr : playerHandList.toArray() ){
+			cr.j.setIcon(cr.c.getImage);
+		}
+		for( CardRep cr : playerGraveyardList.toArray() ){
+			cr.j.setIcon(cr.c.getImage);
+		}
+		for( CardRep cr : playerBattlefieldList.toArray() ){
+			cr.j.setIcon(cr.c.getImage);
+		}
+		for( CardRep cr : opponentBattlefieldList.toArray() ){
+			cr.j.setIcon(cr.c.getImage);
+		}
+	}
+	
+	private void erase(){
+		for( CardRep cr : playerHandList.toArray() ){
+			Container parent = cr.j.getParent();
+			parent.remove(cr.j);
+			parent.validate();
+			parent.repaint();
+		}
+		for( CardRep cr : playerGraveyardList.toArray() ){
+			Container parent = cr.j.getParent();
+			parent.remove(cr.j);
+			parent.validate();
+			parent.repaint();
+		}
+		for( CardRep cr : playerBattlefieldList.toArray() ){
+			Container parent = cr.j.getParent();
+			parent.remove(cr.j);
+			parent.validate();
+			parent.repaint();
+		}
+		for( CardRep cr : opponentBattlefieldList.toArray() ){
+			Container parent = cr.j.getParent();
+			parent.remove(cr.j);
+			parent.validate();
+			parent.repaint();
+		}
+	}
 	
 	public void execGame(){
 		while (true){
@@ -44,26 +112,30 @@ public class Gui {
 	public void refresh(){
 		//updates the gui to reflect current state
 		
+		//erases first?
+		
 		//Iterates on the hand to build this part of the layout
-		Iterator<Card> itrHand = this.iterator(m_current_player, HAND);
+		Iterator<Card> itrHand = game.iterator(m_current_player, HAND);
 		while (itrHand.hasNext()){
+			Card temp = itrHand.next();
+			CardRep cr = new CardRep(temp, new JLabel);
 			//adiciona um label na parte de hand do layout
 			//seta de acordo
 		}
 						
 		//Iterates on the Graveyard to build this part of the layout
-		Iterator<Card> itrGraveyard = this.iterator(m_current_player, GRAVEYARD);
+		Iterator<Card> itrGraveyard = game.iterator(m_current_player, GRAVEYARD);
 		while (itrGraveyard.hasNext()){
 			//adiciona um label na parte de graveyard do layout
 			//seta de acordo
 		}
 		
 		//Iterates on the Battlefield to build this part of the layout
-		Iterator<Card> itrBattlefield = this.iterator(m_current_player, BATTLEFIELD);
+		Iterator<Card> itrBattlefield = game.iterator(m_current_player, BATTLEFIELD);
 		while (itrBattlefield.hasNext()){
-			if (card.m_owner == m.currentplayer){
-			//adiciona um label na parte de battlefield de baixo do layout
-			//seta de acordo
+			Card temp = itrBattlefield.next();
+			if ( temp.controller() == game.getCurrentPriorityPlayer() ) {
+				//parte de baixo
 			}
 			else {
 			//adiciona um label na parte de cima do battlefield
