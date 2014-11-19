@@ -1,4 +1,4 @@
-//package GameCore.Ui.Gui;
+package GameCore.Ui.Gui;
 //import GameCore.GameObjectCore.*;
 import java.awt.*;
 import javax.swing.*;
