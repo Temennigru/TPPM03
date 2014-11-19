@@ -44,6 +44,7 @@ public class MainLayout extends javax.swing.JFrame {
         
     }
     
+
     public javax.swing.GroupLayout GetLayout(JPanel j){
     	return (GroupLayout) j.getLayout();
     }
@@ -98,7 +99,13 @@ public class MainLayout extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         graveyardPane = new javax.swing.JScrollPane();
         graveyardPanel = new javax.swing.JPanel();
-
+        handPanelLayout = new javax.swing.GroupLayout(handPanel);
+        p2BattlefieldPanelLayout = new javax.swing.GroupLayout(p2BattlefieldPanel);
+        p1BattlefieldPanelLayout = new javax.swing.GroupLayout(p1BattlefieldPanel);
+        cardInfoPanelLayout = new javax.swing.GroupLayout(cardInfoPanel);
+        infoPanelLayout = new javax.swing.GroupLayout(infoPanel);
+        graveyardLayout = new javax.swing.GroupLayout(graveyardPanel);
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Magic The Gathering");
         setPreferredSize(new java.awt.Dimension(900, 800));
@@ -113,7 +120,6 @@ public class MainLayout extends javax.swing.JFrame {
         batllefieldSplitPane.setDividerLocation(250);
         batllefieldSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        javax.swing.GroupLayout p2BattlefieldPanelLayout = new javax.swing.GroupLayout(p2BattlefieldPanel);
         p2BattlefieldPanel.setLayout(p2BattlefieldPanelLayout);
         p2BattlefieldPanelLayout.setHorizontalGroup(
             p2BattlefieldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,7 +134,6 @@ public class MainLayout extends javax.swing.JFrame {
 
         batllefieldSplitPane.setTopComponent(p2Battlefield);
 
-        javax.swing.GroupLayout p1BattlefieldPanelLayout = new javax.swing.GroupLayout(p1BattlefieldPanel);
         p1BattlefieldPanel.setLayout(p1BattlefieldPanelLayout);
         p1BattlefieldPanelLayout.setHorizontalGroup(
             p1BattlefieldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,7 +153,6 @@ public class MainLayout extends javax.swing.JFrame {
         cardInfo.setText("Card Info");
         cardDescription.setText("Card Description");
 
-        javax.swing.GroupLayout cardInfoPanelLayout = new javax.swing.GroupLayout(cardInfoPanel);
         cardInfoPanel.setLayout(cardInfoPanelLayout);
         cardInfoPanelLayout.setHorizontalGroup(
             cardInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,38 +178,25 @@ public class MainLayout extends javax.swing.JFrame {
         infoSplitPane.setRightComponent(cardViewSplitPane);
 
         p2Lifepoints.setText("Player2 Lifepoints");
-
         p2Cards.setText("Player2 Cards");
-
         p1Lifepoints.setText("Player1 Lifepoints");
-
         p1Cards.setText("Player1 Cards");
-
         blackMana.setText("Black Mana");
-
         greenMana.setText("Green Mana");
-
         redMana.setText("Red Mana");
-
         blueMana.setText("Blue Mana");
-
         whiteMana.setText("White Mana");
-
         uncoloredMana.setText("Uncolored Mana");
-
         turnPlayer.setText("Turn: Player1");
-        
+        turnPhase.setText("Phase: Main");
+        priority.setText("Priority: Player1");
+        stack.setText("Stack: Empty");
+       
         turnPlayer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 turnPlayerMouseClicked(evt);
             }
         });
-
-        turnPhase.setText("Phase: Main");
-
-        priority.setText("Priority: Player1");
-
-        stack.setText("Stack: Empty");
 
         passButton.setText("PASS");
         passButton.addActionListener(new java.awt.event.ActionListener() {
@@ -214,7 +205,6 @@ public class MainLayout extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout infoPanelLayout = new javax.swing.GroupLayout(infoPanel);
         infoPanel.setLayout(infoPanelLayout);
         infoPanelLayout.setHorizontalGroup(
             infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,7 +251,7 @@ public class MainLayout extends javax.swing.JFrame {
                 .addComponent(whiteMana)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(uncoloredMana)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(turnPlayer)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(turnPhase)
@@ -481,5 +471,12 @@ public class MainLayout extends javax.swing.JFrame {
    	private ImageIcon iconGreen = new ImageIcon("C:\\Users\\40\\Desktop\\20green.png");
    	private ImageIcon iconUncolored = new ImageIcon("C:\\Users\\40\\Desktop\\20x.png");
    	private ImageIcon iconCardBack = new ImageIcon ("C:\\Users\\40\\Desktop\\cardback.jpg");
+   	private javax.swing.GroupLayout handPanelLayout;
+   	private javax.swing.GroupLayout p2BattlefieldPanelLayout; 
+    private javax.swing.GroupLayout p1BattlefieldPanelLayout;
+    private javax.swing.GroupLayout cardInfoPanelLayout;
+    private javax.swing.GroupLayout infoPanelLayout;
+    private javax.swing.GroupLayout graveyardLayout;
+
     // End of variables declaration                   
 }
