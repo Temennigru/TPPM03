@@ -11,11 +11,11 @@ public class Turn {
 
     private Player m_player;
     private GameCore game;
-    private TextUserInterface tui;
+    private GameEnums.TurnPhases phase;
+    private Vector<GameEnums.TurnPhases> skip;
 
     private Turn() {} // Don't use this
 
-    // TODO: Add dynamic turns (skipping steps, etc.)
     private Turn (Player player) throws IOException, InterruptedException, GameExceptions.GameException {
         tui = TextUserInterface.getTui();
         game = GameCore.getGame();
@@ -36,9 +36,12 @@ public class Turn {
         // TODO: If state check during cleanup fails, cleanup again
     }
 
-    static void takeTurn(Player player) throws IOException, InterruptedException, GameExceptions.GameException {
-        new Turn(player);
+    public void skip (GameEnums.TurnPhases phase) {
+        skip.add(phase);
     }
+
+
+    // TODO: Signal triggers when phases start
 
     public void untap() throws IOException, InterruptedException, GameExceptions.GameException {
         Iterator<Card> itr = game.iterator(GameEnums.Zone.BATTLEFIELD);
@@ -48,7 +51,6 @@ public class Turn {
             if (el.m_controler == m_player) { el.sick = false; }
         }
         m_player.landDrop(1); // Hard coded
-        game.clearMana();
     }
 
     public void draw() throws IOException, InterruptedException, GameExceptions.GameException {
@@ -58,135 +60,60 @@ public class Turn {
         } else {
             drawn.place(GameEnums.Zone.HAND);
         }
-        game.clearMana();
     }
 
     public void upkeep() throws IOException, InterruptedException, GameExceptions.GameException {
-        // Endless ranks not implemented
-        /*
-        for (Iterator<Card> itr = game.iterator(GameEnums.Zone.BATTLEFIELD); itr.hasNext();) {
-            Card card = itr.next();
-            String className;
-            Class<?> enclosingClass = card.getClass().getEnclosingClass();
-            if (enclosingClass != null) {
-                className = enclosingClass.getName();
-            } else {
-                className = card.getClass().getName();
-            }
-            // TODO: Add triggers instead of this
-            if (className.equals("GameCore.Cards.EndlessRanksOfTheDead")) {
-                ((EndlessRanksOfTheDead)card).activateCard();
-            }
-        }*/
-        game.clearMana();
     }
 
     public void main1() throws IOException, InterruptedException, GameExceptions.GameException {
-        // TODO: Dynamic log setting
 
-        tui.setHeader(game.getHud(this.m_player) + String.format("%n%n") + "Main phase" + String.format("%n%n"));
-
-        Card card = m_player.prompt();
-        while (card != null) {
-            if (card.location == GameEnums.Zone.HAND) {
-                if (!card.cast()) {
-                    tui.setOutput("Error: Cannot play card", false);
-                    tui.newLine();
-                }
-            } else if (card.location == GameEnums.Zone.BATTLEFIELD) {
-                if (!Arrays.asList(card.m_type).contains(GameEnums.Type.LAND) || card.m_controler != m_player || card.isTapped()) { // Hard coded
-                    tui.setOutput("Error: Cannot use card", false);
-                    tui.newLine();
-                } else {
-                    card.activateAt(0);
-                }
-            } else if (card.location == GameEnums.Zone.GRAVEYARD) {
-                // Hard coded graveyard interaction
-                String className;
-                Class<?> enclosingClass = card.getClass().getEnclosingClass();
-                if (enclosingClass != null) {
-                    className = enclosingClass.getName();
-                } else {
-                    className = card.getClass().getName();
-                }
-
-                if (!className.equals("GameCore.Cards.ArmyOfTheDamned")) {
-                    tui.setOutput("Error: Cannot use card", false);
-                    tui.newLine();
-                } else {
-                    //((ArmyOfTheDamned)card).cast();
-                }
-            } else {
-                tui.setOutput("Something went terribly wrong", false);
-                tui.newLine();
-            }
-            game.stateCheck();
-            tui.clearHeader();
-            tui.setHeader(game.getHud(this.m_player) + String.format("%n%n") + "Main phase" + String.format("%n%n"));
-            card = m_player.prompt();
-        }
-        tui.clearHeader();
-        game.clearMana();
     }
     
     public void combatDeclareAttackers() throws IOException, InterruptedException, GameExceptions.GameException {
-        // TODO: Dynamic log setting
+        // TODO: Invoke gui prompt
 
-        tui.setHeader(game.getHud(this.m_player) + String.format("%n%n") + "Combat phase" + String.format("%n%n"));
-
-        tui.setHeader("Select attackers" + String.format("%n%n"));
-
-        Card card = m_player.prompt(true);
-        while (card != null) {
-            if (card.location != GameEnums.Zone.BATTLEFIELD ||
-                    !Arrays.asList(card.m_type).contains(GameEnums.Type.CREATURE) ||
-                    card.isTapped() ||
-                    (card.sick && !card.haste) ||
-                    card.m_controler != m_player) {
-
-                tui.setOutput("Error: Cannot attack", false);
-                tui.newLine();
-            } else {
-                ((Creature)card).attack(game.opponent(m_player));
+        for (Iterator<Card> it = game.iterator(GameEnums.Zone.BATTLEFIELD); it.hasNext(); ) {
+            Card card = it.next();
+            List options = new ArrayList();
+            if (card.location() == GameEnums.Zone.BATTLEFIELD &&
+                    Arrays.asList(card.types()).contains(GameEnums.Type.CREATURE) &&
+                    !card.isTapped() &&
+                    (!card.sick() || card.haste()) &&
+                    !card.defender() &&
+                    card.controler() == m_player) {
+                options.add(card.toString(true));
             }
-
-            card = m_player.prompt(true);
+            // Prompt gui
         }
-        tui.clearHeader();
-        game.stateCheck();
+        for (int i : choices) {
+            game.declareAttacker(options.get(i));
+        }
     }
 
     public void combatDeclareBlockers() throws IOException, InterruptedException, GameExceptions.GameException {
-        // TODO: Blocked flag
+        // TODO: Invoke gui prompt
 
-        tui.setHeader("Combat phase" + String.format("%n%n"));
-
-        for (Iterator<Card> itr = game.getAttackers(); itr.hasNext(); ) {
-            Card attacker = itr.next();
-
-            tui.clearHeader();
-
-            tui.setHeader(game.getHud(game.opponent(this.m_player)) + String.format("%n%n") + "Combat phase" + String.format("%n%n"));
-            tui.setHeader("Select blockers for:" + String.format("%n%n") + attacker.toString());
-
-            Card card = game.opponent(m_player).prompt(true);
-            while (card != null) {
-                if (card.location != GameEnums.Zone.BATTLEFIELD ||
-                        !Arrays.asList(card.m_type).contains(GameEnums.Type.CREATURE) ||
-                        card.isTapped() ||
-                        card.m_controler != game.opponent(m_player)) {
-                    tui.setOutput("Error: Cannot block", false);
-                    tui.newLine();
-                } else {
-                    // TODO: Implement block()
-                    game.declareBlocker(((Creature)card), attacker);
+        while (true) {
+            for (Iterator<Card> it = game.iterator(GameEnums.Zone.BATTLEFIELD); it.hasNext(); ) {
+                Card card = it.next();
+                List options = new ArrayList();
+                if (card.location() == GameEnums.Zone.BATTLEFIELD &&
+                        Arrays.asList(card.types()).contains(GameEnums.Type.CREATURE) &&
+                        !card.isTapped() &&
+                        (!card.sick() || card.haste()) &&
+                        !card.defender() &&
+                        card.controler() == m_player) {
+                    options.add(card.toString(true));
                 }
-
-                card = game.opponent(m_player).prompt(true);
+                // Prompt gui
             }
-        }
-        game.stateCheck();
-        tui.clearHeader();
+            game.declareBlocker(card, attacker);
+
+
+
+
+
+
     }
 
     public void combatDamage() throws IOException, InterruptedException, GameExceptions.GameException {

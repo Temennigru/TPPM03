@@ -4,31 +4,13 @@ import GameCore.*;
 
 import java.util.Vector;
 import java.util.Arrays;
+import javax.swing.ImageIcon;
 
 public abstract interface Card extends GameObject {
 
-    // Card reflection
-    public String name() throws GameExceptions.GameException;
-    public void name(String name) throws GameExceptions.GameException;
-
-    public Player controler() throws GameExceptions.GameException;
-    public void controler(Player player) throws GameExceptions.GameException;
-
-    public Player owner() throws GameExceptions.GameException; // Owner can't be changed
-
-    public GameEnums.SuperType[] superTypes() throws GameExceptions.GameException;
-    public void superTypes(GameEnums.SuperType[] subtypes) throws GameExceptions.GameException;
-
-    public GameEnums.Type[] types() throws GameExceptions.GameException;
-    public void types(GameEnums.Type[] subtypes) throws GameExceptions.GameException;
-
-    public GameEnums.SubType[] subTypes() throws GameExceptions.GameException;
-    public void subTypes(GameEnums.SubType[] subtypes) throws GameExceptions.GameException;
-
     // This is where the magic happens
-    public boolean cast () throws GameExceptions.GameException;
-
-    public boolean cast (boolean payManaCost) throws GameExceptions.GameException;
+    public abstract boolean cast () throws GameExceptions.GameException;
+    public abstract boolean cast (boolean payManaCost) throws GameExceptions.GameException;
 
     public abstract void play () throws GameExceptions.GameException;
 
@@ -40,6 +22,9 @@ public abstract interface Card extends GameObject {
 
     // Print card details
     public abstract String toString() throws GameExceptions.GameException;
+    public abstract String toString(boolean simple) throws GameExceptions.GameException;
+
+    public abstract ImageIcon getImg();
 
     // Activate ability
     public abstract boolean activateAt(int ability) throws GameExceptions.GameException;
@@ -55,6 +40,35 @@ public abstract interface Card extends GameObject {
 
     public abstract int damage () throws GameExceptions.GameException;
     public abstract void damage (int value) throws GameExceptions.GameException;
+
+    public abstract void tap();
+    public abstract boolean isTapped();
+    public abstract void unTap();
+
+    public abstract String name() throws GameExceptions.GameException;
+    public abstract void name(String name) throws GameExceptions.GameException;
+
+    public abstract Player controler() throws GameExceptions.GameException;
+    public abstract void controler(Player player) throws GameExceptions.GameException;
+
+    public abstract Player owner() throws GameExceptions.GameException; // Owner can't be changed
+
+    public abstract GameEnums.SuperType[] superTypes() throws GameExceptions.GameException;
+    public abstract void superTypes(GameEnums.SuperType[] subtypes) throws GameExceptions.GameException;
+
+    public abstract GameEnums.Type[] types() throws GameExceptions.GameException;
+    public abstract void types(GameEnums.Type[] subtypes) throws GameExceptions.GameException;
+
+    public abstract GameEnums.SubType[] subTypes() throws GameExceptions.GameException;
+    public abstract void subTypes(GameEnums.SubType[] subtypes) throws GameExceptions.GameException;
+
+    public abstract GameEnums.Zone location();
+
+    public abstract boolean sick();
+    public abstract sick(boolean val);
+
+
+
 
     // Evergreen abilities
     public abstract boolean deathtouch() throws GameExceptions.GameException;

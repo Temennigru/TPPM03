@@ -111,9 +111,7 @@ public class GameEnums {
     }
 
     public enum Zone {
-
         COMMAND, BATTLEFIELD, EXILE_FUP, EXILE_FDN, GRAVEYARD, LIBRARY, HAND
-        
     }
 
     public enum AbilityType {
@@ -122,5 +120,9 @@ public class GameEnums {
 
     public enum ManaPoolDirection {
         ADD, SUB
+    }
+
+    public enum TurnPhases {
+        UNTAP, UPKEEP, DRAW, MAIN1, DECLAREATK, DECLAREBLK, DAMAGE, MAIN2, CLEANUP, END
     }
 }

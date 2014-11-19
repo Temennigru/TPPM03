@@ -13,7 +13,7 @@ public class GameExceptions {
         }
 	}
 
-	/*public static class WrongZoneException extends GameException {
+	public static class WrongZoneException extends GameException {
 		public WrongZoneException(Card card, GameEnums.Zone got, GameEnums.Zone expected) {
 			this.msg = ("Error: Card is in wrong zone." + String.format("%n") +
 				"Card: " + card.name() + String.format("%n") +
@@ -31,7 +31,7 @@ public class GameExceptions {
 	}
 
 	public static class InvalidGameException extends GameException {
-		public InvalidGameException(Card card, Player got, Player expected) {
+		public InvalidGameException() {
 			this.msg = "Error: Game was not created." + String.format("%n");
 		}
 	}
@@ -58,7 +58,7 @@ public class GameExceptions {
 				"(Got " + got.abilityType().toString() + ")" + String.format("%n"));
 		}
 	}
-*/
+
 	public static class CthulhuWasSummonedException extends GameException {
 		public CthulhuWasSummonedException() {
 			java.lang.StackTraceElement trace = Thread.currentThread().getStackTrace()[1];

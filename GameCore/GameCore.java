@@ -34,12 +34,16 @@ public class GameCore {
     private Vector<Card> m_commandZone;
     private Vector<Card> attackers;
     private Map<Card, Card> blockers;
+    private GameStack m_gameStack;
 
     // TODO: Implement dynamic player number.
     private static final int m_numPlayers = 2;
     private boolean m_isValid;
 
-    public Player m_currentPlayer;
+    private Player m_currentPlayer;
+    private Player m_currentPriorityPlayer;
+    private Player m_roundRobinPlayer;
+    private int m_currentPriorityPlayerNum;
 
     private static GameCore m_game = null;
 
@@ -100,11 +104,15 @@ public class GameCore {
         return this.m_currentPlayer;
     }
 
+    public Player getCurrentPriorityPlayer() {
+        return this.m_currentPriorityPlayer;
+    }
 
     public Iterator<Card> find (Card card) {
         return this.find (card, false);
     }
 
+    // TODO: Implement card search
     private Iterator<Card> find (Card card, boolean byName) { // false if not by name
         /*this.find (card, GameEnums.Zone.COMMAND, byName);
         this.find (card, GameEnums.Zone.BATTLEFIELD, byName);
@@ -335,22 +343,25 @@ public class GameCore {
     public void stateCheck() throws GameExceptions.GameException {
         // TODO: Check all states before killing creatures
         Vector<Card> toBeKilled = new Vector<Card>();
+        Vector<Card> toBeDestroyed = new Vector<Card>();
         for (int i = 0; i < m_battlefield.size(); i++) {
             Card el = m_battlefield.elementAt(i);
             if (Arrays.asList(el.m_type).contains(GameEnums.Type.CREATURE)) {
                 System.out.println("Found " + el.name + String.format("%n") + "toughness " + el.toughness() + "damage " + el.damage() + String.format("%n"));
                 if (((Permanent)el).toughness() <= 0) { toBeKilled.add(el); } // Killed by state-based action and not destroyed
-                else if (((Permanent)el).toughness() - ((Permanent)el).damage() <= 0) { toBeKilled.add(el); } // TODO: Change to destroy
+                else if (((Permanent)el).toughness() - ((Permanent)el).damage() <= 0) { toBeDestroyed.add(el); }
             }
         }
-        for (Iterator itr = toBeKilled.iterator(); itr.hasNext(); ((Permanent)itr.next()).kill()) {}
+        for (Iterator itr = toBeKilled.iterator(); itr.hasNext(); itr.next().kill()) {}
+        for (Iterator itr = toBeDestroyed.iterator(); itr.hasNext(); itr.next().destroy()) {}
         for (int i = 0; i < this.m_numPlayers; i++) {
-            // TODO: Implement poison
-            if (m_player[i].life <= 0 && m_canLose[i]) {
+            if ((m_player[i].life <= 0 || m_player[i].poison() >= 10) && m_canLose[i]) {
                 m_player[i].lose();
             }
         }
     }
+
+
 
     public boolean spendMana(Player player, String mana) {
         return player.removeMana(mana);
@@ -380,6 +391,30 @@ public class GameCore {
         this.blockers.clear();
     }
 
+    public void nextPhase() {
+
+    }
+
+    public void passPriority() {
+        this.m_currentPriorityPlayerNum = (this.m_currentPriorityPlayerNum + 1) % this.m_numPlayers;
+        if (this.m_player[this.m_currentPriorityPlayerNum] == this.m_roundRobinPlayer) { // Went round once
+            
+            if (this.m_gameStack.isEmpty()) { // Pass phase
+                this.nextPhase();
+            } else { // Execute next stack object
+                GameObject nextExec = this.m_gameStack.pop();
+                nextExec.play();
+            }
+
+        } else {
+            this.m_currentPriorityPlayer = this.m_player[this.m_currentPriorityPlayerNum];
+        }
+    }
+
+    public void resetRoundRobin(){
+        this.m_roundRobinPlayer = this.m_currentPriorityPlayer;
+    }
+
     // Other
 
     public String getHud(Player player) {
@@ -391,7 +426,7 @@ public class GameCore {
         return ret;
     }
 
-    public Player runGame() throws GameExceptions.GameException, IOException, InterruptedException {
+    public void runGame() throws GameExceptions.GameException, IOException, InterruptedException {
         Card drawn;
         Player me = m_player[0];
 
@@ -439,7 +474,7 @@ public class GameCore {
                 Turn.takeTurn(m_currentPlayer);
             }
         } catch (GameExceptions.CurrentPlayerLostException e) {
-            return this.opponent(e.player);
+            //return this.opponent(e.player);
         }
     }
 }

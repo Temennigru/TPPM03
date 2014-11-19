@@ -20,6 +20,8 @@ public abstract class Player {
 
     protected boolean dead = false;
 
+    private int poison = 0;
+
     // Damage dealing is the game's responsibility. The player can only lose life.
 
     protected Player() {}
@@ -28,6 +30,14 @@ public abstract class Player {
     public abstract void removeLife(int ammount);
 
     public abstract void takeTurn();
+
+    public int poison() {
+        return this.poison;
+    }
+    
+    public void poison(int val) {
+        this.poison += val;
+    }
 
     public void setDeck(Deck deck) {
         this.library = deck;
