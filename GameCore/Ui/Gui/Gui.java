@@ -6,6 +6,7 @@ import java.util.Vector;
 
 public class Gui {
 	
+	
 	public boolean player_passed = false;
 	public boolean player_played_something = false;
 	public boolean something_cast = true;
@@ -14,7 +15,9 @@ public class Gui {
 	private Vector<CardRep> playerGraveyardList;
 	private Vector<CardRep> playerBattlefieldList;
 	private Vector<CardRep> opponentBattlefieldList;
-	
+	private MainLayout layout;
+	private static Gui m_gui;
+		
 	private static class CardRep{
 		Card c;
 		JLabel j;
@@ -25,11 +28,19 @@ public class Gui {
 		}
 	}
 	
-	public Gui(){
+	public static Gui get_gui (){
+		if (m_gui == null){
+			m_gui = new Gui();
+		}
+		return m_gui;
+	}
+	
+	private Gui(){
 		game = GameCore.getGame();
 		if (! game.valid() ){
 			throw new GameExceptions.InvalidGameException();
 		}
+		layout = new MainLayout();
 	}
 	
 	private void draw(){
@@ -78,7 +89,7 @@ public class Gui {
 		while (true){
 			if (player_passed){
 				player_passed = false;
-				//game.passPriority();
+				game.passPriority();
 			}
 			
 			else if (player_played_something){
@@ -118,16 +129,18 @@ public class Gui {
 		Iterator<Card> itrHand = game.iterator(m_current_player, HAND);
 		while (itrHand.hasNext()){
 			Card temp = itrHand.next();
-			CardRep cr = new CardRep(temp, new JLabel);
-			//adiciona um label na parte de hand do layout
-			//seta de acordo
+			JLabel j = new JLabel();
+			CardRep cr = new CardRep(temp, j);
+			layout.place(j, "Hand");
 		}
 						
 		//Iterates on the Graveyard to build this part of the layout
 		Iterator<Card> itrGraveyard = game.iterator(m_current_player, GRAVEYARD);
 		while (itrGraveyard.hasNext()){
-			//adiciona um label na parte de graveyard do layout
-			//seta de acordo
+			Card temp = itrHand.next();
+			JLabel j = new JLabel();
+			CardRep cr = new CardRep(temp, j);
+			layout.place(j, "Graveyard");
 		}
 		
 		//Iterates on the Battlefield to build this part of the layout
@@ -135,11 +148,16 @@ public class Gui {
 		while (itrBattlefield.hasNext()){
 			Card temp = itrBattlefield.next();
 			if ( temp.controller() == game.getCurrentPriorityPlayer() ) {
-				//parte de baixo
+				Card temp = itrHand.next();
+				JLabel j = new JLabel();
+				CardRep cr = new CardRep(temp, j);
+				layout.place(j, "p1Battlefield");
 			}
 			else {
-			//adiciona um label na parte de cima do battlefield
-			//seta de acordo
+				Card temp = itrHand.next();
+				JLabel j = new JLabel();
+				CardRep cr = new CardRep(temp, j);
+				layout.place(j, "p2Battlefield");
 			}
 		}
 		
