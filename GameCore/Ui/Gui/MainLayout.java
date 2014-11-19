@@ -7,32 +7,30 @@ import javax.swing.*;
 public class MainLayout extends javax.swing.JFrame {
 
     public MainLayout() {
+    	
+    	//initializes
         initComponents();
         
-        //componentes no handPanel
-    	ImageIcon iconx = new ImageIcon("C:\\Users\\40\\Desktop\\107s.jpg");
-       	jLabel1.setIcon(iconx);
+        //handPanel
+    	//ImageIcon iconx = new ImageIcon("C:\\Users\\40\\Desktop\\107s.jpg");
+    	ImageIcon iconx = new ImageIcon("GameCore/Cards/img/cards/untapped/Swamp.jpg");
+       	jLabel1.setIcon(iconx); 
        	jLabel2.setIcon(iconx);
        	jLabel3.setIcon(iconx);
        	
-       	//componentes no cardInfoPanel
+       	//cardInfoPanel
        	cardInfo.setIcon(iconCardBack);
        	cardInfo.setText("");
        	
-       	//componentes no infoPanel
+       	//infoPanel
        	blackMana.setIcon(iconBlack);
-       	blackMana.setText("");
        	whiteMana.setIcon(iconWhite);
-       	whiteMana.setText("");
        	redMana.setIcon(iconRed);
-       	redMana.setText("");
        	blueMana.setIcon(iconBlue);
-       	blueMana.setText("");
        	greenMana.setIcon(iconGreen);
-       	greenMana.setText("");
        	uncoloredMana.setIcon(iconUncolored);
-       	uncoloredMana.setText("");
-       	    	
+       	
+       	//testing mouse events for jlabel1
     	jLabel1.addMouseListener(new java.awt.event.MouseAdapter(){
     		public void mouseClicked(java.awt.event.MouseEvent evt) {
     			labelMouseClicked(evt);
@@ -50,12 +48,13 @@ public class MainLayout extends javax.swing.JFrame {
     }
     
     private void labelMouseClicked(java.awt.event.MouseEvent evt) {                                        
-    	ImageIcon newfig = new ImageIcon("C:\\Users\\40\\Desktop\\107ts.jpg");
-        jLabel1.setIcon(newfig);     
+    	//ImageIcon tapped = new ImageIcon("C:\\Users\\40\\Desktop\\107ts.jpg");
+    	ImageIcon tapped = new ImageIcon("GameCore/Cards/img/cards/tapped/Swamp.jpg");
+        jLabel1.setIcon(tapped);     
     }   
     private void labelMouseEntered(java.awt.event.MouseEvent evt) {                                        
-    	ImageIcon newfig = new ImageIcon("C:\\Users\\40\\Desktop\\107.jpg");
-        cardInfo.setIcon(newfig);     
+    	ImageIcon large = new ImageIcon("GameCore/Cards/img/cards/large/Swamp.jpg");
+        cardInfo.setIcon(large);     
     }   
 
     @SuppressWarnings("unchecked")
@@ -105,6 +104,21 @@ public class MainLayout extends javax.swing.JFrame {
         cardInfoPanelLayout = new javax.swing.GroupLayout(cardInfoPanel);
         infoPanelLayout = new javax.swing.GroupLayout(infoPanel);
         graveyardLayout = new javax.swing.GroupLayout(graveyardPanel);
+       	iconBlack = new ImageIcon("GameCore/Cards/img/other/iconblack.png");
+       	iconWhite = new ImageIcon("GameCore/Cards/img/other/iconwhite.png");
+       	iconRed = new ImageIcon("GameCore/Cards/img/other/iconred.png");
+       	iconBlue = new ImageIcon("GameCore/Cards/img/other/iconblue.png");
+       	iconGreen = new ImageIcon("GameCore/Cards/img/other/icongreen.png");
+       	iconUncolored = new ImageIcon("GameCore/Cards/img/other/iconuncolored.png");
+       	iconCardBack = new ImageIcon ("GameCore/Cards/img/cards/large/CardBack.jpg");
+//      iconBlack = new ImageIcon("C:\\Users\\40\\Desktop\\20black.png");
+//      iconWhite = new ImageIcon("C:\\Users\\40\\Desktop\\20white.png");
+//      iconRed = new ImageIcon("C:\\Users\\40\\Desktop\\20red.png");
+//      iconBlue = new ImageIcon("C:\\Users\\40\\Desktop\\20blue.png");
+//      iconGreen = new ImageIcon("C:\\Users\\40\\Desktop\\20green.png");
+//      iconUncolored = new ImageIcon("C:\\Users\\40\\Desktop\\20x.png");
+//      iconCardBack = new ImageIcon ("C:\\Users\\40\\Desktop\\cardback.jpg");
+        
         
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Magic The Gathering");
@@ -181,12 +195,14 @@ public class MainLayout extends javax.swing.JFrame {
         p2Cards.setText("Player2 Cards");
         p1Lifepoints.setText("Player1 Lifepoints");
         p1Cards.setText("Player1 Cards");
-        blackMana.setText("Black Mana");
-        greenMana.setText("Green Mana");
-        redMana.setText("Red Mana");
-        blueMana.setText("Blue Mana");
-        whiteMana.setText("White Mana");
-        uncoloredMana.setText("Uncolored Mana");
+        /*
+         *  blackMana.setText("Black Mana");
+         *  greenMana.setText("Green Mana");
+         *  redMana.setText("Red Mana");
+         *  blueMana.setText("Blue Mana");
+         *  whiteMana.setText("White Mana");
+         *  uncoloredMana.setText("Uncolored Mana");
+         */
         turnPlayer.setText("Turn: Player1");
         turnPhase.setText("Phase: Main");
         priority.setText("Priority: Player1");
@@ -464,13 +480,13 @@ public class MainLayout extends javax.swing.JFrame {
     private javax.swing.JLabel uncoloredMana;
     private javax.swing.JSplitPane verticalSplitPane;
     private javax.swing.JLabel whiteMana;
-   	private ImageIcon iconBlack = new ImageIcon("C:\\Users\\40\\Desktop\\20black.png");
-   	private ImageIcon iconWhite = new ImageIcon("C:\\Users\\40\\Desktop\\20white.png");
-   	private ImageIcon iconRed = new ImageIcon("C:\\Users\\40\\Desktop\\20red.png");
-   	private ImageIcon iconBlue = new ImageIcon("C:\\Users\\40\\Desktop\\20blue.png");
-   	private ImageIcon iconGreen = new ImageIcon("C:\\Users\\40\\Desktop\\20green.png");
-   	private ImageIcon iconUncolored = new ImageIcon("C:\\Users\\40\\Desktop\\20x.png");
-   	private ImageIcon iconCardBack = new ImageIcon ("C:\\Users\\40\\Desktop\\cardback.jpg");
+   	private ImageIcon iconBlack;
+   	private ImageIcon iconWhite;
+   	private ImageIcon iconRed;
+   	private ImageIcon iconBlue;
+   	private ImageIcon iconGreen;
+   	private ImageIcon iconUncolored;
+   	private ImageIcon iconCardBack;
    	private javax.swing.GroupLayout handPanelLayout;
    	private javax.swing.GroupLayout p2BattlefieldPanelLayout; 
     private javax.swing.GroupLayout p1BattlefieldPanelLayout;
