@@ -18,7 +18,7 @@ public class Gui {
 	private MainLayout layout;
 	private static Gui m_gui;
 		
-	private static class CardRep{
+	private static class CardRep {
 		Card c;
 		JLabel j;
 		
@@ -27,7 +27,7 @@ public class Gui {
 			this.j = j;
 		}
 	}
-	
+
 	public static Gui get_gui (){
 		if (m_gui == null){
 			m_gui = new Gui();
@@ -65,24 +65,28 @@ public class Gui {
 			parent.validate();
 			parent.repaint();
 		}
+		playerHandList.clear();
 		for( CardRep cr : playerGraveyardList.toArray() ){
 			Container parent = cr.j.getParent();
 			parent.remove(cr.j);
 			parent.validate();
 			parent.repaint();
 		}
+		playerGraveyardList.clear();
 		for( CardRep cr : playerBattlefieldList.toArray() ){
 			Container parent = cr.j.getParent();
 			parent.remove(cr.j);
 			parent.validate();
 			parent.repaint();
 		}
+		playerBattlefieldList.clear();
 		for( CardRep cr : opponentBattlefieldList.toArray() ){
 			Container parent = cr.j.getParent();
 			parent.remove(cr.j);
 			parent.validate();
 			parent.repaint();
 		}
+		opponentBattlefieldList.clear();
 	}
 	
 	public void execGame(){

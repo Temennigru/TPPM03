@@ -24,7 +24,7 @@ public abstract interface Card extends GameObject {
     public abstract String toString() throws GameExceptions.GameException;
     public abstract String toString(boolean simple) throws GameExceptions.GameException;
 
-    public abstract ImageIcon getImg();
+    public abstract ImageIcon getImg(boolean large);
 
     // Activate ability
     public abstract boolean activateAt(int ability) throws GameExceptions.GameException;
@@ -118,5 +118,7 @@ public abstract interface Card extends GameObject {
 
     public abstract int regen() throws GameExceptions.GameException;
     public abstract void regen(int val) throws GameExceptions.GameException;
+
+    public abstract boolean castable() throws GameExceptions.GameException;
 
 }

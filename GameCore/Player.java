@@ -27,6 +27,10 @@ public abstract class Player {
     protected Player() {}
     public Player(String name) {}
 
+    public int life() {
+        return this.life;
+    }
+
     public abstract void removeLife(int ammount);
 
     public abstract void takeTurn();
@@ -124,8 +128,9 @@ public abstract class Player {
         for (int i = 0; i < 6; i++) {
 
             if (resultingMana[i] < 0) {
-                if (i != 5) { return false; } // Not enough colored mana in pool
+                if (i != 6) { return false; } // Not enough colored mana in pool
 
+                /* Obsolete code
                 else { // Colorless mana can be negative
                     // TODO: Implement support for multicolored decks (this only checks one color)
                     for (int j = 0; j < 6; j++) { // mana[i] = colorless, mana[j] = colored
@@ -136,6 +141,7 @@ public abstract class Player {
                     } // Monocolored support only ends here
 
                     if (resultingMana[i] < 0) { return false; } // If after subtracting colored mana there is still a debt, the transaction failed.
+                    */
                 }
             }
         }

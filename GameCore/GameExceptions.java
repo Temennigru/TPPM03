@@ -93,4 +93,21 @@ public class GameExceptions {
 				"(\"" + event + "\")" + String.format("%n"));
 		}
 	}
+
+	public static class InvalidImageDBFolderHierarchy extends GameException {
+		protected String root;
+		public InvalidImageDBFolderHierarchy(String root) {
+			this.root = root;
+			this.msg = ("Error: Folder " + root + " does not contain the folder \"tapped\", \"untapped\" or \"large\"" + String.format("%n"));
+		}
+	}
+
+	public static class MissingImageDBFile extends GameException {
+		protected String name, type;
+		public MissingImageDBFile(String name, String type) {
+			this.name = name;
+			this.type = type;
+			this.msg = ("Error: " + name + " is missing the " + type + " file" + String.format("%n"));
+		}
+	}
 }

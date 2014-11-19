@@ -93,8 +93,9 @@ public class Turn {
     public void combatDeclareBlockers() throws IOException, InterruptedException, GameExceptions.GameException {
         // TODO: Invoke gui prompt
 
-        while (true) {
-            for (Iterator<Card> it = game.iterator(GameEnums.Zone.BATTLEFIELD); it.hasNext(); ) {
+        for (Iterator<Card> it = game.getAttackers(); it.hasNext();) {
+            attacker = it.next();
+            for (Iterator<Card> it = game.iterator(GameEnums.Zone.BATTLEFIELD); it.hasNext();) {
                 Card card = it.next();
                 List options = new ArrayList();
                 if (card.location() == GameEnums.Zone.BATTLEFIELD &&

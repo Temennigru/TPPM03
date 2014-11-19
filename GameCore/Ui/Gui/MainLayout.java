@@ -6,6 +6,42 @@ import javax.swing.*;
 
 public class MainLayout extends javax.swing.JFrame {
 
+    private static class PassListener extends java.awt.event.ActionListener {
+        public PassListener() {
+            super();
+        }
+
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            game = GameCore.getGame();
+            if (! game.valid() ){
+                throw new GameExceptions.InvalidGameException();
+            }
+            game.passPriority();
+            get_gui().refresh();
+        }
+
+    }
+
+    private static class CardListener extends java.awt.event.ActionListener {
+        Card card;
+        private CardListener(){};
+        public CardListener(Card card) {
+            super();
+        }
+
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            // TODO: Open prompt window for what to do with card
+            game = GameCore.getGame();
+            if (! game.valid() ){
+                throw new GameExceptions.InvalidGameException();
+            }
+            game.passPriority();
+            get_gui().refresh();
+        }
+    }
+    
     public MainLayout() {
     	
     	//initializes
@@ -315,17 +351,18 @@ public class MainLayout extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }// </editor-fold>
 
     private void turnPlayerMouseClicked(java.awt.event.MouseEvent evt) {
     	//teste
         this.turnPlayer.setText("Turn: teste");
     }                                       
 
-    private void passButtonActionPerformed(java.awt.event.ActionEvent evt) {  
-    	
-    	//gui.player_passed = true;
-    	
+    private void passButtonActionPerformed(java.awt.event.ActionEvent evt) {
+
+    }
+    
+    private String getManaSpend(){
     	JTextField inputBlackMana = new JTextField();
     	JTextField inputBlueMana = new JTextField();
     	JTextField inputRedMana = new JTextField();
@@ -380,7 +417,8 @@ public class MainLayout extends javax.swing.JFrame {
     			inputRedMana.getText() + ", " +
     			inputWhiteMana.getText() + ", " +
     			inputGreenMana.getText() + ", " +
-    			inputUncoloredMana.getText()); 
+    			inputUncoloredMana.getText());
+        return "";
     }                                          
   
     /**
