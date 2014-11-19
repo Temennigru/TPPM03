@@ -9,17 +9,17 @@ public class MainLayout extends javax.swing.JFrame {
     public MainLayout() {
         initComponents();
         
+        //componentes no handPanel
     	ImageIcon iconx = new ImageIcon("C:\\Users\\40\\Desktop\\107s.jpg");
        	jLabel1.setIcon(iconx);
        	jLabel2.setIcon(iconx);
        	jLabel3.setIcon(iconx);
-       	jLabel1.setText("");
-       	jLabel2.setText("");
-       	jLabel3.setText("");
        	
+       	//componentes no cardInfoPanel
        	cardInfo.setIcon(iconCardBack);
        	cardInfo.setText("");
        	
+       	//componentes no infoPanel
        	blackMana.setIcon(iconBlack);
        	blackMana.setText("");
        	whiteMana.setIcon(iconWhite);
@@ -44,13 +44,17 @@ public class MainLayout extends javax.swing.JFrame {
         
     }
     
+    public javax.swing.GroupLayout GetLayout(JPanel j){
+    	return (GroupLayout) j.getLayout();
+    }
+    
     private void labelMouseClicked(java.awt.event.MouseEvent evt) {                                        
     	ImageIcon newfig = new ImageIcon("C:\\Users\\40\\Desktop\\107ts.jpg");
         jLabel1.setIcon(newfig);     
     }   
     private void labelMouseEntered(java.awt.event.MouseEvent evt) {                                        
-    	ImageIcon superfig = new ImageIcon("C:\\Users\\40\\Desktop\\107.jpg");
-        cardInfo.setIcon(superfig);     
+    	ImageIcon newfig = new ImageIcon("C:\\Users\\40\\Desktop\\107.jpg");
+        cardInfo.setIcon(newfig);     
     }   
 
     @SuppressWarnings("unchecked")
@@ -271,17 +275,9 @@ public class MainLayout extends javax.swing.JFrame {
         );
 
         infoScrollPane.setViewportView(infoPanel);
-
         infoSplitPane.setLeftComponent(infoScrollPane);
-
         verticalSplitPane.setTopComponent(infoSplitPane);
-
-        jLabel1.setText("jLabel1");
-
-        jLabel2.setText("jLabel2");
-
-        jLabel3.setText("jLabel3");
-
+ 
         javax.swing.GroupLayout handPanelLayout = new javax.swing.GroupLayout(handPanel);
         handPanel.setLayout(handPanelLayout);
         handPanelLayout.setHorizontalGroup(
@@ -303,11 +299,10 @@ public class MainLayout extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addContainerGap(451, Short.MAX_VALUE))
         );
-
+        
+        
         handPane.setViewportView(handPanel);
-
         handTabbedPane.addTab("Hand", handPane);
-
         graveyardPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         javax.swing.GroupLayout graveyardPanelLayout = new javax.swing.GroupLayout(graveyardPanel);
@@ -346,7 +341,10 @@ public class MainLayout extends javax.swing.JFrame {
         this.turnPlayer.setText("Turn: teste");
     }                                       
 
-    private void passButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            	  	
+    private void passButtonActionPerformed(java.awt.event.ActionEvent evt) {  
+    	
+    	//gui.player_passed = true;
+    	
     	JTextField inputBlackMana = new JTextField();
     	JTextField inputBlueMana = new JTextField();
     	JTextField inputRedMana = new JTextField();
