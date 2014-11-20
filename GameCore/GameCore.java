@@ -10,7 +10,6 @@
  * GameCore has a save and restore feature.
  */
 
-
 package GameCore;
 
 import GameCore.GameObjectCore.*;
@@ -336,8 +335,6 @@ public class GameCore {
                 card.m_owner.addToHand(card);
                 break;
         }
-
-        card.location = zone;
     }
 
     public void stateCheck() throws GameExceptions.GameException {
