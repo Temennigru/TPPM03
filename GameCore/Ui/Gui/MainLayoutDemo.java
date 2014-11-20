@@ -9,77 +9,73 @@ public class MainLayoutDemo extends javax.swing.JFrame {
     public MainLayoutDemo() {
         initComponents();
         
-    	ImageIcon iconx = new ImageIcon("GameCore/img/cards/untapped/Swamp.jpg");
-    	ImageIcon icony = new ImageIcon("GameCore/img/cards/untapped/StranglerootGeist.jpg");
-    	ImageIcon iconz = new ImageIcon("GameCore/img/cards/untapped/ArmyOfTheDamned.jpg");
-       	jLabel1.setIcon(iconx);
-       	jLabel2.setIcon(icony);
-       	jLabel3.setIcon(iconz);
-       	
-       	ImageIcon iconBlack = new ImageIcon("GameCore/img/other/iconblack.png");
-       	ImageIcon iconWhite = new ImageIcon("GameCore/img/other/iconwhite.png");
-       	ImageIcon iconRed = new ImageIcon("GameCore/img/other/iconred.png");
-       	ImageIcon iconBlue = new ImageIcon("GameCore/img/other/iconblue.png");
-       	ImageIcon iconGreen = new ImageIcon("GameCore/img/other/icongreen.png");
-       	ImageIcon iconUncolored = new ImageIcon("GameCore/img/other/iconuncolored.png");
-       	ImageIcon iconCardBack = new ImageIcon ("GameCore/img/cards/large/CardBack.jpg");
-       	
-       	cardInfo.setIcon(iconCardBack);      	
-       	blackMana.setIcon(iconBlack);
-       	whiteMana.setIcon(iconWhite);
-       	redMana.setIcon(iconRed);
-       	blueMana.setIcon(iconBlue);
-       	greenMana.setIcon(iconGreen);
-       	uncoloredMana.setIcon(iconUncolored);
-       	
-    	
-    	jLabel1.addMouseListener(new java.awt.event.MouseAdapter(){
-    		public void mouseClicked(java.awt.event.MouseEvent evt) {                                        
-                // TODO add your handling code here:
-                ImageIcon tapped = new ImageIcon("GameCore/img/cards/tapped/Swamp.jpg");
-                jLabel1.setIcon(tapped);     
-  	      	}
-  	      
-  	      	public void mouseEntered(java.awt.event.MouseEvent evt){                             
-                // TODO add your handling code here:
-                ImageIcon hover = new ImageIcon("GameCore/img/cards/large/Swamp.jpg");
-                cardInfo.setIcon(hover);     
-  	      	}
-    	});
+        ImageIcon iconx = new ImageIcon("GameCore/img/cards/untapped/Swamp.jpg");
+        ImageIcon icony = new ImageIcon("GameCore/img/cards/untapped/StranglerootGeist.jpg");
+        ImageIcon iconz = new ImageIcon("GameCore/img/cards/untapped/ArmyOfTheDamned.jpg");
+        jLabel1.setIcon(iconx);
+        jLabel2.setIcon(icony);
+        jLabel3.setIcon(iconz);
+        
+        ImageIcon iconBlack = new ImageIcon("GameCore/img/other/iconblack.png");
+        ImageIcon iconWhite = new ImageIcon("GameCore/img/other/iconwhite.png");
+        ImageIcon iconRed = new ImageIcon("GameCore/img/other/iconred.png");
+        ImageIcon iconBlue = necaw ImageIcon("GameCore/img/other/iconblue.png");
+        ImageIcon iconGreen = new ImageIcon("GameCore/img/other/icongreen.png");
+        ImageIcon iconUncolored = new ImageIcon("GameCore/img/other/iconuncolored.png");
+        ImageIcon iconCardBack = new ImageIcon ("GameCore/img/cards/large/CardBack.jpg");
+        
+        cardInfo.setIcon(iconCardBack);         
+        blackMana.setIcon(iconBlack);
+        whiteMana.setIcon(iconWhite);
+        redMana.setIcon(iconRed);
+        blueMana.setIcon(iconBlue);
+        greenMana.setIcon(iconGreen);
+        uncoloredMana.setIcon(iconUncolored);
+        
+        
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter(){
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelMouseClicked(evt);
+            }
+          
+            public void mouseEntered(java.awt.event.MouseEvent evt){
+                labelMouseEntered(evt);
+            }
+        });
+
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter(){
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                labelMouseClicked(evt);
+               // labelMouseClicked(evt);
             }
           
-            public void mouseEntered(java.awt.event.MouseEvent evt){                            
-                // TODO add your handling code here:
+            public void mouseEntered(java.awt.event.MouseEvent evt){
                 ImageIcon hover = new ImageIcon("GameCore/img/cards/large/StranglerootGeist.jpg");
-                cardInfo.setIcon(hover);     
+                cardInfo.setIcon(hover); 
             }
         });
+
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter(){
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                labelMouseClicked(evt);
+               // labelMouseClicked(evt);
             }
           
-            public void mouseEntered(java.awt.event.MouseEvent evt){                            
-                // TODO add your handling code here:
+            public void mouseEntered(java.awt.event.MouseEvent evt){
                 ImageIcon hover = new ImageIcon("GameCore/img/cards/large/ArmyOfTheDamned.jpg");
-                cardInfo.setIcon(hover);     
+                cardInfo.setIcon(hover); 
             }
         });
-    	  	   	
+                
         
     }
     
     private void labelMouseClicked(java.awt.event.MouseEvent evt) {                                        
         // TODO add your handling code here:
-    	ImageIcon tapped = new ImageIcon("GameCore/img/cards/tapped/Swamp.jpg");
+        ImageIcon tapped = new ImageIcon("GameCore/img/cards/tapped/Swamp.jpg");
         jLabel1.setIcon(tapped);     
     }   
     private void labelMouseEntered(java.awt.event.MouseEvent evt) {                                        
         // TODO add your handling code here:
-    	ImageIcon hover = new ImageIcon("GameCore/img/cards/large/Swamp.jpg");
+        ImageIcon hover = new ImageIcon("GameCore/img/cards/large/Swamp.jpg");
         cardInfo.setIcon(hover);     
     }   
 
@@ -170,8 +166,6 @@ public class MainLayoutDemo extends javax.swing.JFrame {
         batllefieldSplitPane.setRightComponent(p1Battlefield);
 
         cardViewSplitPane.setRightComponent(batllefieldSplitPane);
-
-        //cardInfo.setText("Card Info");
 
         javax.swing.GroupLayout cardInfoPanelLayout = new javax.swing.GroupLayout(cardInfoPanel);
         cardInfoPanel.setLayout(cardInfoPanelLayout);
@@ -354,58 +348,58 @@ public class MainLayoutDemo extends javax.swing.JFrame {
 
     private void passButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
-    	JTextField inputBlackMana = new JTextField();
-    	JTextField inputBlueMana = new JTextField();
-    	JTextField inputRedMana = new JTextField();
-    	JTextField inputWhiteMana = new JTextField();
-    	JTextField inputGreenMana = new JTextField();
-    	JTextField inputUncoloredMana = new JTextField();
-    	JLabel inputIconBlack = new JLabel();
-    	JLabel inputIconBlue = new JLabel();
-    	JLabel inputIconRed = new JLabel();
-    	JLabel inputIconWhite = new JLabel();
-    	JLabel inputIconGreen = new JLabel();
-    	JLabel inputIconUncolored = new JLabel();
-    	final JComponent[] inputs = new JComponent[] {
-    	inputIconBlack,
-    	new JLabel ("Black Mana"),
-    	inputBlackMana,
-    	inputIconBlue,
-    	new JLabel ("Blue Mana"),
-    	inputBlueMana,
-    	inputIconRed,
-    	new JLabel ("Red Mana"),
-    	inputRedMana,
-    	inputIconWhite,
-    	new JLabel ("White Mana"),
-    	inputWhiteMana,
-    	inputIconGreen,
-    	new JLabel ("Green Mana"),
-    	inputGreenMana,
-    	inputIconUncolored,
-    	new JLabel ("Uncolored Mana"),
-    	inputUncoloredMana
-    	};
-    	ImageIcon iconBlack = new ImageIcon("GameCore/img/other/iconblack.png");
-       	ImageIcon iconWhite = new ImageIcon("GameCore/img/other/iconwhite.png");
-       	ImageIcon iconRed = new ImageIcon("GameCore/img/other/iconred.png");
-       	ImageIcon iconBlue = new ImageIcon("GameCore/img/other/iconblue.png");
-       	ImageIcon iconGreen = new ImageIcon("GameCore/img/other/icongreen.png");
-       	ImageIcon iconUncolored = new ImageIcon("GameCore/img/other/iconuncolored.png");
-    	inputIconBlack.setIcon(iconBlack);
-    	inputIconBlue.setIcon(iconBlue);
-    	inputIconRed.setIcon(iconRed);
-    	inputIconWhite.setIcon(iconWhite);
-    	inputIconGreen.setIcon(iconGreen);
-    	inputIconUncolored.setIcon(iconUncolored);
-    	JOptionPane.showMessageDialog(null, inputs, "Pay the correct mana cost", JOptionPane.PLAIN_MESSAGE);
-    	System.out.println("You entered " +
-    			inputBlackMana.getText() + ", " +
-    			inputBlueMana.getText() + ", " +
-    			inputRedMana.getText() + ", " +
-    			inputWhiteMana.getText() + ", " +
-    			inputGreenMana.getText() + ", " +
-    			inputUncoloredMana.getText());
+        JTextField inputBlackMana = new JTextField();
+        JTextField inputBlueMana = new JTextField();
+        JTextField inputRedMana = new JTextField();
+        JTextField inputWhiteMana = new JTextField();
+        JTextField inputGreenMana = new JTextField();
+        JTextField inputUncoloredMana = new JTextField();
+        JLabel inputIconBlack = new JLabel();
+        JLabel inputIconBlue = new JLabel();
+        JLabel inputIconRed = new JLabel();
+        JLabel inputIconWhite = new JLabel();
+        JLabel inputIconGreen = new JLabel();
+        JLabel inputIconUncolored = new JLabel();
+        final JComponent[] inputs = new JComponent[] {
+        inputIconBlack,
+        new JLabel ("Black Mana"),
+        inputBlackMana,
+        inputIconBlue,
+        new JLabel ("Blue Mana"),
+        inputBlueMana,
+        inputIconRed,
+        new JLabel ("Red Mana"),
+        inputRedMana,
+        inputIconWhite,
+        new JLabel ("White Mana"),
+        inputWhiteMana,
+        inputIconGreen,
+        new JLabel ("Green Mana"),
+        inputGreenMana,
+        inputIconUncolored,
+        new JLabel ("Uncolored Mana"),
+        inputUncoloredMana
+        };
+        ImageIcon iconBlack = new ImageIcon("GameCore/img/other/iconblack.png");
+        ImageIcon iconWhite = new ImageIcon("GameCore/img/other/iconwhite.png");
+        ImageIcon iconRed = new ImageIcon("GameCore/img/other/iconred.png");
+        ImageIcon iconBlue = new ImageIcon("GameCore/img/other/iconblue.png");
+        ImageIcon iconGreen = new ImageIcon("GameCore/img/other/icongreen.png");
+        ImageIcon iconUncolored = new ImageIcon("GameCore/img/other/iconuncolored.png");
+        inputIconBlack.setIcon(iconBlack);
+        inputIconBlue.setIcon(iconBlue);
+        inputIconRed.setIcon(iconRed);
+        inputIconWhite.setIcon(iconWhite);
+        inputIconGreen.setIcon(iconGreen);
+        inputIconUncolored.setIcon(iconUncolored);
+        JOptionPane.showMessageDialog(null, inputs, "Pay the correct mana cost", JOptionPane.PLAIN_MESSAGE);
+        System.out.println("You entered " +
+                inputBlackMana.getText() + ", " +
+                inputBlueMana.getText() + ", " +
+                inputRedMana.getText() + ", " +
+                inputWhiteMana.getText() + ", " +
+                inputGreenMana.getText() + ", " +
+                inputUncoloredMana.getText());
     }                                          
   
     /**
