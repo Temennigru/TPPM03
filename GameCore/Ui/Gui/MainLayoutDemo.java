@@ -1,4 +1,4 @@
-//package GameCore.Ui.Gui;
+package GameCore.Ui.Gui;
 //import GameCore.GameObjectCore.*;
 import java.awt.*;
 import javax.swing.*;
@@ -9,20 +9,20 @@ public class MainLayoutDemo extends javax.swing.JFrame {
     public MainLayoutDemo() {
         initComponents();
         
-    	ImageIcon iconx = new ImageIcon("GameCore/Cards/img/cards/untapped/Swamp.jpg");
-    	ImageIcon icony = new ImageIcon("GameCore/Cards/img/cards/untapped/StranglerootGeist.jpg");
-    	ImageIcon iconz = new ImageIcon("GameCore/Cards/img/cards/untapped/ArmyOfTheDamned.jpg");
+    	ImageIcon iconx = new ImageIcon("GameCore/img/cards/untapped/Swamp.jpg");
+    	ImageIcon icony = new ImageIcon("GameCore/img/cards/untapped/StranglerootGeist.jpg");
+    	ImageIcon iconz = new ImageIcon("GameCore/img/cards/untapped/ArmyOfTheDamned.jpg");
        	jLabel1.setIcon(iconx);
        	jLabel2.setIcon(icony);
        	jLabel3.setIcon(iconz);
        	
-       	ImageIcon iconBlack = new ImageIcon("GameCore/Cards/img/other/iconblack.png");
-       	ImageIcon iconWhite = new ImageIcon("GameCore/Cards/img/other/iconwhite.png");
-       	ImageIcon iconRed = new ImageIcon("GameCore/Cards/img/other/iconred.png");
-       	ImageIcon iconBlue = new ImageIcon("GameCore/Cards/img/other/iconblue.png");
-       	ImageIcon iconGreen = new ImageIcon("GameCore/Cards/img/other/icongreen.png");
-       	ImageIcon iconUncolored = new ImageIcon("GameCore/Cards/img/other/iconuncolored.png");
-       	ImageIcon iconCardBack = new ImageIcon ("GameCore/Cards/img/cards/large/CardBack.jpg");
+       	ImageIcon iconBlack = new ImageIcon("GameCore/img/other/iconblack.png");
+       	ImageIcon iconWhite = new ImageIcon("GameCore/img/other/iconwhite.png");
+       	ImageIcon iconRed = new ImageIcon("GameCore/img/other/iconred.png");
+       	ImageIcon iconBlue = new ImageIcon("GameCore/img/other/iconblue.png");
+       	ImageIcon iconGreen = new ImageIcon("GameCore/img/other/icongreen.png");
+       	ImageIcon iconUncolored = new ImageIcon("GameCore/img/other/iconuncolored.png");
+       	ImageIcon iconCardBack = new ImageIcon ("GameCore/img/cards/large/CardBack.jpg");
        	
        	cardInfo.setIcon(iconCardBack);      	
        	blackMana.setIcon(iconBlack);
@@ -34,26 +34,52 @@ public class MainLayoutDemo extends javax.swing.JFrame {
        	
     	
     	jLabel1.addMouseListener(new java.awt.event.MouseAdapter(){
-    		public void mouseClicked(java.awt.event.MouseEvent evt) {
-    			labelMouseClicked(evt);
+    		public void mouseClicked(java.awt.event.MouseEvent evt) {                                        
+                // TODO add your handling code here:
+                ImageIcon tapped = new ImageIcon("GameCore/img/cards/tapped/Swamp.jpg");
+                jLabel1.setIcon(tapped);     
   	      	}
   	      
-  	      	public void mouseEntered(java.awt.event.MouseEvent evt){
-  	    	  	labelMouseEntered(evt);
+  	      	public void mouseEntered(java.awt.event.MouseEvent evt){                             
+                // TODO add your handling code here:
+                ImageIcon hover = new ImageIcon("GameCore/img/cards/large/Swamp.jpg");
+                cardInfo.setIcon(hover);     
   	      	}
     	});
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter(){
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelMouseClicked(evt);
+            }
+          
+            public void mouseEntered(java.awt.event.MouseEvent evt){                            
+                // TODO add your handling code here:
+                ImageIcon hover = new ImageIcon("GameCore/img/cards/large/StranglerootGeist.jpg");
+                cardInfo.setIcon(hover);     
+            }
+        });
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter(){
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelMouseClicked(evt);
+            }
+          
+            public void mouseEntered(java.awt.event.MouseEvent evt){                            
+                // TODO add your handling code here:
+                ImageIcon hover = new ImageIcon("GameCore/img/cards/large/ArmyOfTheDamned.jpg");
+                cardInfo.setIcon(hover);     
+            }
+        });
     	  	   	
         
     }
     
     private void labelMouseClicked(java.awt.event.MouseEvent evt) {                                        
         // TODO add your handling code here:
-    	ImageIcon tapped = new ImageIcon("GameCore/Cards/img/cards/tapped/Swamp.jpg");
+    	ImageIcon tapped = new ImageIcon("GameCore/img/cards/tapped/Swamp.jpg");
         jLabel1.setIcon(tapped);     
     }   
     private void labelMouseEntered(java.awt.event.MouseEvent evt) {                                        
         // TODO add your handling code here:
-    	ImageIcon hover = new ImageIcon("GameCore/Cards/img/cards/large/Swamp.jpg");
+    	ImageIcon hover = new ImageIcon("GameCore/img/cards/large/Swamp.jpg");
         cardInfo.setIcon(hover);     
     }   
 
@@ -145,7 +171,7 @@ public class MainLayoutDemo extends javax.swing.JFrame {
 
         cardViewSplitPane.setRightComponent(batllefieldSplitPane);
 
-        cardInfo.setText("Card Info");
+        //cardInfo.setText("Card Info");
 
         javax.swing.GroupLayout cardInfoPanelLayout = new javax.swing.GroupLayout(cardInfoPanel);
         cardInfoPanel.setLayout(cardInfoPanelLayout);
@@ -360,12 +386,12 @@ public class MainLayoutDemo extends javax.swing.JFrame {
     	new JLabel ("Uncolored Mana"),
     	inputUncoloredMana
     	};
-    	ImageIcon iconBlack = new ImageIcon("GameCore/Cards/img/other/iconblack.png");
-       	ImageIcon iconWhite = new ImageIcon("GameCore/Cards/img/other/iconwhite.png");
-       	ImageIcon iconRed = new ImageIcon("GameCore/Cards/img/other/iconred.png");
-       	ImageIcon iconBlue = new ImageIcon("GameCore/Cards/img/other/iconblue.png");
-       	ImageIcon iconGreen = new ImageIcon("GameCore/Cards/img/other/icongreen.png");
-       	ImageIcon iconUncolored = new ImageIcon("GameCore/Cards/img/other/iconuncolored.png");
+    	ImageIcon iconBlack = new ImageIcon("GameCore/img/other/iconblack.png");
+       	ImageIcon iconWhite = new ImageIcon("GameCore/img/other/iconwhite.png");
+       	ImageIcon iconRed = new ImageIcon("GameCore/img/other/iconred.png");
+       	ImageIcon iconBlue = new ImageIcon("GameCore/img/other/iconblue.png");
+       	ImageIcon iconGreen = new ImageIcon("GameCore/img/other/icongreen.png");
+       	ImageIcon iconUncolored = new ImageIcon("GameCore/img/other/iconuncolored.png");
     	inputIconBlack.setIcon(iconBlack);
     	inputIconBlue.setIcon(iconBlue);
     	inputIconRed.setIcon(iconRed);
@@ -399,20 +425,20 @@ public class MainLayoutDemo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainLayout.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainLayoutDemo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainLayout.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainLayoutDemo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainLayout.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainLayoutDemo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainLayout.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainLayoutDemo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainLayout().setVisible(true);
+                new MainLayoutDemo().setVisible(true);
             }
         });
     }
