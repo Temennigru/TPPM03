@@ -34,6 +34,8 @@ public class GameCore {
     private Vector<Card> attackers;
     private Map<Card, Card> blockers;
     private GameStack m_gameStack;
+    private TriggerDecorator m_triggers;
+    private ImgDatabase m_images;
 
     // TODO: Implement dynamic player number.
     private static final int m_numPlayers = 2;
@@ -83,6 +85,10 @@ public class GameCore {
         m_commandZone = new Vector<Card>();
         attackers = new Vector<Card>();
         blockers = new HashMap<Card, Card>();
+        m_gameStack = new GameStack();
+        m_triggers = new TriggerDecorator();
+        m_images = new ImgDatabase("GameCore/img/cards");
+
 
         m_player = new Player[2];
         m_player[0] = player1;

@@ -5,4 +5,5 @@ send trigger
 get image
 this.stack(something)
 fix imgdatabase not accepting '
+add getuniqueid to gamecore
  
