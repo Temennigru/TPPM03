@@ -6,9 +6,7 @@ import GameCore.*;
 import GameCore.GameObjectCore.*;
 import java.lang.System;
 
-public static class GarruksCompanion {
-
-    private GarruksCompanion(){};
+public static class GarruksCompanion implements GameCore.GameObjectImpl.CardGenerator {
 
     public Card getInstance(Player owner) {
 
