@@ -15,7 +15,7 @@ public abstract class Player {
     protected Vector<Card> hand;
     protected Vector<Card> graveyard;
     private int[] manaPool = new int[6]; // RGBUWC
-    protected Console commandInterface;
+    // protected Console commandInterface; Obsolete
     protected int numberLandDrops = 1;
 
     protected boolean dead = false;
@@ -63,7 +63,7 @@ public abstract class Player {
         this.numberLandDrops = val;
     }
 
-    private boolean manaPoolManip(String mana, GameEnums.ManaPoolDirection direction) {
+    private int[] getResultingMana(String mana, GameEnums.ManaPoolDirection direction) {
         int addSub;
         int[] resultingMana = new int[6];
         resultingMana[0] = 0;
@@ -88,7 +88,6 @@ public abstract class Player {
 
         // Set mana modifiers
         for (int i = 0; i < mana.length(); i++) {
-            // TODO: Implement variable cost
             switch (mana.charAt(i)) {
                 case 'R':
                     resultingMana[0] += addSub * 1;
@@ -119,16 +118,89 @@ public abstract class Player {
         }
 
         // Set resulting mana
-        // TODO: Implement mana prompt to chose color
         for (int i = 0; i < 6; i++) {
             resultingMana[i] += this.manaPool[i];
         }
+
+        return resultingMana;
+    }
+
+    private int[] getResultingMana(int[] mana, GameEnums.ManaPoolDirection direction) {
+        if (mana.length != 6) {
+            throw new GameExceptions.WrongManaColorAmmountException(mana.length);
+        }
+
+        int[] resultingMana = new int[6];
+        resultingMana[0] = this.manaPool[0];
+        resultingMana[1] = this.manaPool[1];
+        resultingMana[2] = this.manaPool[2];
+        resultingMana[3] = this.manaPool[3];
+        resultingMana[4] = this.manaPool[4];
+        resultingMana[5] = this.manaPool[5];
+
+
+        switch (direction) {
+            case ADD:
+                resultingMana[0] += mana[0];
+                resultingMana[1] += mana[1];
+                resultingMana[2] += mana[2];
+                resultingMana[3] += mana[3];
+                resultingMana[4] += mana[4];
+                resultingMana[5] += mana[5];
+                break;
+            case SUB:
+                resultingMana[0] -= mana[0];
+                resultingMana[1] -= mana[1];
+                resultingMana[2] -= mana[2];
+                resultingMana[3] -= mana[3];
+                resultingMana[4] -= mana[4];
+                resultingMana[5] -= mana[5];
+                break;
+            default: // Bad
+                addSub = 0;
+                assert false;
+                break;
+        }
+
+        return resultingMana;
+    }
+
+    public boolean spendable(String mana) {
+
+        int[] resultingMana = getResultingMana(mana, direction);
+
+        for (int i = 0; i < 6; i++) {
+
+            if (resultingMana[i] < 0) {
+                return false; // Not enough mana in pool
+            }
+        }
+        return true;
+    }
+
+
+    public boolean spendable(int[] mana) {
+
+        int[] resultingMana = getResultingMana(mana, direction);
+
+        for (int i = 0; i < 6; i++) {
+
+            if (resultingMana[i] < 0) {
+                return false; // Not enough mana in pool
+            }
+        }
+        return true;
+    }
+
+    private boolean manaPoolManip(String mana, GameEnums.ManaPoolDirection direction) {
+
+        int[] resultingMana = getResultingMana(mana, direction);
 
         // Check if resulting mana is negative
         for (int i = 0; i < 6; i++) {
 
             if (resultingMana[i] < 0) {
-                if (i != 6) { return false; } // Not enough colored mana in pool
+                return false; // Not enough mana in pool
 
                 /* Obsolete code
                 else { // Colorless mana can be negative
@@ -222,10 +294,10 @@ public abstract class Player {
     }
 
     public final boolean lost() { return this.dead; } // No cheating =)
-
+    /* Obsolete
     public final Card prompt() throws IOException, InterruptedException { return this.commandInterface.prompt(); }
 
     public final Card prompt(boolean playerOnly) throws IOException, InterruptedException { return this.commandInterface.prompt(playerOnly); }
-
+    */
     
 }

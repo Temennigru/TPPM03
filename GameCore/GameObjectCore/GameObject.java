@@ -12,8 +12,8 @@ public abstract interface GameObject {
     public abstract GameObject source() throws GameExceptions.GameException;
     public abstract void source(GameObject val) throws GameExceptions.GameException;
     
-    public abstract GameObject destination() throws GameExceptions.GameException;
-    public abstract void destination(GameObject val) throws GameExceptions.GameException;
+    public abstract GameObject[] targets() throws GameExceptions.GameException;
+    public abstract void targets(GameObject[] val) throws GameExceptions.GameException;
 
     public abstract Player owner() throws GameExceptions.GameException; // Owner can't change
 

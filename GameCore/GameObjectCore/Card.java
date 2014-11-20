@@ -41,9 +41,9 @@ public abstract interface Card extends GameObject {
     public abstract int damage () throws GameExceptions.GameException;
     public abstract void damage (int value) throws GameExceptions.GameException;
 
-    public abstract void tap();
-    public abstract boolean isTapped();
-    public abstract void unTap();
+    public abstract void tap() throws GameExceptions.GameException;
+    public abstract boolean isTapped() throws GameExceptions.GameException;
+    public abstract void unTap() throws GameExceptions.GameException;
 
     public abstract String name() throws GameExceptions.GameException;
     public abstract void name(String name) throws GameExceptions.GameException;
@@ -62,11 +62,32 @@ public abstract interface Card extends GameObject {
     public abstract GameEnums.SubType[] subTypes() throws GameExceptions.GameException;
     public abstract void subTypes(GameEnums.SubType[] subtypes) throws GameExceptions.GameException;
 
-    public abstract GameEnums.Zone location();
+    public abstract GameEnums.Zone location() throws GameExceptions.GameException;
 
-    public abstract boolean sick();
-    public abstract sick(boolean val);
+    public abstract boolean stackable() throws GameExceptions.GameException;
+    public abstract void stackable(boolean val) throws GameExceptions.GameException;
 
+    public abstract GameObject source() throws GameExceptions.GameException;
+    public abstract void source(GameObject val) throws GameExceptions.GameException;
+    
+    public abstract GameObject destination() throws GameExceptions.GameException;
+    public abstract void destination(GameObject val) throws GameExceptions.GameException;
+
+    public abstract Player owner() throws GameExceptions.GameException; // Owner can't change
+
+    public abstract Player controler() throws GameExceptions.GameException;
+    public abstract void controler(Player val) throws GameExceptions.GameException;
+
+    public abstract boolean sick() throws GameExceptions.GameException;
+    public abstract sick(boolean val) throws GameExceptions.GameException;
+
+    public abstract boolean castable() throws GameExceptions.GameException;
+
+    public abstract boolean checkMana(String mana) throws GameExceptions.GameException;
+
+    public abstract Iterator<Ability> getAbilityIterator() throws GameExceptions.GameException;
+
+    public abstract void reset(String field) throws GameExceptions.GameException;
 
 
 
@@ -88,6 +109,9 @@ public abstract interface Card extends GameObject {
 
     public abstract boolean flying() throws GameExceptions.GameException;
     public abstract void flying(boolean val) throws GameExceptions.GameException;
+
+    public abstract boolean haste() throws GameExceptions.GameException;
+    public abstract void haste(boolean val) throws GameExceptions.GameException;
 
     public abstract boolean hexproof() throws GameExceptions.GameException;
     public abstract void hexproof(boolean val) throws GameExceptions.GameException;
@@ -118,7 +142,4 @@ public abstract interface Card extends GameObject {
 
     public abstract int regen() throws GameExceptions.GameException;
     public abstract void regen(int val) throws GameExceptions.GameException;
-
-    public abstract boolean castable() throws GameExceptions.GameException;
-
 }

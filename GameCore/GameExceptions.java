@@ -31,6 +31,13 @@ public class GameExceptions {
 		}
 	}
 
+	public static class WrongManaColorAmmountException extends GameException {
+		public WrongManaColorAmmountException(int ammount) {
+			this.msg = ("Error: Someone is trying to manipulate a wrong number of mana colors" + String.format("%n") +
+				"(Expected 6 but got " + Integer.toString(ammount) + String.format("%n"));
+		}
+	}
+
 	public static class InvalidGameException extends GameException {
 		public InvalidGameException() {
 			this.msg = "Error: Game was not created." + String.format("%n");
@@ -64,6 +71,14 @@ public class GameExceptions {
 		public CthulhuWasSummonedException() {
 			java.lang.StackTraceElement trace = Thread.currentThread().getStackTrace()[1];
 			this.msg = ("Error: Something has gone terribly wrong." + String.format("%n") +
+				trace.getFileName() + ":" + Integer.toString(trace.getLineNumber()) + String.format("%n"));
+		}
+	}
+
+	public static class MethodNotImplementedException extends GameException {
+		public MethodNotImplementedException() {
+			java.lang.StackTraceElement trace = Thread.currentThread().getStackTrace()[1];
+			this.msg = ("Error: Someone is trying to use an unimplemented method." + String.format("%n") +
 				trace.getFileName() + ":" + Integer.toString(trace.getLineNumber()) + String.format("%n"));
 		}
 	}
