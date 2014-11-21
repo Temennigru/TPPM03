@@ -40,6 +40,54 @@ public class Turn {
         skip.add(phase);
     }
 
+    public Turn nextPhase() {
+        // TODO: Implement dirty cleanup step
+        do {
+            switch (this.phase) {
+                case null:
+                    this.phase = GameEnums.TurnPhases.UNTAP;
+                    break;
+                case GameEnums.TurnPhases.UNTAP:
+                    this.phase = GameEnums.TurnPhases.UPKEEP;
+                    break;
+                case GameEnums.TurnPhases.UPKEEP:
+                    this.phase = GameEnums.TurnPhases.DRAW;
+                    break;
+                case GameEnums.TurnPhases.DRAW:
+                    this.phase = GameEnums.TurnPhases.MAIN1;
+                    break;
+                case GameEnums.TurnPhases.MAIN1:
+                    this.phase = GameEnums.TurnPhases.DECLAREATK;
+                    break;
+                case GameEnums.TurnPhases.DECLAREATK:
+                    this.phase = GameEnums.TurnPhases.DECLAREBLK;
+                    break;
+                case GameEnums.TurnPhases.DECLAREBLK:
+                    this.phase = GameEnums.TurnPhases.DAMAGE;
+                    break;
+                case GameEnums.TurnPhases.DAMAGE:
+                    this.phase = GameEnums.TurnPhases.MAIN2;
+                    break;
+                case GameEnums.TurnPhases.MAIN2:
+                    this.phase = GameEnums.TurnPhases.CLEANUP;
+                    break;
+                case GameEnums.TurnPhases.CLEANUP:
+                    this.phase = GameEnums.TurnPhases.END;
+                    break;
+                case GameEnums.TurnPhases.END:
+                    // This should never happen
+                    throw new GameExceptions.CthulhuWasSummonedException();
+                    break;
+                default:
+                    // This should also never happen
+                    throw new GameExceptions.CthulhuWasSummonedException();
+                    break;
+            }
+        } while (!this.skip.contains(this.phase));
+        return this;
+    }
+
+
 
     // TODO: Signal triggers when phases start
 
@@ -157,8 +205,6 @@ public class Turn {
         game.stateCheck();
         game.clearMana();
     }
-
-    public void main2() {} // No cards in this release will know how to distinguish between main phases
 
     public void end() {
         game.clearMana();

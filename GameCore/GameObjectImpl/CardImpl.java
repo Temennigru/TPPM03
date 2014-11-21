@@ -206,15 +206,15 @@ public class CardImpl implements Card {
 	}
 
 	private void sendTriggerEvent(String event) {
-		this.m_game.trigger(this.getTriggerString(event, null));
+		this.m_game.trigger(this.getTriggerString(event, null), this);
 	}
 
 	private void sendTriggerEvent(String event, String append) {
-		this.m_game.trigger(this.getTriggerString(event, append));
+		this.m_game.trigger(this.getTriggerString(event, append), this);
 	}
 
 	// This is where the magic happens
-    public boolean cast () throws GameExceptions.GameException {
+    public boolean cast (String mana) throws GameExceptions.GameException {
     	this.cast(true);
     }
 
@@ -234,6 +234,11 @@ public class CardImpl implements Card {
 
 	    this.sendTriggerEvent("cast", "location = " + this.m_location.toString());
     }
+
+    public abstract boolean cast(GameObject from) throws GameExceptions.GameException {
+    	throw new GameExceptions.MethodNotImplementedException();
+    }
+
 
     public void play () throws GameExceptions.GameException {
     	if (Arrays.asList(this.SubType).contains(GameEnums.Type.CREATURE)     ||
@@ -475,7 +480,9 @@ public class CardImpl implements Card {
     	this.m_controler = value;
     }
 
-    public Player owner() throws GameExceptions.GameException; // Owner can't be changed
+    public Player owner() throws GameExceptions.GameException { // Owner can't be changed
+    	return this.m_owner;
+	}
 
     public GameEnums.SuperType[] superTypes() throws GameExceptions.GameException {
     	return this.m_superTypes;

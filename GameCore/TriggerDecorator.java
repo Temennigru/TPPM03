@@ -92,7 +92,7 @@ public final class TriggerDecorator {
 				m_lastRet[i]--;
 			} else if (realPos == m_lastRet[i]) {
 				// If for some reason the decorator returns a trigger more than once,
-				// all will be set as dirty.
+				// all the copies will be set as dirty.
 				m_lastRetDirty[i] = true;
 			}
 		}

@@ -48,6 +48,11 @@ public class GameCore {
 
     private static GameCore m_game = null;
 
+    private int m_objId;
+    private Vector<GameObject> m_registeredObjects;
+
+    Turn m_currentTurn;
+
     // Singleton methods
 
     public boolean valid() { return this.m_isValid; }
@@ -88,6 +93,8 @@ public class GameCore {
         m_gameStack = new GameStack();
         m_triggers = new TriggerDecorator();
         m_images = new ImgDatabase("GameCore/img/cards");
+        m_objId = 0;
+        m_registeredObjects = new Vector<GameObject>();
 
 
         m_player = new Player[2];
@@ -105,6 +112,17 @@ public class GameCore {
     }
 
     // Element access
+
+    public int getUniqueId(GameObject object) {
+        this.m_registeredObjects.add(object);
+        this.m_objId++;
+        return this.m_objId;
+    }
+
+    public GameObject fromId(int id) {
+        return this.m_registeredObjects.elementAt(id - 1)0;
+    }
+
     public Player getCurrentPlayer() {
         return this.m_currentPlayer;
     }
@@ -395,7 +413,14 @@ public class GameCore {
     }
 
     public void nextPhase() {
-
+        if (this.m_currentTurn == null) {
+            int i = (m_currentPlayer == m_player[0]) ? 0 : 1;
+            i = (i + 1) % m_numPlayers;
+            m_currentPlayer = m_player[i];
+            this.m_currentTurn = new Turn(m_currentPlayer);
+        } else {
+            m_currentTurn = Turn.nextPhase();
+        }
     }
 
     public void passPriority() {
@@ -416,6 +441,26 @@ public class GameCore {
 
     public void resetRoundRobin(){
         this.m_roundRobinPlayer = this.m_currentPriorityPlayer;
+    }
+
+    public void trigger(String event, GameObject source) {
+        // TODO: Add target to 
+        Ability[] viable = this.m_triggers.getViableTriggers(event);
+        for (int i = 0; i < viable.length; i++) {
+            if (!viable[i].valid()) {
+                this.m_triggers.unRegister(i, true);
+            } else {
+                viable[i].cast(source);
+            }
+        }
+    }
+
+    public void stack(GameObject object) {
+        if (object.stackable()) {
+            this.m_gameStack.push(object);
+        } else {
+            object.play();
+        }
     }
 
     // Other

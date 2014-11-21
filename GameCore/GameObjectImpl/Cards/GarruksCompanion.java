@@ -15,7 +15,7 @@ public static class GarruksCompanion implements GameCore.GameObjectImpl.CardGene
         GameEnums.SubType[] subtypes = { GameEnums.BEAST };
 
         Card ret = new GameCore.GameObjectImpl.CardImpl(
-            "Garruk's Companion",
+            "Garruks Companion",
             "GG",
             supertypes,
             types,
@@ -43,8 +43,8 @@ public static class GarruksCompanion implements GameCore.GameObjectImpl.CardGene
             3,     // power
             2,     // toughness
             "They seek out living trees to glean age-old secrets from sap and wood.", // flavor
-            false, // stackable
-            owner, // owner
+            true, // stackable
+            owner // owner
             );
         return ret;
     }

@@ -16,4 +16,6 @@ public abstract class Ability implements GameObject {
 
     public abstract boolean activate () throws GameExceptions.GameException; 
 
+    public abstract boolean valid() throws GameExceptions.GameException;
+
 }

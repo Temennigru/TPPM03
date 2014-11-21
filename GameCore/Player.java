@@ -213,8 +213,8 @@ public abstract class Player {
                     } // Monocolored support only ends here
 
                     if (resultingMana[i] < 0) { return false; } // If after subtracting colored mana there is still a debt, the transaction failed.
-                    */
-                }
+                    
+                }*/
             }
         }
 

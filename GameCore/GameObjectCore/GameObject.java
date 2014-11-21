@@ -20,8 +20,10 @@ public abstract interface GameObject {
     public abstract Player controler() throws GameExceptions.GameException;
     public abstract void controler(Player val) throws GameExceptions.GameException;
 
-    public abstract boolean cast (String mana) throws GameExceptions.GameException;
-    public abstract boolean cast (String mana, boolean payManaCost) throws GameExceptions.GameException;
+    public abstract boolean cast(String mana) throws GameExceptions.GameException;
+    public abstract boolean cast(String mana, boolean payManaCost) throws GameExceptions.GameException;
+
+    public abstract boolean cast(GameObject from) throws GameExceptions.GameException;
 
     public abstract void play () throws GameExceptions.GameException;
 }

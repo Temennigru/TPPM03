@@ -11,9 +11,10 @@ public class RealPlayer extends Player {
     public RealPlayer(String name) {
     	this.life = 20;
     	this.name = name;
-        this.commandInterface = new PlayerConsoleImpl(this);
+        // this.commandInterface = new PlayerConsoleImpl(this); Obsolete
     	this.hand = new Vector<Card>();
     	this.graveyard = new Vector<Card>();
+        this.deck = new Deck();
     }
 
     public void removeLife(int ammount) {
