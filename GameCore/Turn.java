@@ -17,9 +17,15 @@ public class Turn {
     private Turn() {} // Don't use this
 
     private Turn (Player player) throws IOException, InterruptedException, GameExceptions.GameException {
-        tui = TextUserInterface.getTui();
+        //tui = TextUserInterface.getTui();
+
         game = GameCore.getGame();
         this.m_player = player;
+        this.phase = null;
+        this.skip = new Vector<GameEnums.TurnPhases>();
+
+
+
         tui.setHeader("New turn" + String.format("%n%n"));
         this.untap();
         this.draw();
@@ -84,6 +90,50 @@ public class Turn {
                     break;
             }
         } while (!this.skip.contains(this.phase));
+
+        switch (this.phase) {
+            case null:
+                // This should never happen
+                throw new GameExceptions.CthulhuWasSummonedException();
+                break;
+            case GameEnums.TurnPhases.UNTAP:
+                this.untap();
+                break;
+            case GameEnums.TurnPhases.UPKEEP:
+                this.upkeep();
+                break;
+            case GameEnums.TurnPhases.DRAW:
+                this.draw()
+                break;
+            case GameEnums.TurnPhases.MAIN1:
+                this.main();
+                break;
+            case GameEnums.TurnPhases.DECLAREATK:
+                this.combatDeclareAttackers();
+                break;
+            case GameEnums.TurnPhases.DECLAREBLK:
+                this.combatDeclareBlockers();
+                break;
+            case GameEnums.TurnPhases.DAMAGE:
+                this.combatDamage();
+                break;
+            case GameEnums.TurnPhases.MAIN2:
+                this.main();
+                break;
+            case GameEnums.TurnPhases.CLEANUP:
+                this.cleanup();
+                break;
+            case GameEnums.TurnPhases.END:
+                this.end();
+                return null;
+                break;
+            default:
+                // This should also never happen
+                throw new GameExceptions.CthulhuWasSummonedException();
+                break;
+        }
+
+
         return this;
     }
 
@@ -113,9 +163,6 @@ public class Turn {
     public void upkeep() throws IOException, InterruptedException, GameExceptions.GameException {
     }
 
-    public void main1() throws IOException, InterruptedException, GameExceptions.GameException {
-
-    }
     
     public void combatDeclareAttackers() throws IOException, InterruptedException, GameExceptions.GameException {
         // TODO: Invoke gui prompt
@@ -157,11 +204,6 @@ public class Turn {
                 // Prompt gui
             }
             game.declareBlocker(card, attacker);
-
-
-
-
-
 
     }
 
